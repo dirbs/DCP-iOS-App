@@ -52,10 +52,10 @@ DCP iOS application is developed using clean swift architecture.
 DCP app utilizes some open source libraries to meet its functional requirements. The libraries used and the purpose of their usage are
 -	Alamofire for making network calls.
 -	MTBBarcodeScanner for scanning barcode of IME.
-- SlideMenuControllerSwift for binding views and callbacks to fields and methods. 
+- SlideMenuControllerSwift for left Nevigation Drawer. 
 -	Hippolyte for unit testing.
 -	Image picker for selecting or taking images.
 
 ### File Structure
-In DCP source code files are structured in a way that files relaed to a screen are placed in a folder having sub folders for scenes, view, presenter and worker calls.                         
+In DCP source code files are structured in a way that files related to a screen are placed in a folder having sub folders for scenes, view, presenter and worker calls.                         
 
