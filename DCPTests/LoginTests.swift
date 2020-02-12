@@ -13,28 +13,22 @@
 import XCTest
 @testable import DCP
 import Hippolyte
-
 class LoginTests: XCTestCase {
     var loginView : LoginViewController!
      var forgotPasswordView : ForgotPasswordViewController!
+     // MARK: Make override setUp Method
     override func setUp() {
-        getLoginViwcontroller()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        getLoginViewcontroller()
     }
-
-    
-    func getLoginViwcontroller()
-    {
+    // MARK: Make getLoginViewController Method setUp Method
+    func getLoginViewcontroller(){
 
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
         loginView = vc
         let _ = loginView.view
     }
-    
-    func testForChangeLanguageBtn()
-    {
-
-        
+    // MARK: Make test for change language Btn Method
+    func testForChangeLanguageBtn(){
         //test for change Language Btn
         loginView.language = "en"
         loginView.changeLanguageBtn.sendActions(for: .touchUpInside)
@@ -46,10 +40,9 @@ class LoginTests: XCTestCase {
         XCTAssertEqual("vi", loginView.language)
 
     }
-    func testForLoginScreen()
-    {
-        
-        
+    // MARK: Make testFor Login Screen Method
+    func testForLoginScreen(){
+        //test for image
         var titleImage = UIImage(named: "dcp_logo-1")
         XCTAssertEqual(titleImage, loginView.titleImageView.image)
         //test for title
@@ -65,15 +58,13 @@ class LoginTests: XCTestCase {
         //test for error message
         XCTAssert(loginView.emailErrorMessage.isHidden)
         XCTAssert(loginView.passwordErrorMessage.isHidden)
-        
         //Others tests
         loginView.animateViewMoving(up: true, moveValue: 30)
         loginView.animateViewMoving(up: false, moveValue: 30)
         loginView.showNetworkDialogBox()  
     }
-func testForEmailTextfieldValiadtion()
-{
-    
+    // MARK: Make testForEmailTextFieldValidation Method
+func testForEmailTextFieldValiadtion(){
       //test For empty Strings
       loginView.loginBtn.sendActions(for: .touchUpInside)
     XCTAssertEqual("Can't be empty!".localized(),loginView.emailErrorMessage.text!)
@@ -81,7 +72,6 @@ func testForEmailTextfieldValiadtion()
     loginView.emailTF.text = "shamas@3gca.0rg"
     loginView.loginBtn.sendActions(for: .touchUpInside)
     XCTAssertEqual("Invalid email!".localized(),loginView.emailErrorMessage.text!)
-    
     //test For valid email Strings
     loginView.emailTF.text = "shamas@3gca.org"
     loginView.loginBtn.sendActions(for: .touchUpInside)
@@ -91,12 +81,9 @@ func testForEmailTextfieldValiadtion()
     loginView.textFieldDidEndEditing(loginView.emailTF)
     loginView.textFieldDidBeginEditing(loginView.emailTF)
     loginView.doneBtnPressed()
-
-    
     }
-    
-    func testForPasswordTextfieldValiadtion()
-    {
+    // MARK: Make  testForPasswordTextfieldValiadtion Method
+    func testForPasswordTextfieldValiadtion(){
         
         //test For empty Strings
         loginView.loginBtn.sendActions(for: .touchUpInside)
@@ -105,7 +92,6 @@ func testForEmailTextfieldValiadtion()
         loginView.passwordTF.text = "56786"
         loginView.loginBtn.sendActions(for: .touchUpInside)
         XCTAssertEqual("Must be at least minmimim 6 character".localized(),loginView.passwordErrorMessage.text!)
-        
         //test For valid  Strings
         loginView.passwordTF.text = "admin212345"
         loginView.loginBtn.sendActions(for: .touchUpInside)
@@ -113,12 +99,9 @@ func testForEmailTextfieldValiadtion()
         XCTAssert(loginView.passwordErrorMessage.isHidden)
         loginView.textFieldDidEndEditing(loginView.passwordTF)
         loginView.textFieldDidBeginEditing(loginView.passwordTF)
-        
         //test for visibilityBtn
-        
         var VisibilityImageOff = UIImage(named: "ic_visibility_off")
         XCTAssertEqual(VisibilityImageOff, loginView.passwordVisibilityBtn.image(for: .normal))
-        
         loginView.passwordVisibilityBtn.sendActions(for: .touchUpInside)
         var VisibilityImage = UIImage(named: "ic_visibility")
         XCTAssertEqual(VisibilityImage, loginView.passwordVisibilityBtn.image(for: .normal)
@@ -127,7 +110,7 @@ func testForEmailTextfieldValiadtion()
         
     }
   
-    
+    // MARK: Make testForLoginApiResponse Method
     func testForLoginApiResponse()
     {
         
@@ -154,8 +137,6 @@ func testForEmailTextfieldValiadtion()
         })
 
         waitForExpectations(timeout: 6, handler: nil)
-      
-        XCTAssertEqual("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vZWMyLTM0LTIyMC0xNDMtMjMyLnVzLXdlc3QtMi5jb21wdXRlLmFtYXpvbmF3cy5jb206ODEvYXBpL2xvZ2luIiwiaWF0IjoxNTc3MTAwODk4LCJleHAiOjE1NzcxMzY4OTgsIm5iZiI6MTU3NzEwMDg5OCwianRpIjoiOEJPVWNnemR1czJZWDFLWiIsInN1YiI6MywicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.sdT9uHUymX71tWWetlFRVmMTIeBTeJG2km6iB7oA6-w", loginView.homeViewController?.access_Token)
-         
+      XCTAssertEqual("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vZWMyLTM0LTIyMC0xNDMtMjMyLnVzLXdlc3QtMi5jb21wdXRlLmFtYXpvbmF3cy5jb206ODEvYXBpL2xvZ2luIiwiaWF0IjoxNTc3MTAwODk4LCJleHAiOjE1NzcxMzY4OTgsIm5iZiI6MTU3NzEwMDg5OCwianRpIjoiOEJPVWNnemR1czJZWDFLWiIsInN1YiI6MywicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.sdT9uHUymX71tWWetlFRVmMTIeBTeJG2km6iB7oA6-w", loginView.homeViewController?.access_Token)
     }
 }

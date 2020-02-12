@@ -13,12 +13,9 @@
 
 import UIKit
 import WebKit
-
 class LiscenceWebViewController: UIViewController , WKUIDelegate {
-
     var webView: WKWebView!
     var language = "en"
-
     override func loadView() {
         let webConfiguration = WKWebViewConfiguration()
         webView = WKWebView(frame: .zero, configuration: webConfiguration)
@@ -28,13 +25,9 @@ class LiscenceWebViewController: UIViewController , WKUIDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
        loadPrivecyPolicyHtlmlFile()
-        
     }
-    
-    // MARK: Make load Priveecy Policy Htm file Method
-    func loadPrivecyPolicyHtlmlFile()
-    {
-        
+    // MARK: Make load Priveecy Policy Html file Method
+    func loadPrivecyPolicyHtlmlFile(){
         let preferences = UserDefaults.standard
         if(preferences.object(forKey: "CurrentLanguage") == nil) {
             let preferences = UserDefaults.standard
@@ -50,13 +43,9 @@ class LiscenceWebViewController: UIViewController , WKUIDelegate {
                 
                 let request = URLRequest(url: url)
                 webView.load(request)
-                
             } else {
-                
-                
                 let htmlPath = Bundle.main.path(forResource: "privecy", ofType: "html")
                 let url = URL(fileURLWithPath: htmlPath!)
-                
                 let request = URLRequest(url: url)
                 webView.load(request)
             }

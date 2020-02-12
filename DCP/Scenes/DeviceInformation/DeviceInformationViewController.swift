@@ -15,15 +15,12 @@ import Material
 import Localize_Swift
 import SwiftyJSON
 import JGProgressHUD
-protocol DeviceInformationDisplayLogic: class
-{
+protocol DeviceInformationDisplayLogic: class{
   func displayMatchedImei(viewModel: DeviceInformation.ImeiMatched.ViewModel)
     
      func displayNotMatchedImei(viewModel: DeviceInformation.ImeiNotMatched.ViewModel)
 }
-
-class DeviceInformationViewController: UIViewController, DeviceInformationDisplayLogic
-{
+class DeviceInformationViewController: UIViewController, DeviceInformationDisplayLogic{
    //Outlet
     @IBOutlet var backBtn: UIButton!
     @IBOutlet var customDialogBoxView: UIView!
@@ -61,22 +58,18 @@ class DeviceInformationViewController: UIViewController, DeviceInformationDispla
 
   // MARK: Object lifecycle
   
-  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
-  {
+  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?){
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     setup()
   }
   
-  required init?(coder aDecoder: NSCoder)
-  {
+  required init?(coder aDecoder: NSCoder){
     super.init(coder: aDecoder)
     setup()
   }
   
   // MARK: Setup
-  
-  private func setup()
-  {
+  private func setup(){
     let viewController = self
     let interactor = DeviceInformationInteractor()
     let presenter = DeviceInformationPresenter()
@@ -88,8 +81,6 @@ class DeviceInformationViewController: UIViewController, DeviceInformationDispla
     router.viewController = viewController
     router.dataStore = interactor
   }
-  
-  
      // MARK: Make  backBtnclick Method
     @IBAction func backBtn(_ sender: UIButton) {
         if(backBtnflag == false)
@@ -113,8 +104,7 @@ class DeviceInformationViewController: UIViewController, DeviceInformationDispla
     }
     
      // MARK: Make  showHomeVC Method
-    func showHomeVC()
-    {
+    func showHomeVC(){
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let HomeVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
         let appDlg = UIApplication.shared.delegate as? AppDelegate
@@ -131,8 +121,7 @@ class DeviceInformationViewController: UIViewController, DeviceInformationDispla
             showNetworkDialogBox()
         }
     }
-    func showLoading()
-    {
+    func showLoading(){
         self.spinner.textLabel.text = "Updating Device Status".localized()
         self.spinner.textLabel.textColor = UIColor.black
         self.spinner.show(in: self.view)
@@ -149,8 +138,7 @@ class DeviceInformationViewController: UIViewController, DeviceInformationDispla
         }
     }
     // MARK: View lifecycle
-  override func viewDidLoad()
-  {
+  override func viewDidLoad(){
     super.viewDidLoad()
     showGetDataVC()
     setUpView()
@@ -161,8 +149,7 @@ override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
      // MARK: Make  setUpView Method
-    func setUpView()
-    {
+    func setUpView(){
         // set properties if custom dialog box view
         customDialogBoxView.layer.shadowColor = UIColor.black.cgColor
         customDialogBoxView.layer.shadowOpacity = 1
@@ -204,8 +191,7 @@ override var preferredStatusBarStyle: UIStatusBarStyle {
         scrollVieButtom.constant = 220
     }
      // MARK: Make  showGetDataVC Method
-    func showGetDataVC()
-    {
+    func showGetDataVC(){
         let userVC = self.storyboard?.instantiateViewController(withIdentifier: "GetDeviceInformationDataViewController") as! GetDeviceInformationDataViewController
         getDeviceViewController = userVC
         userVC.Imei = Imei
@@ -231,29 +217,25 @@ override var preferredStatusBarStyle: UIStatusBarStyle {
         userVC.didMove(toParent: self)
     }
      // MARK: Make  requestForCheckMatchedImei Method
-    func requestForCheckMatchedImei(flag: Bool)
-   {
+    func requestForCheckMatchedImei(flag: Bool){
          okflag = flag
         let request = DeviceInformation.ImeiMatched.Request(imei_number:Imei ,access_Token: self.access_Token)
         interactor?.doMatchedImei(request: request)
   }
    // MARK: Make  showNetworkDialogBox Method
-    func showNetworkDialogBox()
-    {
+    func showNetworkDialogBox(){
         let userVC = self.storyboard?.instantiateViewController(withIdentifier: "NetworkdialogBoxViewController") as!  NetworkdialogBoxViewController
         userVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         self.present(userVC, animated: true, completion: nil)
     }
      // MARK: Make  requestForCheckNonMatchedImei Method
-    func requestForCheckNonMathedImei(flag: Bool)
-    {
+    func requestForCheckNonMathedImei(flag: Bool){
         okflag = flag
         let request = DeviceInformation.ImeiNotMatched.Request(imei_number:Imei ,access_Token: self.access_Token)
         interactor?.doNotMatchedImei(request: request)
     }
     // MARK: Make  displayNonMatchedImei Method
-    func displayNotMatchedImei(viewModel: DeviceInformation.ImeiNotMatched.ViewModel)
-    {
+    func displayNotMatchedImei(viewModel: DeviceInformation.ImeiNotMatched.ViewModel){
         if(viewModel.status_code == 200)
         {
             spinner.dismiss()
@@ -307,9 +289,7 @@ override var preferredStatusBarStyle: UIStatusBarStyle {
             userVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
             self.present(userVC, animated: true, completion: nil)
         }
-            
         else{
-            
             self.spinner.dismiss()
             let userVC = self.storyboard?.instantiateViewController(withIdentifier: "ErrorDilogBoxViewController") as!  ErrorDilogBoxViewController
             userVC.message = "Sorry, somthing went wrong. Try again a little later.".localized()

@@ -60,8 +60,7 @@ class SuccessDilogBoxViewController: UIViewController {
         }
     }
     // MARK: Make  setProperties Method
-    func setProperties()
-    {
+    func setProperties(){
         titleOutlet.text =  messagetitle
         messageOutlet.text = message
         okBtn.setTitle("Ok".localized(), for: .normal)

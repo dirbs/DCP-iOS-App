@@ -13,39 +13,24 @@
 import XCTest
 @testable import DCP
 import Hippolyte
-
 class AllowAccessTest: XCTestCase {
-
     var homeView: HomeViewController!
     override func setUp() {
-        getHomeViewContoller()
+        getHomeViewController()
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
-    
-    
-    
-    func getHomeViewContoller()
-    {
-        
+    // MARK: Make  getHomeViewController Method
+    func getHomeViewController(){
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
         homeView = vc
         let _ = homeView.view
-        
     }
-    func testForAllowAccessScreen()
-    {
-        
+    // MARK: Make  testForAllowAccessScreen Method
+    func testForAllowAccessScreen(){
         //test for message label
-        
         homeView.showAllowAccessVC()
-        
         XCTAssertEqual("Please Allow Camera  Access for Scanning Barcode Of IMEI".localized(), homeView.allowAccessViewController?.camerAccessMessage.text)
         //test for allow access button
         XCTAssertEqual("Allow Access".localized(), homeView.allowAccessViewController?.allowAccessBtn.currentTitle)
-        //homeView.allowAccessViewController?.allowAccessBtn.sendActions(for: .touchUpInside)
-
-        
-        
     }
-
 }

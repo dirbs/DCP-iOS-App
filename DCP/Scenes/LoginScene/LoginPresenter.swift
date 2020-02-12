@@ -23,14 +23,12 @@ class LoginPresenter: LoginPresentationLogic
   weak var viewController: LoginDisplayLogic?
   
   // MARK: Make PresentLogin Method
-  func presentLogin(response: Login.LoginResponse.Response)
-  {
+  func presentLogin(response: Login.LoginResponse.Response){
     let viewModel = Login.LoginResponse.ViewModel(accessToken: response.accessToken, roles: response.roles, liscense: response.liscense , status_code: response.status_code, agreed : response.agreed,user_id : response.user_id, active_id :response.active_id)
       viewController?.displayLoginResponse(viewModel: viewModel)
   }
      // MARK: Make presentForgotPassword Method
-    func presentForgotPassword(response: Login.ForgotPassword.Response)
-    {
+    func presentForgotPassword(response: Login.ForgotPassword.Response){
         let viewModel = Login.ForgotPassword.ViewModel(status_code: response.status_code)
         viewController?.displayForgotPasswordResponse(viewModel: viewModel)
     }

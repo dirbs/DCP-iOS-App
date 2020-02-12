@@ -15,7 +15,6 @@ import Material
 import Localize_Swift
 import SlideMenuControllerSwift
 import JGProgressHUD
-
 protocol LoginDisplayLogic: class
 {
   func displayLoginResponse(viewModel: Login.LoginResponse.ViewModel)
@@ -54,21 +53,18 @@ class LoginViewController: UIViewController, LoginDisplayLogic ,UITextFieldDeleg
     var interactor: LoginBusinessLogic?
     var router: (NSObjectProtocol & LoginRoutingLogic & LoginDataPassing)?
   // MARK: Object lifecycle
-  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
-  {
+  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?){
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     setup()
   }
   
-  required init?(coder aDecoder: NSCoder)
-  {
+  required init?(coder aDecoder: NSCoder){
     super.init(coder: aDecoder)
     setup()
   }
   
   // MARK: Setup
-  private func setup()
-  {
+  private func setup(){
     let viewController = self
     let interactor = LoginInteractor()
     let presenter = LoginPresenter()
@@ -80,10 +76,8 @@ class LoginViewController: UIViewController, LoginDisplayLogic ,UITextFieldDeleg
     router.viewController = viewController
     router.dataStore = interactor
   }
-    
     // MARK: Make save ValueInSharedPreferncess Method
-    func saveValueInPrferncess( access_token:String ,roles:String , useremail: String)
-    {
+    func saveValueInPrferncess( access_token:String ,roles:String , useremail: String){
         if(roles == "admin")
         {
             adminFlag = true
@@ -100,15 +94,13 @@ class LoginViewController: UIViewController, LoginDisplayLogic ,UITextFieldDeleg
         _ = preferences.synchronize()
     }
     // MARK: Make show Loading  Method
-    func showLoading(message: String?)
-    {
+    func showLoading(message: String?){
         self.spinner.textLabel.text = message
         self.spinner.textLabel.textColor = UIColor.black
         self.spinner.show(in: self.view)
     }
     // MARK: Make setUpView Method
-    func setUpView()
-    {
+    func setUpView(){
         //set propertiess  of email text View
         emailTF.layer.cornerRadius = 5
         emailTF.layer.borderColor = UIColor(red:0.46, green:0.46, blue:0.46, alpha:1.0).cgColor
@@ -157,7 +149,6 @@ class LoginViewController: UIViewController, LoginDisplayLogic ,UITextFieldDeleg
         scrollview.isScrollEnabled = false
         passwordTF.isSecureTextEntry.toggle()
     }
-    
     // MARK: Make visibilityBtn click Listener Method
     @IBAction func visiblityBtnClick(_ sender: UIButton) {
         if let ButtonImage = passwordVisibilityBtn.image(for: .normal),
@@ -173,8 +164,7 @@ class LoginViewController: UIViewController, LoginDisplayLogic ,UITextFieldDeleg
         }
     }
     // MARK: Make addButtonOnKeyBoard Method
-    func addButtonOnkeyboard()
-    {
+    func addButtonOnkeyboard(){
         let doneBtn  = UIBarButtonItem(title: "DONE".localized(), style: UIBarButtonItem.Style.plain, target: self, action: #selector(LoginViewController.doneBtnPressed))
        doneBtn.tintColor = UIColor(red:0.07, green:0.36, blue:0.55, alpha:1.0)
         let numberToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
@@ -291,8 +281,7 @@ class LoginViewController: UIViewController, LoginDisplayLogic ,UITextFieldDeleg
         }
     }
   // MARK: View lifecycle
-  override func viewDidLoad()
-  {
+  override func viewDidLoad(){
     super.viewDidLoad()
     addStatusBar()
     getPrefrencessValue()
@@ -329,8 +318,7 @@ class LoginViewController: UIViewController, LoginDisplayLogic ,UITextFieldDeleg
     }
   }
    // MARK: Make getPrefrencessValue Method
-  func getPrefrencessValue()
-  {
+  func getPrefrencessValue(){
     let preferences = UserDefaults.standard
     if(preferences.object(forKey: "loginFlag") == nil) {
         preferences.set(false, forKey: "loginFlag")
@@ -357,8 +345,7 @@ class LoginViewController: UIViewController, LoginDisplayLogic ,UITextFieldDeleg
     }
     }
     // MARK: Make validate Method
-    func validate()
-    {
+    func validate(){
         if((emailTF.text?.isEmpty)!)
         {
             emailErrorMessage.isHidden = false
@@ -417,16 +404,14 @@ class LoginViewController: UIViewController, LoginDisplayLogic ,UITextFieldDeleg
     }
     
     // MARK: Make showNetworkDialogBox Method
-    func showNetworkDialogBox()
-    {
+    func showNetworkDialogBox(){
         let userVC = self.storyboard?.instantiateViewController(withIdentifier: "NetworkdialogBoxViewController") as!  NetworkdialogBoxViewController
         userVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         self.present(userVC, animated: true, completion: nil)
     }
 
      // MARK: Make setLanguage Method
-    func setLanguage()
-    {
+    func setLanguage(){
         let preferences = UserDefaults.standard
         if(preferences.object(forKey: "CurrentLanguage") == nil) {
             let preferences = UserDefaults.standard
@@ -447,21 +432,18 @@ class LoginViewController: UIViewController, LoginDisplayLogic ,UITextFieldDeleg
         }
     }
    // MARK: Make loginRequest Method
-  func loginRequest()
-  {
+  func loginRequest(){
     let request = Login.LoginResponse.Request(email: emailTF.text, password: passwordTF.text)
     interactor?.loginRequest(request: request)
   }
     // MARK: Make forgotPasswordRequest Method
-    func forgotPasswordRequest(access_token: String,email:String)
-    {
+    func forgotPasswordRequest(access_token: String,email:String){
         showLoading(message: "Verifiying".localized())
         let request = Login.ForgotPassword.Request(email: email, access_token: accessToken)
         interactor?.forgotPasswordRequest(request: request)
     }
   // MARK: Make displayLoginResponse Method
-  func displayLoginResponse(viewModel: Login.LoginResponse.ViewModel)
-  {
+  func displayLoginResponse(viewModel: Login.LoginResponse.ViewModel){
     if(viewModel.status_code == 200)
     {
         let preferences = UserDefaults.standard
@@ -568,8 +550,7 @@ class LoginViewController: UIViewController, LoginDisplayLogic ,UITextFieldDeleg
         }
     }
      // MARK: Make addStatusBar Method
-    func addStatusBar()
-    {
+    func addStatusBar(){
         if #available(iOS 13.0, *) {            let statusBar =  UIView()
             statusBar.frame = UIApplication.shared.statusBarFrame
             statusBar.backgroundColor = UIColor(red:0.04, green:0.22, blue:0.32, alpha:1.0)

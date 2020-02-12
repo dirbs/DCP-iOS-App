@@ -27,9 +27,7 @@ class ReportDialogBoxViewController: UIViewController {
         animateView()
     }
     // MARK: Make  setUpProperties Method
-    func setUpProperties()
-    {
-        
+    func setUpProperties(){
         // set the text of message label
         messageOutlet.text =  "Does the record field match with the device?".localized()
         // set the title of yas btn
@@ -37,7 +35,6 @@ class ReportDialogBoxViewController: UIViewController {
         // set the title of no report btn
         noReportBtn.setTitle("NO,REPORT".localized(), for: .normal)
         noReportBtn.layer.cornerRadius = 5
-        
         // set the gradient color yas btn
         let gradientLayer:CAGradientLayer = CAGradientLayer()
         gradientLayer.frame.size = yasBtn.frame.size
@@ -50,7 +47,6 @@ class ReportDialogBoxViewController: UIViewController {
         gradientLayer.cornerRadius = 4
         yasBtn.layer.cornerRadius = 5
         yasBtn.layer.addSublayer(gradientLayer)
-        
         // set the noreport btn color yas btn
         let gradientLayer1:CAGradientLayer = CAGradientLayer()
         gradientLayer1.frame.size = noReportBtn.frame.size
@@ -77,8 +73,7 @@ class ReportDialogBoxViewController: UIViewController {
     }
     
      // MARK: Make  showNetworkDialogBox Method
-    func showNetworkDialogBox()
-    {
+    func showNetworkDialogBox(){
         let userVC = self.storyboard?.instantiateViewController(withIdentifier: "NetworkdialogBoxViewController") as!  NetworkdialogBoxViewController
         userVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         self.present(userVC, animated: true, completion: nil)

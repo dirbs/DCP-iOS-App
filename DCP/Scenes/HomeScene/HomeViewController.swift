@@ -45,7 +45,6 @@ class HomeViewController: UIViewController, HomeDisplayLogic
      var allowAccessViewController: AllowAccessViewController?
     var resultViewController: ResultViewController?
     var deviceInformationViewController: DeviceInformationViewController?
-    
     var language = "en"
     var getToken = ""
     var getEmail = ""
@@ -57,12 +56,9 @@ class HomeViewController: UIViewController, HomeDisplayLogic
     var typeImeiFlag = false
     var checkBtnFlag = false
     var scanBtnFlag = false
-    
   var interactor: HomeBusinessLogic?
   var router: (NSObjectProtocol & HomeRoutingLogic & HomeDataPassing)?
-
   // MARK: Object lifecycle
-  
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
   {
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -74,7 +70,6 @@ class HomeViewController: UIViewController, HomeDisplayLogic
     super.init(coder: aDecoder)
     setup()
   }
-    
      // MARK: Make prepareMenueButton Method
     func prepareMenuButton() {
         menuButton = IconButton(image: Icon.cm.menu, tintColor: .white)
@@ -131,7 +126,6 @@ class HomeViewController: UIViewController, HomeDisplayLogic
         self.spinner.textLabel.textColor = UIColor.black
         self.spinner.show(in: self.view)
     }
-    
      // MARK: Make typeImeiBtnClick Method
     @IBAction func typeImeBtnClick(_ sender: UIButton) {
         let typeVisible = MyVariables.scannerVisible
@@ -171,8 +165,7 @@ class HomeViewController: UIViewController, HomeDisplayLogic
         snackbar.show()
     }
   // MARK: Setup
-  private func setup()
-  {
+  private func setup(){
     let viewController = self
     let interactor = HomeInteractor()
     let presenter = HomePresenter()
@@ -184,10 +177,7 @@ class HomeViewController: UIViewController, HomeDisplayLogic
     router.viewController = viewController
     router.dataStore = interactor
   }
-  
- 
-  override func viewDidLoad()
-  {
+  override func viewDidLoad(){
     super.viewDidLoad()
     prepareMenuButton()
     prepareToolbar()
@@ -195,9 +185,8 @@ class HomeViewController: UIViewController, HomeDisplayLogic
     scrollview.isScrollEnabled = false
     addStatusBar()
   }
-     // MARK: Make addStatusBar Method
-    func addStatusBar()
-    {
+// MARK: Make addStatusBar Method
+    func addStatusBar(){
       if #available(iOS 13.0, *) {            let statusBar =  UIView()
             statusBar.frame = UIApplication.shared.statusBarFrame
             statusBar.backgroundColor = UIColor(red:0.04, green:0.22, blue:0.32, alpha:1.0)
@@ -217,8 +206,7 @@ class HomeViewController: UIViewController, HomeDisplayLogic
         return .lightContent
     }
     // MARK: Make requestforImei Method
-    func requsetForImei(Imei: String , sharedFlag: Bool)
-    {
+    func requsetForImei(Imei: String , sharedFlag: Bool){
        showLoading()
        getImeiRequest(imei: Imei, flag: sharedFlag, acces_Token: access_Token)
         sharedflag = sharedFlag
@@ -226,15 +214,13 @@ class HomeViewController: UIViewController, HomeDisplayLogic
     }
     
      // MARK: Make showResultdialogBox Method
-    func showResultDialogBox()
-    {
+    func showResultDialogBox(){
         let userVC = self.storyboard?.instantiateViewController(withIdentifier: "ResultViewController") as!  ResultViewController
         userVC.modalPresentationStyle = UIModalPresentationStyle.overFullScreen
         self.present(userVC, animated: true, completion: nil)
     }
      // MARK: Make showNetworkDiologBox Method
-    func showNetworkDialogBox(flag: Bool)
-    {
+    func showNetworkDialogBox(flag: Bool){
         if(flag == false)
         {
         let userVC = self.storyboard?.instantiateViewController(withIdentifier: "NetworkdialogBoxViewController") as!  NetworkdialogBoxViewController
@@ -256,8 +242,7 @@ class HomeViewController: UIViewController, HomeDisplayLogic
     }
     }
      // MARK: Make showScanVC Method
-    func showScanVC()
-    {
+    func showScanVC(){
         if(scanBtnFlag == false)
         {
         showSnackBar(message: "Please place the barcode inside the box.".localized())
@@ -280,8 +265,7 @@ class HomeViewController: UIViewController, HomeDisplayLogic
     }
     
      // MARK: Make showtypeImeiVc Method
-    func showTypeImeiVC()
-    {
+    func showTypeImeiVC(){
         let TypeVisible = MyVariables.scannerVisible
         typeImeiVC.isHidden = false
         scanImeiVC.isHidden = true
@@ -304,8 +288,7 @@ class HomeViewController: UIViewController, HomeDisplayLogic
         }
     }
      // MARK: Make showAllowAccess Method
-    func showAllowAccessVC()
-    {
+    func showAllowAccessVC(){
         typeImeiVC.isHidden = true
         scanImeiVC.isHidden = true
         cameraAccessVC.isHidden = false
@@ -320,14 +303,12 @@ class HomeViewController: UIViewController, HomeDisplayLogic
         userVC.didMove(toParent: self)
     }
      // MARK: Make getImeirequest Method
-    func getImeiRequest(imei:String ,flag:Bool,acces_Token:String)
-  {
+    func getImeiRequest(imei:String ,flag:Bool,acces_Token:String){
     let request = Home.GetImei.Request(imei:imei,imeiflag:flag ,access_Token: acces_Token)
     interactor?.doGetImei(request: request)
   }
    // MARK: Make displayGetImeiResponse Method
-  func displayGetImeiResponse(viewModel: Home.GetImei.ViewModel)
-  {
+  func displayGetImeiResponse(viewModel: Home.GetImei.ViewModel){
     if(viewModel.statusCode == 200)
     {
         spinner.dismiss()

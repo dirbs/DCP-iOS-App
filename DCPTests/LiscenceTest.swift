@@ -13,24 +13,20 @@
 import XCTest
 @testable import DCP
 import Hippolyte
-
 class LiscenceTest: XCTestCase {
     var liscenceView: LiscenceAgrementViewController!
     override func setUp() {
         getLiscenceViewContoller()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    func getLiscenceViewContoller()
-    {
         
+    }
+// MARK: Make  getLiscenceViewController Method
+    func getLiscenceViewContoller(){
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LiscenceAgrementViewController") as! LiscenceAgrementViewController
         liscenceView = vc
         let _ = liscenceView.view
-        
     }
-    func testForLiscenceScreen()
-    {
+   // MARK: Make  testForLiscencescreen Method
+    func testForLiscenceScreen(){
       //test for agrred check Btn
           XCTAssertEqual("I agreed".localized(), liscenceView.agreedCheckBtn.currentTitle)
         liscenceView.agreedCheckBtn.sendActions(for: .touchUpInside)
@@ -43,14 +39,14 @@ class LiscenceTest: XCTestCase {
         let urlpath = Bundle.main.path(forResource: "privecyVi", ofType: "html");
         let requesturl = URL(string: urlpath!)
         let request = URLRequest(url: requesturl!)
-        liscenceView.privecyPolicywebView.loadRequest(request)
+        //liscenceView.privecyPolicywebView.loadRequest(request)
         XCTAssertEqual(request, request)
         //test for others
         liscenceView.showNetworkDialogBox()
         
     }
-    func testForLiscenceApiResponse()
-    {
+    // MARK: Make  testForLiscenceApiResponse Method
+    func testForLiscenceApiResponse(){
         let url = URL(string: "http://ec2-34-220-143-232.us-west-2.compute.amazonaws.com:81/api/update-user-license/2")!
         var stub = StubRequest(method: .PUT, url: url)
         var response = StubResponse()
@@ -60,19 +56,15 @@ class LiscenceTest: XCTestCase {
         Hippolyte.shared.add(stubbedRequest: stub)
         Hippolyte.shared.start()
         Constants.Base_Url = "http://ec2-34-220-143-232.us-west-2.compute.amazonaws.com:81/"
-        
         UIApplication.shared.keyWindow?.rootViewController = liscenceView
          liscenceView.getUserId = 2
         liscenceView.continueBtn.sendActions(for: .touchUpInside)
         let liscenceExpectation = self.expectation(description: "liscenceExpectation")
-        
         DispatchQueue.main.asyncAfter(deadline: .now() + 6.0, execute: {
             
             liscenceExpectation.fulfill()
         })
-        
         waitForExpectations(timeout: 6, handler: nil)
-
     }
 
 }

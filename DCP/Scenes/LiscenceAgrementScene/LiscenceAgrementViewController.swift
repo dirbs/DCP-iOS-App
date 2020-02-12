@@ -16,12 +16,10 @@ import Material
 import Localize_Swift
 import SlideMenuControllerSwift
 import JGProgressHUD
-
 protocol LiscenceAgrementDisplayLogic: class
 {
   func displayLiscenceUpdateResponse(viewModel: LiscenceAgrement.LiscenceUpdate.ViewModel)
 }
-
 class LiscenceAgrementViewController: UIViewController, LiscenceAgrementDisplayLogic
 {
   var interactor: LiscenceAgrementBusinessLogic?
@@ -36,22 +34,18 @@ class LiscenceAgrementViewController: UIViewController, LiscenceAgrementDisplayL
     var language = ""
     var checkAgreedflag = false
     let spinner = JGProgressHUD(style: .extraLight)
- 
-  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
-  {
+  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?){
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     setup()
   }
   
-  required init?(coder aDecoder: NSCoder)
-  {
+  required init?(coder aDecoder: NSCoder){
     super.init(coder: aDecoder)
     setup()
   }
   
   // MARK: Setup
-  private func setup()
-  {
+  private func setup(){
     let viewController = self
     let interactor = LiscenceAgrementInteractor()
     let presenter = LiscenceAgrementPresenter()
@@ -63,22 +57,15 @@ class LiscenceAgrementViewController: UIViewController, LiscenceAgrementDisplayL
     router.viewController = viewController
     router.dataStore = interactor
   }
-    
-    
-  
   // MARK: View lifecycle
-  
-  override func viewDidLoad()
-  {
+  override func viewDidLoad(){
     super.viewDidLoad()
     //  Calling of Method
     getValueInPreferncess()
     setUpView()
-
   }
     // MARK: Creat getValueInPreferncess Method
-    func getValueInPreferncess()
-    {
+    func getValueInPreferncess(){
         
         //Get the user_id in shared_Preferncess
         let preferences = UserDefaults.standard
@@ -88,8 +75,7 @@ class LiscenceAgrementViewController: UIViewController, LiscenceAgrementDisplayL
         }
     }
 // MARK: Make setUpView Method
-    func setUpView()
-    {
+    func setUpView(){
         //set the title of agreed checkBtn
         agreedCheckBtn.setTitle("I agreed".localized(), for: .normal)
        //set the gradient color agreed checkBtn
@@ -111,7 +97,6 @@ class LiscenceAgrementViewController: UIViewController, LiscenceAgrementDisplayL
         continueBtn.isUserInteractionEnabled = false
         continueBtn.alpha = 0.5
     }
-  
   // MARK: Creat click Listener in continue Btn
     @IBAction func continueBtn(_ sender: UIButton) {
         //convert int value to string value
@@ -130,15 +115,13 @@ class LiscenceAgrementViewController: UIViewController, LiscenceAgrementDisplayL
         return .lightContent
     }
      // MARK: Creat showNetworkDialogBoxMethod
-    func showNetworkDialogBox()
-    {
+    func showNetworkDialogBox(){
         let userVC = self.storyboard?.instantiateViewController(withIdentifier: "NetworkdialogBoxViewController") as!  NetworkdialogBoxViewController
         userVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         self.present(userVC, animated: true, completion: nil)
     }
      // MARK: Creat click Listener agreed check Btn
     @IBAction func agreedCheckBtn(_ sender: CheckButton) {
-       
         if(agreedCheckBtn.isSelected == true)
         {
             continueBtn.isUserInteractionEnabled = true
@@ -149,7 +132,6 @@ class LiscenceAgrementViewController: UIViewController, LiscenceAgrementDisplayL
             continueBtn.alpha = 0.5
         }
     }
-    
      // MARK: Make updeteLiscencerequest  Method
     func updateLiscenceRequest(access_Token: String ,user_id: String)
   {
@@ -157,8 +139,7 @@ class LiscenceAgrementViewController: UIViewController, LiscenceAgrementDisplayL
     interactor?.doLiscenceUpdate(request: request)
   }
    // MARK: Make displayLiscenceUpdateResponse  Method
-  func displayLiscenceUpdateResponse(viewModel: LiscenceAgrement.LiscenceUpdate.ViewModel)
-  {
+  func displayLiscenceUpdateResponse(viewModel: LiscenceAgrement.LiscenceUpdate.ViewModel){
     if(viewModel.status_code == 200)
     {
         let preferences = UserDefaults.standard

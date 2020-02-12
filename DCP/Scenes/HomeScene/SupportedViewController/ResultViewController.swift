@@ -26,11 +26,9 @@ class ResultViewController: UIViewController {
         setUpProperties()
         setupView()
         animateView()
-       
     }
      // MARK: Make setUpProperties Method
-    func setUpProperties()
-    {
+    func setUpProperties(){
         titleOutlet.text = "Imei not Found".localized()
         reportMobilePhoneBtn.setTitle("REPORT MOBILE PHONE".localized(), for: .normal)
         if (language == "en")
@@ -63,8 +61,7 @@ class ResultViewController: UIViewController {
     }
     
      // MARK: Make showReportVC Method
-    func showReportVC()
-    {
+    func showReportVC(){
         let userVC = self.storyboard?.instantiateViewController(withIdentifier: "ReportViewController") as!  ReportViewController
         userVC.imei = imei
         let appDlg = UIApplication.shared.delegate as? AppDelegate

@@ -21,7 +21,6 @@ protocol ReportDisplayLogic: class
 {
   func displayReport(viewModel: Report.Report.ViewModel)
 }
-
 class ReportViewController: UIViewController,UITextFieldDelegate, ReportDisplayLogic , UICollectionViewDelegate, UICollectionViewDataSource
 {
     // outlet
@@ -68,25 +67,17 @@ class ReportViewController: UIViewController,UITextFieldDelegate, ReportDisplayL
     var selectImageFlag  = false
   var interactor: ReportBusinessLogic?
   var router: (NSObjectProtocol & ReportRoutingLogic & ReportDataPassing)?
-
   // MARK: Object lifecycle
-  
-  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
-  {
+  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?){
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     setup()
   }
-  
-  required init?(coder aDecoder: NSCoder)
-  {
+  required init?(coder aDecoder: NSCoder){
     super.init(coder: aDecoder)
     setup()
   }
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
         return arrayOfImage.count
-        
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as!  CollectionViewCell
@@ -110,12 +101,8 @@ class ReportViewController: UIViewController,UITextFieldDelegate, ReportDisplayL
             selectImageFlag  = false
         }
     }
-    
-   
-    
    // MARK: Make setUpTooltip Method
-   func setUpToolTip()
-   {
+   func setUpToolTip(){
     popTip.edgeMargin = 5
     popTip.offset = 2
     popTip.edgeInsets = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 10)
@@ -128,8 +115,7 @@ class ReportViewController: UIViewController,UITextFieldDelegate, ReportDisplayL
     popTip.bubbleColor = Color.black
     }
     // MARK: Make saveReportData Method
-    func saveReportDate()
-    {
+    func saveReportDate(){
         saveMobilePhoneBrand = mobilePhoneBrandTf.text!
         saveModelName = modelNameTf.text!
         saveStoreName = storeNameTf.text!
@@ -178,8 +164,7 @@ class ReportViewController: UIViewController,UITextFieldDelegate, ReportDisplayL
         }
     }
     // MARK: Make getSaveData Method
-    func getSaveData()
-    {
+    func getSaveData(){
        reportStateSave   = UserDefaults.standard.bool(forKey: "ReportStatusFlage")
         if(reportStateSave == true)
         {
@@ -216,8 +201,7 @@ class ReportViewController: UIViewController,UITextFieldDelegate, ReportDisplayL
         }
     }
     // MARK: Make setUpProperties Method
-    func  setUpProperties()
-    {
+    func  setUpProperties(){
         // set properties of report Phone Brand text field
         mobilePhoneBrandTf.layer.cornerRadius = 5
         mobilePhoneBrandTf.layer.borderColor = UIColor(red:0.46, green:0.46, blue:0.46, alpha:1.0).cgColor
@@ -309,13 +293,8 @@ class ReportViewController: UIViewController,UITextFieldDelegate, ReportDisplayL
             print(access_Token)
         }
     }
-    
-  
-    
-   
     // MARK: Make addButtonKeyBoard Method
-    func addButtonOnkeyboard()
-    {
+    func addButtonOnkeyboard(){
         let doneBtn  = UIBarButtonItem(title: "DONE".localized(), style: UIBarButtonItem.Style.plain, target: self, action: #selector(ReportViewController.doneBtnPressed))
         doneBtn.tintColor = UIColor(red:0.07, green:0.36, blue:0.55, alpha:1.0)
         let numberToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
@@ -336,8 +315,7 @@ class ReportViewController: UIViewController,UITextFieldDelegate, ReportDisplayL
         view.endEditing(true)
     }
     // MARK: Make validate Method
-    func valiadte()
-    {
+    func valiadte(){
         let getModelName = modelNameTf.text!.trimmingCharacters(in: .whitespaces)
         let getMobilePhoneBrand = mobilePhoneBrandTf.text!.trimmingCharacters(in: .whitespaces)
         let getStoreName = storeNameTf.text!.trimmingCharacters(in: .whitespaces)
@@ -418,22 +396,19 @@ class ReportViewController: UIViewController,UITextFieldDelegate, ReportDisplayL
         }
     }
     // MARK: Make showNetworkdialogBox Method
-    func showNetworkDialogBox()
-    {
+    func showNetworkDialogBox(){
         let userVC = self.storyboard?.instantiateViewController(withIdentifier: "NetworkdialogBoxViewController") as!  NetworkdialogBoxViewController
         userVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         self.present(userVC, animated: true, completion: nil)
     }
     // MARK: Make showLoading Method
-    func showLoading()
-    {
+    func showLoading(){
         self.spinner.textLabel.text = "Adding Device Information...".localized()
         self.spinner.textLabel.textColor = UIColor.black
         self.spinner.show(in: self.view)
     }
     // MARK: Make getLanguage Method
-    func getLanguage()
-    {
+    func getLanguage(){
         let preferences = UserDefaults.standard
         if(preferences.object(forKey: "CurrentLanguage") == nil) {
             let preferences = UserDefaults.standard
@@ -501,14 +476,11 @@ class ReportViewController: UIViewController,UITextFieldDelegate, ReportDisplayL
     
     
     // MARK: Make AllowPermissionDialogBox Method
-    func AllowPermissionDialogBox()
-    {
+    func AllowPermissionDialogBox(){
         allowPermissionOfcamera()
     }
     // MARK: Make showPermissionDialogBox Method
-    func showPermissionDialogBox()
-    {
-        
+    func showPermissionDialogBox(){
         let alert = UIAlertController(title: title, message: "Allow DCP to access the Photos".localized(), preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Allow".localized(), style: UIAlertAction.Style.default, handler: {(action:UIAlertAction!) in
             if let url = URL(string: UIApplication.openSettingsURLString) {
@@ -553,8 +525,7 @@ class ReportViewController: UIViewController,UITextFieldDelegate, ReportDisplayL
         }
     }
     // MARK: Make  showCamerPermissionDialogBox Method
-    func showCamerPermissionDialogBox()
-    {
+    func showCamerPermissionDialogBox(){
         let alert = UIAlertController(title: title, message: "Allow DCP to access the camera".localized(), preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Allow".localized(), style: UIAlertAction.Style.default, handler: {(action:UIAlertAction!) in
             if let url = URL(string: UIApplication.openSettingsURLString) {
@@ -574,8 +545,7 @@ class ReportViewController: UIViewController,UITextFieldDelegate, ReportDisplayL
     }
     
     // MARK: Setup
-  private func setup()
-  {
+  private func setup(){
     let viewController = self
     let interactor = ReportInteractor()
     let presenter = ReportPresenter()
@@ -587,10 +557,7 @@ class ReportViewController: UIViewController,UITextFieldDelegate, ReportDisplayL
     router.viewController = viewController
     router.dataStore = interactor
   }
-  
-
-  override func viewDidLoad()
-  {
+  override func viewDidLoad(){
     super.viewDidLoad()
     getSaveData()
     getLanguage()
@@ -648,8 +615,7 @@ class ReportViewController: UIViewController,UITextFieldDelegate, ReportDisplayL
         }
     }
     // MARK: Make  addScrolViewHide Method
-    func addScrolViewHide()
-    {
+    func addScrolViewHide(){
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         
@@ -684,18 +650,15 @@ class ReportViewController: UIViewController,UITextFieldDelegate, ReportDisplayL
     }
     // MARK: Make  requestForreport Method
     func requestForReport( imei_number: String?,
-    access_Token: String?,language: String?,brand_name: String?,model_name: String?,store_name: String?,address: String?,description: String?,arrayOfImage: [UIImage])
-  {
+    access_Token: String?,language: String?,brand_name: String?,model_name: String?,store_name: String?,address: String?,description: String?,arrayOfImage: [UIImage]){
     let request = Report.Report.Request(imei_number: imei_number,access_Token: access_Token,language:language,brand_name:brand_name,model_name:model_name,store_name:store_name,address:address,description:description,arrayOfImage:arrayOfImage)
     interactor?.doReport(request: request)
   }
 // MARK: Make  displayReport Method
-  func displayReport(viewModel: Report.Report.ViewModel)
-  {
+  func displayReport(viewModel: Report.Report.ViewModel){
     if(viewModel.status_code == 200)
     {
         spinner.dismiss()
-        
         let userVC = self.storyboard?.instantiateViewController(withIdentifier: "successDilogBoxViewController") as!  SuccessDilogBoxViewController
         let message = viewModel.message
         userVC.message  = message
@@ -729,8 +692,7 @@ class ReportViewController: UIViewController,UITextFieldDelegate, ReportDisplayL
     }
   }
       // MARK: Make  showHomeVC Method
-    func showHomeVC()
-    {
+    func showHomeVC(){
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         let HomeVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
@@ -765,8 +727,7 @@ extension ReportViewController: ImagePickerDelegate
          imagePicker.dismiss(animated: true, completion: nil)
     }
     
-    func cancelButtonDidPress(_ imagePicker: ImagePickerController)
-    {
+    func cancelButtonDidPress(_ imagePicker: ImagePickerController){
          imagePicker.dismiss(animated: true, completion: nil)
         
     }   

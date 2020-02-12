@@ -14,29 +14,23 @@ import XCTest
 @testable import DCP
 import Hippolyte
 class ReportTest: XCTestCase {
-
     var reportView: ReportViewController!
     override func setUp() {
-        getReportViewContoller()
+        getReportViewController()
     }
-    func getReportViewContoller()
-    {
-        
+       // MARK: Make  getHomeViewController Method
+    func getReportViewController(){
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ReportViewController") as! ReportViewController
-        
         reportView = vc
         let _ = reportView.view
         
     }
-    
-    func testForReportScreen()
-    {
-        
+    // MARK: Make  testForReportScreen Method
+    func testForReportScreen(){
         //test for title text
          XCTAssertEqual("Report Mobile Phone".localized(), reportView.reportMobilePhoneOutlet.text)
         //test for Title of device image
         XCTAssertEqual("Device Image".localized(), reportView.deviceImageOutlet.text)
-        
         //test for mobile Phone Brand textField
           XCTAssertEqual("Mobile Phone Brand".localized(), reportView.mobilePhoneBrandTf!.attributedPlaceholder?.string)
         //test for model Name textField
@@ -47,12 +41,10 @@ class ReportTest: XCTestCase {
         XCTAssertEqual("Address".localized(), reportView.addressTf!.attributedPlaceholder?.string)
         //test for store Name textField
         XCTAssertEqual("Description".localized(), reportView.descriptionTf!.attributedPlaceholder?.string)
-        
         //test for submitBtn
         XCTAssertEqual("SUBMIT".localized(), reportView.submitBtnOutlet.currentTitle)
         //test for select image btn
         XCTAssertEqual("SELECT IMAGES".localized(), reportView.selectImageBtn.currentTitle)
-        
         //test for toot tips btn btn
         var getImageTooTipButtons = UIImage(named: "ic_info1")
         XCTAssertEqual(getImageTooTipButtons, reportView.mobilePhoneBrandBtn.image(for: .normal))
@@ -61,18 +53,14 @@ class ReportTest: XCTestCase {
          XCTAssertEqual(getImageTooTipButtons, reportView.addressBtn.image(for: .normal))
          XCTAssertEqual(getImageTooTipButtons, reportView.descriptionBtn.image(for: .normal))
          XCTAssertEqual(getImageTooTipButtons, reportView.selectImageDescriptionBtn.image(for: .normal))
-        
-        
     }
-    func testForSubmitBtnWithValidInput()
-    {
-        
+    // MARK: Make  testForsubmitBtnWithValidInput Method
+    func testForSubmitBtnWithValidInput(){
         //test for mobile Phone brand textfield valid input
         reportView.mobilePhoneBrandTf.text = "samsung"
         reportView.submitBtnOutlet.sendActions(for: .touchUpInside)
         XCTAssertEqual("can't be empty!".localized(), reportView.mobilePhoneBrandErrorMessage.text)
         XCTAssertTrue((reportView.mobilePhoneBrandErrorMessage.isHidden))
-        
         //test for model name textfield valid input
         reportView.modelNameTf.text = "grand prime"
         reportView.submitBtnOutlet.sendActions(for: .touchUpInside)
@@ -88,7 +76,6 @@ class ReportTest: XCTestCase {
         reportView.submitBtnOutlet.sendActions(for: .touchUpInside)
         XCTAssertEqual("can't be empty!".localized(), reportView.addressErrorMessage.text)
         XCTAssertTrue((reportView.addressErrorMessage.isHidden))
-        
         //test for description textfield valid input
         reportView.descriptionTf.text = "it is a software house"
         reportView.submitBtnOutlet.sendActions(for: .touchUpInside)
@@ -96,16 +83,13 @@ class ReportTest: XCTestCase {
         XCTAssertTrue((reportView.descriptionErrorMessage.isHidden))
     
     }
-    
-    func testForSubmitBtnWithInValidInput()
-    {
-        
+     // MARK: Make  testForsubmitBtnWithInValidInput Method
+    func testForSubmitBtnWithInValidInput(){
         //test for mobile Phone brand textfield invalid input
         reportView.mobilePhoneBrandTf.text = ""
         reportView.submitBtnOutlet.sendActions(for: .touchUpInside)
         XCTAssertEqual("can't be empty!".localized(), reportView.mobilePhoneBrandErrorMessage.text)
         XCTAssertFalse((reportView.mobilePhoneBrandErrorMessage.isHidden))
-        
         //test for model name textfield invalid input
         reportView.modelNameTf.text = ""
         reportView.submitBtnOutlet.sendActions(for: .touchUpInside)
@@ -116,14 +100,11 @@ class ReportTest: XCTestCase {
         reportView.submitBtnOutlet.sendActions(for: .touchUpInside)
         XCTAssertEqual("can't be empty!".localized(), reportView.storeNameErrorMessage.text)
         XCTAssertFalse((reportView.storeNameErrorMessage.isHidden))
-        
-        
         //test for address textfield invalid input
         reportView.addressTf.text = ""
         reportView.submitBtnOutlet.sendActions(for: .touchUpInside)
         XCTAssertEqual("can't be empty!".localized(), reportView.addressErrorMessage.text)
         XCTAssertFalse((reportView.addressErrorMessage.isHidden))
-        
         //test for description textfield invalid input
         reportView.descriptionTf.text = ""
         reportView.submitBtnOutlet.sendActions(for: .touchUpInside)
@@ -135,12 +116,9 @@ class ReportTest: XCTestCase {
         reportView.showNetworkDialogBox()
         reportView.showPermissionDialogBox()
         reportView.showCamerPermissionDialogBox()
-        
     }
-    
-    func testForToolTips()
-    {
-        
+     // MARK: Make  testForToolTips Method
+    func testForToolTips(){
         reportView.mobilePhoneBrandBtn.sendActions(for: .touchUpInside)
          XCTAssertEqual("Enter the valid brand name of the device".localized(), reportView.popTip.text)
         reportView.modelNameBtn.sendActions(for: .touchUpInside)
@@ -154,10 +132,9 @@ class ReportTest: XCTestCase {
      reportView.selectImageDescriptionBtn.sendActions(for: .touchUpInside)
         XCTAssertEqual("Upload valid images of the device".localized(), reportView.popTip.text)
     }
-    
-    func testForSelectImageBtn()
-    {
-         UIApplication.shared.keyWindow!.rootViewController = reportView
+     // MARK: Make  testForSelectImageBtn Method
+    func testForSelectImageBtn(){
+        UIApplication.shared.keyWindow!.rootViewController = reportView
         let Image1 = UIImage(named: "ic_home")
         let Image2 = UIImage(named: "ic_history")
         let Image3 = UIImage(named: "ic_history")
@@ -170,27 +147,20 @@ class ReportTest: XCTestCase {
             
             leftNeviagtionExpectation.fulfill()
         })
-        
         waitForExpectations(timeout: 6, handler: nil)
-        
         let indexPath1 = IndexPath(item: 0, section: 0)
         let cell1 = reportView.collectionView.cellForItem(at: indexPath1) as! CollectionViewCell
                XCTAssertEqual(reportView.arrayOfImage[0], cell1.imageView.image)
-        
         let indexPath2 = IndexPath(item: 1, section: 0)
         let cell2 = reportView.collectionView.cellForItem(at: indexPath2) as! CollectionViewCell
         XCTAssertEqual(reportView.arrayOfImage[1], cell2.imageView.image)
-
         let indexPath3 = IndexPath(item: 2, section: 0)
         let cell3 = reportView.collectionView.cellForItem(at: indexPath3) as! CollectionViewCell
         XCTAssertEqual(reportView.arrayOfImage[2], cell3.imageView.image)
         cell3.backBtn.sendActions(for: .touchUpInside)
-        
 }
-    
-    func testForReportApiResponse()
-    {
-        
+     // MARK: Make  testForReportApiResponse Method
+    func testForReportApiResponse(){
         let url = URL(string: "http://ec2-34-220-143-232.us-west-2.compute.amazonaws.com:81/api/counterfiet")!
         var stub = StubRequest(method: .POST, url: url)
         var response = StubResponse()
@@ -207,19 +177,15 @@ class ReportTest: XCTestCase {
          reportView.addressTf.text = "First App"
          reportView.descriptionTf.text = "First App"
         reportView.submitBtnOutlet.sendActions(for: .touchUpInside)
-        
         let reportExpectation = self.expectation(description: "reportExpectation")
         DispatchQueue.main.asyncAfter(deadline: .now() + 6.0, execute: {
             
             reportExpectation.fulfill()
         })
-        
         waitForExpectations(timeout: 6, handler: nil)
         let inputViewController = reportView.presentedViewController as! SuccessDilogBoxViewController
         XCTAssertEqual("Reported".localized(), inputViewController.titleOutlet.text)
         XCTAssertEqual("The device has been reported as counterfeit.", inputViewController.messageOutlet.text)
         inputViewController.okBtn.sendActions(for: .touchUpInside)
-      
-        
     }
 }

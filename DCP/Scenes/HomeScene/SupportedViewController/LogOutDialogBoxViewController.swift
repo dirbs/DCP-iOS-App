@@ -26,8 +26,7 @@ class LogOutDialogBoxViewController: UIViewController {
         animateView()
     }
      // MARK: Make setUpProperties Method
-    func setUpProperties()
-    {
+    func setUpProperties(){
         titleOutlet.text = "Logout".localized()
         messageOutlet.text = "Are you sure you want to logout?".localized()
         yasBtn.setTitle("YES".localized(), for: .normal)
@@ -38,8 +37,7 @@ class LogOutDialogBoxViewController: UIViewController {
         logout()
     }
      // MARK: Make Logout Method
-    func logout()
-    {
+    func logout(){
         let defaults = UserDefaults.standard
         defaults.removeObject(forKey: "loginFlag")
         defaults.removeObject(forKey: "adminFlag")

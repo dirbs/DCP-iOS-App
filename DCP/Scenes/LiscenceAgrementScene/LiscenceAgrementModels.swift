@@ -12,11 +12,9 @@
  */
 
 import UIKit
-
 enum LiscenceAgrement
 {
   // MARK: Use cases
-  
   enum LiscenceUpdate
   {
     struct Request

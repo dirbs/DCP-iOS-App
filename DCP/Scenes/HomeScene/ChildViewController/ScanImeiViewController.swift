@@ -49,7 +49,6 @@ class ScanImeiViewController: UIViewController {
         super.viewDidLayoutSubviews()
     }
     override func viewWillAppear(_ animated: Bool) {
-        
         super.viewWillAppear(animated)
         if Platform.isSimulator {
             
@@ -62,8 +61,7 @@ class ScanImeiViewController: UIViewController {
         super.viewDidAppear(animated)
     }
     // MARK: Make setUpView Method
-    func  setUpView()
-    {
+    func  setUpView(){
         //set background color transpernet
         view.frame = CGRect(x: 0, y: 0, width: 70, height: 80)
         leftView.backgroundColor = UIColor.black.withAlphaComponent(0.5)

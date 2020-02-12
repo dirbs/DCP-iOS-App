@@ -13,40 +13,31 @@
 import XCTest
 @testable import DCP
 import Hippolyte
-
 class HistoryTest: XCTestCase {
     var historyView: HistoryViewController!
     override func setUp() {
-        getHistoryViewContoller()
+        getHistoryViewController()
     }
-    func getHistoryViewContoller()
-    {
-        
+    // MARK: Make  get history view controller Method
+    func getHistoryViewController(){
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HistoryViewController") as! HistoryViewController
-        
         historyView = vc
         let _ = historyView.view
         UIApplication.shared.keyWindow?.rootViewController = historyView
-
-        
     }
     
-    
-    func testForHistoryScreen()
-    {
+    // MARK: Make override testForHistoryScreen Method
+    func testForHistoryScreen(){
         //test for title text
          XCTAssertEqual("History".localized(), historyView.historyTitle.text)
-           XCTAssertEqual("History".localized(), historyView.titleOutlet.text)
+        XCTAssertEqual("History".localized(), historyView.titleOutlet.text)
         //test for search Image view
         var getsearchImage = UIImage(named: "ic_action_search")
         XCTAssertEqual(getsearchImage, historyView.searchBtn.image(for: .normal))
         historyView.searchBtn.sendActions(for: .touchUpInside)
-        
-        
     }
-    
-    func testForApiResponse()
-    {
+    // MARK: Make override testForApiResponse Method
+    func testForApiResponse(){
        
         let url = URL(string: "http://ec2-34-220-143-232.us-west-2.compute.amazonaws.com:81/api/datatable/my-activity?page=59")!
         var stub = StubRequest(method: .POST, url: url)
@@ -69,9 +60,8 @@ class HistoryTest: XCTestCase {
         
         
     }
-    
-    func testForSearchApiResponse()
-    {
+    // MARK: Make  testForSearchApiResponse Method
+    func testForSearchApiResponse(){
         
         let url = URL(string: "http://ec2-34-220-143-232.us-west-2.compute.amazonaws.com:81/api/search_users_activity?page=1")!
         var stub = StubRequest(method: .POST, url: url)
@@ -82,19 +72,14 @@ class HistoryTest: XCTestCase {
         Hippolyte.shared.add(stubbedRequest: stub)
         Hippolyte.shared.start()
         Constants.Base_Url = "http://ec2-34-220-143-232.us-west-2.compute.amazonaws.com:81/"
-        
         historyView.searchTF.text = "5555555"
         historyView.search()
-        // UIApplication.shared.keyWindow?.rootViewController = historyView
-        
         let historyExpectationApi = self.expectation(description: "historyExpectationApi")
         DispatchQueue.main.asyncAfter(deadline: .now() + 6.0, execute: {
             
             historyExpectationApi.fulfill()
         })
-        
         waitForExpectations(timeout: 6, handler: nil)
-        
         let indexPath1 = IndexPath(item: 0, section: 0)
         let cell1 = historyView.historyTableView.cellForRow(at: indexPath1) as! HistoryTableViewCell
         XCTAssertEqual(historyView.user_id[0], cell1.idOutlet.text)
@@ -102,22 +87,14 @@ class HistoryTest: XCTestCase {
         XCTAssertEqual(historyView.user_device[0], cell1.user_device_Outlet.text)
         XCTAssertEqual(historyView.date[0], cell1.dateOutlet.text)
         XCTAssertEqual(historyView.visitor_ip[0], cell1.visitor_ip_outlet.text)
-       
-        
-        
         historyView.searchTF.text = "5555555"
         historyView.search()
         // UIApplication.shared.keyWindow?.rootViewController = historyView
-        
         let historyExpectationApi1 = self.expectation(description: "historyExpectationApi1")
         DispatchQueue.main.asyncAfter(deadline: .now() + 6.0, execute: {
             
             historyExpectationApi1.fulfill()
         })
-        
         waitForExpectations(timeout: 6, handler: nil)
-        
-        
     }
-  
 }

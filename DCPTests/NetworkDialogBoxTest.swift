@@ -16,20 +16,16 @@ import Hippolyte
 class NetworkDialogBoxTest: XCTestCase {
     var networkDialogBoxView: NetworkdialogBoxViewController!
     override func setUp() {
-        getNetworkDialogBoxViewContoller()
+        getNetworkDialogBoxViewController()
     }
-    func getNetworkDialogBoxViewContoller()
-    {
-        
+    // MARK: Make  getNetworkDialogBoxViewController Method
+    func getNetworkDialogBoxViewController(){
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NetworkdialogBoxViewController") as! NetworkdialogBoxViewController
         networkDialogBoxView = vc
         let _ = networkDialogBoxView.view
-        
     }
-    
-    func testForNetworkDialogBox()
-    {
-        
+    // MARK: Make  testForNetworkDialogBox Method
+    func testForNetworkDialogBox(){
         UIApplication.shared.keyWindow?.rootViewController = networkDialogBoxView
         //test for title Image view
         var getTitleImage = UIImage(named: "ic_error")
@@ -41,11 +37,7 @@ class NetworkDialogBoxTest: XCTestCase {
         //test for ok btn text
         XCTAssertEqual("NO".localized(), networkDialogBoxView.noBtn.currentTitle)
         networkDialogBoxView.noBtn.sendActions(for: .touchUpInside)
-        
         //test for ok btn text
         XCTAssertEqual("YES, ENABLE IT!".localized(), networkDialogBoxView.enableItBtn.currentTitle)
-        //networkDialogBoxView.enableItBtn.sendActions(for: .touchUpInside)
-        
     }
-
 }

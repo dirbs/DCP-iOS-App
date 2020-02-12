@@ -47,13 +47,11 @@ class inputDialogBoxViewController: UIViewController ,UITextFieldDelegate  {
         animateView()
     }
     // MARK: Make setUpProperties Method
-    func setUpProperties()
-    {
+    func setUpProperties(){
         titleOutlet.text  = titleText
         messageOutlet.text = messageTitle
         errorMessageOutlet.isHidden = true
         errorMessageOutlet.text = "Please enter 14-16 digit IMEI".localized()
-        
          //set the propertiess of enterImeiTextfield
         enterImeiTextField.layer.cornerRadius = 5
         enterImeiTextField.layer.borderColor  = UIColor(red:0.46, green:0.46, blue:0.46, alpha:1.0).cgColor
@@ -75,8 +73,7 @@ class inputDialogBoxViewController: UIViewController ,UITextFieldDelegate  {
         addButtonOnkeyBoard()
     }
      // MARK: Make valiadete Method
-    func validate()
-    {
+    func validate(){
         if(((enterImeiTextField.text?.isEmpty)!) || (enterImeiTextField.text?.count)!<14) {
             errorMessageOutlet.isHidden = false
             errorMessageOutlet.text = "Please enter 14-16 digit IMEI".localized()
@@ -149,8 +146,7 @@ class inputDialogBoxViewController: UIViewController ,UITextFieldDelegate  {
         }
     }
      // MARK: Make addButtonOnKeyBoard Method
-    func addButtonOnkeyBoard()
-    {
+    func addButtonOnkeyBoard(){
         let doneBtn  = UIBarButtonItem(title: "DONE".localized(), style: UIBarButtonItem.Style.plain, target: self, action: #selector(ReportViewController.doneBtnPressed))
           doneBtn.tintColor = UIColor(red:0.07, green:0.36, blue:0.55, alpha:1.0)
         let numberToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))

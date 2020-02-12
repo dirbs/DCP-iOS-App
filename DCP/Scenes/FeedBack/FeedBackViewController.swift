@@ -15,8 +15,7 @@ import Material
 import SlideMenuControllerSwift
 import Localize_Swift
 import JGProgressHUD
-protocol FeedBackDisplayLogic: class
-{
+protocol FeedBackDisplayLogic: class{
   func displayFeedback(viewModel: FeedBack.Feedback.ViewModel)
 }
 class FeedBackViewController: UIViewController, FeedBackDisplayLogic , UITextViewDelegate
@@ -38,22 +37,17 @@ class FeedBackViewController: UIViewController, FeedBackDisplayLogic , UITextVie
 
   // MARK: Object lifecycle
   
-  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
-  {
+  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?){
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     setup()
   }
   
-  required init?(coder aDecoder: NSCoder)
-  {
+  required init?(coder aDecoder: NSCoder){
     super.init(coder: aDecoder)
     setup()
   }
-    
-  
   // MARK: Setup
-  private func setup()
-  {
+  private func setup(){
     let viewController = self
     let interactor = FeedBackInteractor()
     let presenter = FeedBackPresenter()
@@ -72,8 +66,7 @@ class FeedBackViewController: UIViewController, FeedBackDisplayLogic , UITextVie
         return numberOfChars <= 255
     }
      // MARK: Make extension showLoading Method
-    func showLoading()
-    {
+    func showLoading(){
         self.spinner.textLabel.text = "Submitting FeedBack".localized()
         self.spinner.textLabel.textColor = UIColor.black
         self.spinner.show(in: self.view)
@@ -85,8 +78,7 @@ class FeedBackViewController: UIViewController, FeedBackDisplayLogic , UITextVie
         countOutlet.text = "\(countText) / 255"
            }
   // MARK: Routing
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-  {
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?){
     if let scene = segue.identifier {
       let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
       if let router = router, router.responds(to: selector) {
@@ -95,16 +87,13 @@ class FeedBackViewController: UIViewController, FeedBackDisplayLogic , UITextVie
     }
   }
   // MARK: View lifecycle
-  
-  override func viewDidLoad()
-  {
+  override func viewDidLoad(){
     super.viewDidLoad()
     setUpView()
     getLanguage()
   }
      // MARK: Make getLanguage Method
-    func getLanguage()
-    {
+    func getLanguage(){
         let preferences = UserDefaults.standard
         if(preferences.object(forKey: "CurrentLanguage") == nil) {
             let preferences = UserDefaults.standard
@@ -122,8 +111,7 @@ class FeedBackViewController: UIViewController, FeedBackDisplayLogic , UITextVie
         }
     }
      // MARK: Make setUpView Method
-    func setUpView()
-    {
+    func setUpView(){
         feedBackTextView.delegate = self
         dcpFeedBackTitleOutlet.text = "feedBack".localized()
         submitFeedBackBtn.setTitle("SUBMIT FEEDBACK".localized(), for: .normal)
@@ -156,8 +144,7 @@ class FeedBackViewController: UIViewController, FeedBackDisplayLogic , UITextVie
         return .lightContent
     }
      // MARK: Make showNetworkDiologBox Method
-    func showNetworkDialogBox()
-    {
+    func showNetworkDialogBox(){
         let userVC = self.storyboard?.instantiateViewController(withIdentifier: "NetworkdialogBoxViewController") as!  NetworkdialogBoxViewController
         userVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         self.present(userVC, animated: true, completion: nil)
@@ -173,8 +160,7 @@ class FeedBackViewController: UIViewController, FeedBackDisplayLogic , UITextVie
         appDlg?.window?.makeKeyAndVisible()
     }
     // MARK: Make addButtonKeyBoard Method
-    func addButtonOnkeyboard()
-    {
+    func addButtonOnkeyboard(){
         let doneBtn  = UIBarButtonItem(title: "DONE".localized(), style: UIBarButtonItem.Style.plain, target: self, action: #selector(ReportViewController.doneBtnPressed))
         doneBtn.tintColor = UIColor(red:0.07, green:0.36, blue:0.55, alpha:1.0)
         let numberToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
@@ -193,7 +179,6 @@ class FeedBackViewController: UIViewController, FeedBackDisplayLogic , UITextVie
     }
     // MARK: Make submitFeedBackClick Method
     @IBAction func submitFeedBackClick(_ sender: UIButton) {
-        
     let getFeedbackString = feedBackTextView.text.trimmingCharacters(in: .whitespaces)
         if(getFeedbackString.isEmpty)
         {
@@ -213,15 +198,13 @@ class FeedBackViewController: UIViewController, FeedBackDisplayLogic , UITextVie
         }
     }
     // MARK: Make requestForFeedBack Method
-  func requestForFeedback()
-  {
+  func requestForFeedback(){
     let request = FeedBack.Feedback.Request(message:feedBackTextView.text, access_Token:access_token,language:language)
     interactor?.doFeedBack(request: request)
     
     }
     // MARK: Make displayFeedback Method
-  func displayFeedback(viewModel: FeedBack.Feedback.ViewModel)
-  {
+  func displayFeedback(viewModel: FeedBack.Feedback.ViewModel){
     if(viewModel.status_code == 200)
     {
         spinner.dismiss()

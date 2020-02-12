@@ -11,26 +11,21 @@
  * NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE GRANTED BY THIS LICENSE. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 import UIKit
-protocol HistoryPresentationLogic
-{
+protocol HistoryPresentationLogic{
  func presentHistory(response: History.History.Response)
  func presentSearchHistory(response: History.SearchHistory.Response)
 
 }
-
 class HistoryPresenter: HistoryPresentationLogic
 {
   weak var viewController: HistoryDisplayLogic?
-  
   // MARK: Do presentHistory
-  func presentHistory(response: History.History.Response)
-  {
+  func presentHistory(response: History.History.Response){
     let viewModel = History.History.ViewModel(status_code:response.status_code,id:response.id,date:response.date ,result:response.result ,user_device:response.user_device , user_name:response.user_name ,visitor_ip:response.visitor_ip, last_Page: response.last_Page )
     viewController?.displayHistory(viewModel: viewModel)
   }
     // MARK: Do presentSearchHistory
-    func presentSearchHistory(response: History.SearchHistory.Response)
-    {
+    func presentSearchHistory(response: History.SearchHistory.Response){
         let viewModel = History.SearchHistory.ViewModel(status_code:response.status_code,id:response.id,date:response.date ,result:response.result ,user_device:response.user_device , user_name:response.user_name ,visitor_ip:response.visitor_ip, last_Page: response.last_Page )
         viewController?.displaySearchHistory(viewModel: viewModel)
     }

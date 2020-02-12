@@ -17,18 +17,16 @@ import Hippolyte
 class LogoutDialogBoxTest: XCTestCase {
     var logOutView: LogOutDialogBoxViewController!
     override func setUp() {
-        getLogOutViewContoller()
+        getLogOutViewController()
     }
-    func getLogOutViewContoller()
-    {
-        
+    // MARK: Make  getLogOutviewController Method
+    func getLogOutViewController(){
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LogOutDialogBoxViewController") as! LogOutDialogBoxViewController
         logOutView = vc
         let _ = logOutView.view
         UIApplication.shared.keyWindow?.rootViewController = logOutView
-        
     }
-    
+     // MARK: Make  testForLogoutScreen Method
     func testForLogoutScreen()
     {
         //test for title Image view
@@ -45,8 +43,5 @@ class LogoutDialogBoxTest: XCTestCase {
         XCTAssertEqual("YES".localized(), logOutView.yasBtn.currentTitle)
         logOutView.yasBtn.sendActions(for: .touchUpInside)
         logOutView.noBtn.sendActions(for: .touchUpInside)
-        
-        
     }
-
 }

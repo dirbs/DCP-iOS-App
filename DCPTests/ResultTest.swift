@@ -13,24 +13,20 @@
 import XCTest
 @testable import DCP
 import Hippolyte
-
 class ResultTest: XCTestCase {
-
     var homeView: HomeViewController!
     override func setUp() {
-        getHomeViewContoller()
+        getHomeViewController()
     }
-    func getHomeViewContoller()
-    {
-        
+     // MARK: Make  testForTypeImei Method
+    func getHomeViewController(){
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
         homeView = vc
         let _ = homeView.view
         
     }
-    
-    func testForTypeImeiInvalidImeiResponse()
-    {
+     // MARK: Make  testForTypeImeiIValidResponse Method
+    func testForTypeImeiInvalidImeiResponse(){
         let url = URL(string: "http://ec2-34-220-143-232.us-west-2.compute.amazonaws.com:81/api/lookup/iOSApp/manual")!
         var stub = StubRequest(method: .POST, url: url)
         var response = StubResponse()
@@ -52,17 +48,11 @@ class ResultTest: XCTestCase {
         waitForExpectations(timeout: 6, handler: nil)
         homeView.typeImeiViewController?.inputDialogBox?.okBtnOutlet.sendActions(for: .touchUpInside)
         let typeImeiResultViewControllerExpactions = self.expectation(description: "typeImeiResultViewControllerExpactions")
-
         DispatchQueue.main.asyncAfter(deadline: .now() + 6.0, execute: {
-
              typeImeiResultViewControllerExpactions.fulfill()
-
         })
-
         waitForExpectations(timeout: 6, handler: nil)
-        
         let inputViewController = homeView.presentedViewController as! ResultViewController
-        
         if(inputViewController.language == "en")
         {
         var messages = "555555555555555" + " " + "not found in database. This device may be" + "\n" + "counterfeit or illegal. Please report this device through DCP!" + "\n\n" + "To fill the form press Report Mobile " + "\n" + "Phone"
@@ -78,9 +68,8 @@ class ResultTest: XCTestCase {
         }
         XCTAssertEqual("REPORT MOBILE PHONE".localized(), inputViewController.reportMobilePhoneBtn.currentTitle)
     }
-    
-    func testForScanImeiInvalidImeiResponse()
-    {
+    // MARK: Make  testForScanImeiIValidResponse Method
+    func testForScanImeiInvalidImeiResponse(){
         let url = URL(string: "http://ec2-34-220-143-232.us-west-2.compute.amazonaws.com:81/api/lookup/iOSApp/scanner")!
         var stub = StubRequest(method: .POST, url: url)
         var response = StubResponse()
@@ -96,10 +85,8 @@ class ResultTest: XCTestCase {
         homeView.scanImeiViewController?.showScanImeiDialogBoxVC()
         let inputDialogBoxExpectationScanApi = self.expectation(description: "inputDialogBoxExpectationScanApi")
         DispatchQueue.main.asyncAfter(deadline: .now() + 6.0, execute: {
-            
             inputDialogBoxExpectationScanApi.fulfill()
         })
-        
         waitForExpectations(timeout: 6, handler: nil)
         homeView.language = "vi"
   homeView.scanImeiViewController?.inputDialogBox?.okBtnOutlet.sendActions(for: .touchUpInside)

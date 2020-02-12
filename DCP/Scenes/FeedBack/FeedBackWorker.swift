@@ -14,10 +14,8 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import AVFoundation
-
 class FeedBackWorker
 {
-    
     var baseUrl = Constants.Base_Url
     var jsonResult: JSON!
     var url = ""
@@ -56,6 +54,4 @@ class FeedBackWorker
             }
         }
     }
-
-   
 }

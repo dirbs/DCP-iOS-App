@@ -13,7 +13,6 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
-
 class ReportWorker
 {
     var baseUrl = Constants.Base_Url
@@ -84,13 +83,5 @@ class ReportWorker
             }
             
         })
-        
-        
-        
-        
-    
-    
-    
-
     }
 }

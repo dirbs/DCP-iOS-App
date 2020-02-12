@@ -12,22 +12,18 @@
  */
 import UIKit
 import SwiftyJSON
-
 protocol HomeBusinessLogic
 {
   func doGetImei(request: Home.GetImei.Request)
 }
-
 protocol HomeDataStore
 {
     var statusCode: Int? {get set}
 }
-
 class HomeInteractor: HomeBusinessLogic, HomeDataStore
 {
   var presenter: HomePresentationLogic?
   var worker: HomeWorker?
-    
     var statusCode: Int? = 0
     var statusMessage: String? = ""
     var deviceId :  String?  = ""
@@ -48,8 +44,7 @@ class HomeInteractor: HomeBusinessLogic, HomeDataStore
     var tacApprovedDate :  String? = ""
     var gsmaApprovedTac : String? = ""
   // MARK: Do doGetImei
-  func doGetImei(request: Home.GetImei.Request)
-  {
+  func doGetImei(request: Home.GetImei.Request){
     worker = HomeWorker()
     worker?.getImei(Imei: request.imei!, flag: request.imeiflag, acess_token: request.access_Token!){(statusCode,statusMessage,deviceId,brandName,modelName,internalModelName,marketingName,equipmentType,simSupport,nfcSupport,wlanSupport,blueToothSupport,operatingSystem  ,radioInterface ,lpwan,deviceCertifybody,manufacturer,tacApprovedDate,gsmaApprovedTac) in
         self.statusCode = statusCode

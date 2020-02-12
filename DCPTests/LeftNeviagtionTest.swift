@@ -13,54 +13,43 @@
 import XCTest
 @testable import DCP
 import Hippolyte
-
 class LeftNeviagtionTest: XCTestCase {
     var leftNeviagtionDrawer: NeviagtionDrawerVC!
     override func setUp() {
         getNeviagtionViewContoller()
     }
-    func getNeviagtionViewContoller()
-    {
-        
+    // MARK: Make  getNevigationViewController Method
+    func getNevigationViewContoller(){
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NeviagtionDrawerVC") as! NeviagtionDrawerVC
         leftNeviagtionDrawer = vc
         let _ = leftNeviagtionDrawer.view
           UIApplication.shared.keyWindow?.rootViewController = leftNeviagtionDrawer
-        
     }
-    func testForLeftNeviagtionScreen()
-    {
-        
+    // MARK: Make  testForLeftNevigationScreen Method
+    func testForLeftNevigationScreen(){
         if(leftNeviagtionDrawer.flag == true)
         {
         //test for title text
         XCTAssertEqual("Usama Muneer", leftNeviagtionDrawer.userName.text)
          //test for email
         XCTAssertEqual("usama@3gca.org", leftNeviagtionDrawer.emailOutlet.text)
-            
          //test for home Image view
-            var getHomeImage = UIImage(named: "ic_home")
-            XCTAssertEqual(getHomeImage, leftNeviagtionDrawer.homeImageView.image)
-            
-           //test for history Image view
-             var getHistoryImage = UIImage(named: "ic_history")
-            XCTAssertEqual(getHistoryImage, leftNeviagtionDrawer.historyImageView.image)
-            
-            //test for feedback Image view
-             var getFeedBackImage = UIImage(named: "ic_input")
-            
-            XCTAssertEqual(getFeedBackImage, leftNeviagtionDrawer.feedBackImageView.image)
-            
-            //test for logout Image view
-             var getLogoutImage = UIImage(named: "ic_feedback")
-            XCTAssertEqual(getLogoutImage, leftNeviagtionDrawer.logoutImageView.image)
-            //test for feedback Btn
-            XCTAssertEqual("Logout".localized(), leftNeviagtionDrawer.feedbackBtn.currentTitle)
-            //test for logout Btn
-            XCTAssertEqual("feedBack".localized(), leftNeviagtionDrawer.logoutBtn.currentTitle)
-            
+        var getHomeImage = UIImage(named: "ic_home")
+        XCTAssertEqual(getHomeImage, leftNeviagtionDrawer.homeImageView.image)
+        //test for history Image view
+        var getHistoryImage = UIImage(named: "ic_history")
+        XCTAssertEqual(getHistoryImage, leftNeviagtionDrawer.historyImageView.image)
+        //test for feedback Image view
+        var getFeedBackImage = UIImage(named: "ic_input")
+        XCTAssertEqual(getFeedBackImage, leftNeviagtionDrawer.feedBackImageView.image)
+        //test for logout Image view
+        var getLogoutImage = UIImage(named: "ic_feedback")
+        XCTAssertEqual(getLogoutImage, leftNeviagtionDrawer.logoutImageView.image)
+        //test for feedback Btn
+       XCTAssertEqual("Logout".localized(),leftNeviagtionDrawer.feedbackBtn.currentTitle)
+        //test for logout Btn
+        XCTAssertEqual("feedBack".localized(), leftNeviagtionDrawer.logoutBtn.currentTitle)
         }
-        
         //test for Change Language Btn
         leftNeviagtionDrawer.language = "vi"
         leftNeviagtionDrawer.changeLanguageBtn.sendActions(for: .touchUpInside)
@@ -72,39 +61,29 @@ class LeftNeviagtionTest: XCTestCase {
          XCTAssertEqual("Home".localized(), leftNeviagtionDrawer.homeBtn.currentTitle)
          //test for history Btn
         XCTAssertEqual("History".localized(), leftNeviagtionDrawer.historyBtn.currentTitle)
-       
         leftNeviagtionDrawer.homeBtn.sendActions(for: .touchUpInside)
         leftNeviagtionDrawer.historyBtn.sendActions(for: .touchUpInside)
         leftNeviagtionDrawer.logoutBtn.sendActions(for: .touchUpInside)
-       
         leftNeviagtionDrawer.homeBtn.sendActions(for: .touchDown)
         leftNeviagtionDrawer.historyBtn.sendActions(for: .touchDown)
         //leftNeviagtionDrawer.logoutBtn.sendActions(for: .touchDown)
         leftNeviagtionDrawer.feedbackBtn.sendActions(for: .touchDown)
-       
     }
-    
-    func testForLogoutDialogBox()
-    {
-        
-      
+    // MARK: Make  testForLogOutDialogBox Method
+    func testForLogoutDialogBox(){
         leftNeviagtionDrawer.feedbackBtn.sendActions(for: .touchUpInside)
-        
         let leftNeviagtionExpectation = self.expectation(description: "leftNeviagtionExpectation")
         DispatchQueue.main.asyncAfter(deadline: .now() + 6.0, execute: {
             
             leftNeviagtionExpectation.fulfill()
         })
-        
         waitForExpectations(timeout: 6, handler: nil)
-        
         if(leftNeviagtionDrawer.flag == true)
         {
          let inputViewController = leftNeviagtionDrawer.presentedViewController as! LogOutDialogBoxViewController
         //test for title Image view
         var getTitleImage = UIImage(named: "ic_logout")
         XCTAssertEqual(getTitleImage, inputViewController.titleImageView.image)
-        
         //test for titles text
         XCTAssertEqual("Logout".localized(), inputViewController.titleOutlet.text)
          //test for message text
@@ -116,8 +95,5 @@ class LeftNeviagtionTest: XCTestCase {
         inputViewController.yasBtn.sendActions(for: .touchUpInside)
         inputViewController.noBtn.sendActions(for: .touchUpInside)
         }
-        
-        
     }
-    
 }

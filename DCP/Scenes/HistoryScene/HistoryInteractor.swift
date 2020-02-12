@@ -11,29 +11,20 @@
  * NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE GRANTED BY THIS LICENSE. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 import UIKit
-
-protocol HistoryBusinessLogic
-{
+protocol HistoryBusinessLogic{
   func doHistory(request: History.History.Request)
      func doSearchHistory(request: History.SearchHistory.Request)
 }
-
-protocol HistoryDataStore
-{
+protocol HistoryDataStore{
   //var name: String { get set }
 }
-
 class HistoryInteractor: HistoryBusinessLogic, HistoryDataStore
 {
   var presenter: HistoryPresentationLogic?
   var worker: HistoryWorker?
   //var name: String = ""
- 
-  
   // MARK: Do doHistory
-  
-  func doHistory(request: History.History.Request)
-  {
+  func doHistory(request: History.History.Request){
     worker = HistoryWorker()
     worker?.getHistory(access_token: request.access_Token!, language: request.language!, page_No: request.page_No!)  {(status_code,id,date,user_name,result,user_device,visitor_ip, last_Page) in
         let response = History.History.Response(status_code: status_code,id:id as! [String],date:date as! [String],result:result as! [String], user_device:user_device as! [String], user_name:user_name as! [String],visitor_ip:visitor_ip as! [String], last_Page: last_Page)

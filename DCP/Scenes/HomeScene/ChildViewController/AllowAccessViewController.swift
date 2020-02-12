@@ -23,8 +23,7 @@ class AllowAccessViewController: UIViewController {
          setUpView()
     }
     // MARK: Make setUpView Method
-    func setUpView()
-    {
+    func setUpView(){
         
        //set text of title message
         camerAccessMessage.text = "Please Allow Camera  Access for Scanning Barcode Of IMEI".localized()

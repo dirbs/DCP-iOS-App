@@ -24,8 +24,7 @@ class LiscenceAgrementPresenter: LiscenceAgrementPresentationLogic
   
   // MARK: Present Liscence
   
-  func presentLiscence(response: LiscenceAgrement.LiscenceUpdate.Response)
-  {
+  func presentLiscence(response: LiscenceAgrement.LiscenceUpdate.Response){
     let viewModel = LiscenceAgrement.LiscenceUpdate.ViewModel(status_code:response.status_code)
     viewController?.displayLiscenceUpdateResponse(viewModel: viewModel)
   }

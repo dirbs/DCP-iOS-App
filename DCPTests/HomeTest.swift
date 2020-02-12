@@ -14,30 +14,19 @@ import XCTest
 @testable import DCP
 import Hippolyte
 import Material
-
-
 class HomeTest: XCTestCase {
-
-    
     var homeView: HomeViewController!
     override func setUp() {
         getHomeViewContoller()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
     }
-
-    
-    
-    func getHomeViewContoller()
-    {
-        
+    // MARK: Make  getHomeViewController Method
+    func getHomeViewContoller(){
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
         homeView = vc
         let _ = homeView.view
-        
     }
-    
-   func testForHomeScreen()
-    {
+    // MARK: Make  testForHomeScreen Method
+   func testForHomeScreen(){
         //test for title text
         XCTAssertEqual("Home".localized(), homeView.dcpToolBar.title)
          //test for menueBtn
@@ -55,7 +44,6 @@ class HomeTest: XCTestCase {
         XCTAssertEqual("TYPE IMEI".localized(), homeView.typeImeiBtn.currentTitle)
         //test for description Message
         XCTAssertEqual("The IMEI (International Mobile Equipment Identity) is a globally unique number to identify any SIM based mobile device. You can view the mobile phone's IMEI by pressing *#06# on dialpad of the device. If the device has two simcards, you will see two 14-16 digit codes. Enter the 14-16 digit IMEI number in the box and click on the check  box to view its detail.".localized(), homeView.paragraphOutlet.text)
-        
         homeView.showNetworkDialogBox(flag: false)
     }
 

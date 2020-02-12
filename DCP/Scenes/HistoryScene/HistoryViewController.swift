@@ -17,15 +17,11 @@ protocol HistoryDisplayLogic: class
   func displayHistory(viewModel: History.History.ViewModel)
      func displaySearchHistory(viewModel: History.SearchHistory.ViewModel)
 }
-
 class HistoryViewController: UIViewController, HistoryDisplayLogic,UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate
 {
    //Outlet
-    
     @IBOutlet var backBtn: UIButton!
     @IBOutlet var searchBtn: UIButton!
-    
-   
     @IBOutlet var titleOutlet: UILabel!
     @IBOutlet var historyToolBarView: UIView!
     //variables
@@ -62,21 +58,18 @@ class HistoryViewController: UIViewController, HistoryDisplayLogic,UITableViewDe
     var buttomscrollSearch = false
     var searchFlag = false
     // MARK: Object lifecycle
-  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
-  {
+  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?){
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     setup()
   }
   
-  required init?(coder aDecoder: NSCoder)
-  {
+  required init?(coder aDecoder: NSCoder){
     super.init(coder: aDecoder)
     setup()
   }
   
   // MARK: Setup
-  private func setup()
-  {
+  private func setup(){
     let viewController = self
     let interactor = HistoryInteractor()
     let presenter = HistoryPresenter()
@@ -88,23 +81,11 @@ class HistoryViewController: UIViewController, HistoryDisplayLogic,UITableViewDe
     router.viewController = viewController
     router.dataStore = interactor
   }
-  
   // MARK: Routing
-  
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-  {
-//    if let scene = segue.identifier {
-//      let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-//      if let router = router, router.responds(to: selector) {
-//        router.perform(selector, with: segue)
-//      }
-//    }
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?){
   }
-  
   // MARK: View lifecycle
-  
-  override func viewDidLoad()
-  {
+  override func viewDidLoad(){
     super.viewDidLoad()
     getLanguage()
     setUpView()
@@ -122,8 +103,7 @@ class HistoryViewController: UIViewController, HistoryDisplayLogic,UITableViewDe
         showHomeVC()
     }
      // MARK: Make  showHomeVC  Method
-    func showHomeVC()
-    {
+    func showHomeVC(){
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let HomeVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
         let appDlg = UIApplication.shared.delegate as? AppDelegate
@@ -131,8 +111,7 @@ class HistoryViewController: UIViewController, HistoryDisplayLogic,UITableViewDe
         appDlg?.window?.makeKeyAndVisible()
     }
      // MARK: Make  addButtomSpinner Method
-    func addButtomSpinner()
-    {
+    func addButtomSpinner(){
          buttomSpinner = UIActivityIndicatorView(style: .gray)
          buttomSpinner.startAnimating()
          buttomSpinner.frame = CGRect(x: CGFloat(0), y: CGFloat(0), width: historyTableView.bounds.width, height: CGFloat(44))
@@ -144,8 +123,7 @@ class HistoryViewController: UIViewController, HistoryDisplayLogic,UITableViewDe
         return .lightContent
     }
      // MARK: Make  setUpView Method
-    func setUpView()
-    {
+    func setUpView(){
         searchTF.placeholder = "Search IMEI".localized()
         historyTitle.text = "History".localized()
         titleOutlet.text = "History".localized()
@@ -168,8 +146,7 @@ class HistoryViewController: UIViewController, HistoryDisplayLogic,UITableViewDe
         textFieldInsideUISearchBarLabel?.textColor = UIColor(red:0.44, green:0.64, blue:0.77, alpha:1.0)
     }
      // MARK: Make  getLanguage Method
-    func getLanguage()
-    {
+    func getLanguage(){
         let preferences = UserDefaults.standard
         if(preferences.object(forKey: "CurrentLanguage") == nil) {
             let preferences = UserDefaults.standard
@@ -205,8 +182,7 @@ class HistoryViewController: UIViewController, HistoryDisplayLogic,UITableViewDe
         return cell
     }
      // MARK: Make  addButtonOnKeyboard Method
-    func addButtonOnkeyboard()
-    {
+    func addButtonOnkeyboard(){
         let donebtn =   UIBarButtonItem(title: "CANCEL".localized(), style: UIBarButtonItem.Style.plain, target: self, action: #selector(HistoryViewController.cancelBtnPressed))
         donebtn.tintColor = UIColor(red:0.07, green:0.36, blue:0.55, alpha:1.0)
         let searchBtn =  UIBarButtonItem(title: "Search".localized(), style: UIBarButtonItem.Style.plain, target: self, action: #selector(HistoryViewController.searchBtnPressed))
@@ -230,8 +206,7 @@ class HistoryViewController: UIViewController, HistoryDisplayLogic,UITableViewDe
         
     }
     // MARK: Make search Method
-    func search()
-    {
+    func search(){
          searchTF.resignFirstResponder()
         if((searchTF.text?.isEmpty)!)
         {
@@ -329,15 +304,13 @@ class HistoryViewController: UIViewController, HistoryDisplayLogic,UITableViewDe
         }
     }
      // MARK: Make showLoading Method
-    func showLoading()
-    {
+    func showLoading(){
         self.spinner.textLabel.text = ""
         self.spinner.textLabel.textColor = UIColor.black
         self.spinner.show(in: self.view)
     }
      // MARK: Make requestForHistory Method
-    func requestForhistory(page_No: Int,flag:Bool)
-  {
+    func requestForhistory(page_No: Int,flag:Bool){
     if Reachability.isConnectedToNetwork() == true {
     if (flag == true)
     {
@@ -367,8 +340,7 @@ class HistoryViewController: UIViewController, HistoryDisplayLogic,UITableViewDe
     }
   }
      // MARK: Make showNetworkDialogBox Method
-    func showNetworkDialogBox()
-    {
+    func showNetworkDialogBox(){
         spinner.dismiss()
         norrecordFound.isHidden = false
         buttomSpinner.isHidden = true
@@ -391,8 +363,7 @@ class HistoryViewController: UIViewController, HistoryDisplayLogic,UITableViewDe
         self.historyTableView.contentOffset = CGPoint.zero
     }
     // MARK: Make requestForSearch Method
-    func requestForSearchhistory(page_No: Int,flag:Bool)
-    {
+    func requestForSearchhistory(page_No: Int,flag:Bool){
         if Reachability.isConnectedToNetwork() == true {
         if (flag == true)
         {
@@ -422,8 +393,7 @@ class HistoryViewController: UIViewController, HistoryDisplayLogic,UITableViewDe
         }
     }
      // MARK: Make addRefreshControll Method
-    func addRefreshControll(Flag:Bool)
-    {
+    func addRefreshControll(Flag:Bool){
         if (Flag == true)
         {
             
@@ -532,8 +502,7 @@ class HistoryViewController: UIViewController, HistoryDisplayLogic,UITableViewDe
         }
     }
    // MARK: Make displayHistory Method
-  func displayHistory(viewModel: History.History.ViewModel)
-  {
+  func displayHistory(viewModel: History.History.ViewModel){
     lastPage_N0 = viewModel.last_Page!
     if(viewModel.status_code == 200)
     {

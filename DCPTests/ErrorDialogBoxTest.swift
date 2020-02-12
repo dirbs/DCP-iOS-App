@@ -13,36 +13,28 @@
 import XCTest
 @testable import DCP
 import Hippolyte
-
-
 class ErrorDialogBoxTest: XCTestCase {
     var errorDialogBoxView: ErrorDilogBoxViewController!
     override func setUp() {
-        getErrorDialogBoxViewContoller()
+        getErrorDialogBoxViewController()
     }
-    func getErrorDialogBoxViewContoller()
-    {
-        
+     // MARK: Make  getErrorDialogBoxViewController Method
+    func getErrorDialogBoxViewController(){
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ErrorDilogBoxViewController") as! ErrorDilogBoxViewController
-      
         errorDialogBoxView = vc
         let _ = errorDialogBoxView.view
-        
     }
-    func testForErrorDialogBox()
-    {
-        
+     // MARK: Make  testForErrorDialogBox Method
+    func testForErrorDialogBox(){
         UIApplication.shared.keyWindow?.rootViewController = errorDialogBoxView
         //test for title Image view
         var getTitleImage = UIImage(named: "ic_error")
         XCTAssertEqual(getTitleImage, errorDialogBoxView.titleImageView.image)
-        
         //test for titles text
         XCTAssertEqual("Oops...".localized(), errorDialogBoxView.titleOutlet.text)
         //test for ok btn text
         XCTAssertEqual("Ok".localized(), errorDialogBoxView.okBtn.currentTitle)
         errorDialogBoxView.okBtn.sendActions(for: .touchUpInside)
-        
     }
 
 }

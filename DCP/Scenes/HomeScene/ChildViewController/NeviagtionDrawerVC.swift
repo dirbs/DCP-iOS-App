@@ -48,8 +48,7 @@ class NeviagtionDrawerVC: UIViewController {
     
     
    // MARK: Make setUpView Method
-    func setUpView()
-    {
+    func setUpView(){
         
         //set the title of button
         homeBtn.setTitle("Home".localized(), for: .normal)
@@ -99,8 +98,7 @@ class NeviagtionDrawerVC: UIViewController {
         }
     }
     // MARK: Make showfeedBack Method
-    func showfeedback()
-    {
+    func showfeedback(){
         logoutBtn.backgroundColor = UIColor(red:0.96, green:0.96, blue:0.96, alpha:1.0)
         historyBtn.backgroundColor = UIColor.white
         logoutBtn.backgroundColor = UIColor.white
@@ -180,8 +178,7 @@ class NeviagtionDrawerVC: UIViewController {
         }
     }
     // MARK: Make showHomeVC Method
-    func showHomeVC()
-    {
+    func showHomeVC(){
         homeBtn.backgroundColor = UIColor(red:0.96, green:0.96, blue:0.96, alpha:1.0)
         historyBtn.backgroundColor = UIColor.white
         logoutBtn.backgroundColor = UIColor.white
@@ -212,8 +209,7 @@ class NeviagtionDrawerVC: UIViewController {
         appDlg?.window?.makeKeyAndVisible()
     }
     // MARK: Make showLogoutDialogBox Method
-    func showLogoutDialogBox()
-    {
+    func showLogoutDialogBox(){
         logoutBtn.backgroundColor = UIColor(red:0.96, green:0.96, blue:0.96, alpha:1.0)
         historyBtn.backgroundColor = UIColor.white
         homeBtn.backgroundColor = UIColor.white
@@ -244,8 +240,7 @@ class NeviagtionDrawerVC: UIViewController {
           print("drag outside")
     }
     // MARK: Make showHistoryVC Method
-    func showHistoryVC()
-    {
+    func showHistoryVC(){
         
         historyBtn.backgroundColor = UIColor(red:0.96, green:0.96, blue:0.96, alpha:1.0)
         homeBtn.backgroundColor = UIColor.white

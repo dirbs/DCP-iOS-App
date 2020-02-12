@@ -25,7 +25,6 @@ enum Home
     }
     struct Response
     {
-        
         var statusCode: Int?
         var statusMessage: String?
         var deviceId :  String?

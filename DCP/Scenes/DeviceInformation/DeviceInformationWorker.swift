@@ -12,7 +12,6 @@
  */import UIKit
 import Alamofire
 import  SwiftyJSON
-
 class DeviceInformationWorker
 {
     var baseUrl = Constants.Base_Url

@@ -130,9 +130,7 @@ class HistoryWorker
                     last_Page = Last_page
                 }
                 
-            completionHandler(status,id,date,user_name,result1,user_device,visitor_ip,last_Page)
-                
-                
+    completionHandler(status,id,date,user_name,result1,user_device,visitor_ip,last_Page)
             }
             else if(status == 401)
             {

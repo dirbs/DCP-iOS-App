@@ -13,39 +13,32 @@
 import XCTest
 @testable import DCP
 import Hippolyte
-
 class FeedBackTest: XCTestCase {
-
     var feedbackView: FeedBackViewController!
     override func setUp() {
-        getHomeViewContoller()
+        getHomeViewController()
     }
-    func getHomeViewContoller()
-    {
-        
+    // MARK: Make  getHomeViewController Method
+    func getHomeViewController(){
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FeedBackViewController") as! FeedBackViewController
         feedbackView = vc
         let _ = feedbackView.view
         
     }
-    
-    func testForFeedBackScreen()
-    {
+      // MARK: Make  testForFeedBackScreen Method
+    func testForFeedBackScreen(){
        //test for title label
         XCTAssertEqual("feedBack".localized(), feedbackView.dcpFeedBackTitleOutlet.text)
          //test for title label
         XCTAssertEqual( "Send Feedback".localized(), feedbackView.feedbackTitle.text)
          //test for submit feedback Btn
         XCTAssertEqual("SUBMIT FEEDBACK".localized(), feedbackView.submitFeedBackBtn.currentTitle)
-        
         //test for Feedback textfield invalid input
         feedbackView.feedBackTextView.text = ""
         feedbackView.submitFeedBackBtn.sendActions(for: .touchUpInside)
         XCTAssertEqual("can't be empty!".localized(), feedbackView.errorMessage.text)
         XCTAssertFalse((feedbackView.errorMessage.isHidden))
-        
           XCTAssertEqual("0 / 255", feedbackView.countOutlet.text)
-        
         //test for Feedback textfield Valid input
         feedbackView.feedBackTextView.text = "First App"
         feedbackView.submitFeedBackBtn.sendActions(for: .touchUpInside)
@@ -53,15 +46,12 @@ class FeedBackTest: XCTestCase {
         XCTAssertEqual("can't be empty!".localized(), feedbackView.errorMessage.text)
         //XCTAssertTrue((feedbackView.errorMessage.isHidden))
         XCTAssertEqual("0 / 255", feedbackView.countOutlet.text)
-        
         //test for others
         feedbackView.showNetworkDialogBox()
         feedbackView.doneBtnPressed()
     }
-    
-    func testForfeedbackApiResponse()
-    {
-        
+      // MARK: Make  testForFeedBackApiResponse Method
+    func testForFeedbackApiResponse(){
         let url = URL(string: "http://ec2-34-220-143-232.us-west-2.compute.amazonaws.com:81/api/feedback")!
         var stub = StubRequest(method: .POST, url: url)
         var response = StubResponse()
@@ -88,6 +78,4 @@ class FeedBackTest: XCTestCase {
         inputViewController.okBtn.sendActions(for: .touchUpInside)
         feedbackView.backBtn.sendActions(for: .touchUpInside)
     }
- 
-
 }

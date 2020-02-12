@@ -11,15 +11,11 @@
  * NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE GRANTED BY THIS LICENSE. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 import UIKit
-
-protocol DeviceInformationBusinessLogic
-{
+protocol DeviceInformationBusinessLogic{
   func doMatchedImei(request: DeviceInformation.ImeiMatched.Request)
      func doNotMatchedImei(request: DeviceInformation.ImeiNotMatched.Request)
 }
-
-protocol DeviceInformationDataStore
-{
+protocol DeviceInformationDataStore{
   //var name: String { get set }
 }
 
@@ -30,11 +26,8 @@ class DeviceInformationInteractor: DeviceInformationBusinessLogic, DeviceInforma
   var status_code : Int? = 0
   var success: Bool = false
   var message: String? = ""
-  
   // MARK: Do MatchedImei
-  
-  func doMatchedImei(request: DeviceInformation.ImeiMatched.Request)
-  {
+  func doMatchedImei(request: DeviceInformation.ImeiMatched.Request){
     worker = DeviceInformationWorker()
     worker?.getImeiMatched(Imei: request.imei_number!, acess_token: request.access_Token!){
         (status_code,success,message) in
@@ -44,8 +37,7 @@ class DeviceInformationInteractor: DeviceInformationBusinessLogic, DeviceInforma
   }
 }
     // MARK: Do NotMatchedImei
-    func doNotMatchedImei(request: DeviceInformation.ImeiNotMatched.Request)
-    {
+    func doNotMatchedImei(request: DeviceInformation.ImeiNotMatched.Request){
         worker = DeviceInformationWorker()
         worker?.getImeiNotMatched(Imei: request.imei_number!, acess_token: request.access_Token!){
             (status_code,success,message) in

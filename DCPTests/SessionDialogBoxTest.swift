@@ -13,31 +13,24 @@
 import XCTest
 @testable import DCP
 import Hippolyte
-
-
 class SessionDialogBoxTest: XCTestCase {
-
     var sessionDialogBoxView: SessionDialogBoxViewController!
     override func setUp() {
-        getSessionDialogBoxViewContoller()
+        getSessionDialogBoxViewController()
     }
-    func getSessionDialogBoxViewContoller()
-    {
+     // MARK: Make  getSessionDialogBoxViewController Method
+    func getSessionDialogBoxViewController(){
         
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SessionDialogBoxViewController") as! SessionDialogBoxViewController
         sessionDialogBoxView = vc
         let _ = sessionDialogBoxView.view
-        
     }
-    
-    func testForSesssionDialogBox()
-    {
-        
+     // MARK: Make  testForSessionDialogBox Method
+    func testForSesssionDialogBox(){
         UIApplication.shared.keyWindow?.rootViewController = sessionDialogBoxView
         //test for title Image view
         var getTitleImage = UIImage(named: "ic_warn")
         XCTAssertEqual(getTitleImage, sessionDialogBoxView.titleImageView.image)
-        
         //test for titles text
         XCTAssertEqual("Session Expired!".localized(), sessionDialogBoxView.titleOutlet.text)
         //test for message text
@@ -45,7 +38,5 @@ class SessionDialogBoxTest: XCTestCase {
         //test for ok btn text
         XCTAssertEqual("Ok".localized(), sessionDialogBoxView.okBtn.currentTitle)
         sessionDialogBoxView.okBtn.sendActions(for: .touchUpInside)
-        
     }
-
 }

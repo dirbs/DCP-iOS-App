@@ -13,7 +13,6 @@
 import UIKit
 import Foundation
 class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
-    
     //Outlet
     @IBOutlet var okBtn: UIButton!
     @IBOutlet var emailErrorMessage: UILabel!
@@ -22,7 +21,6 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var customView: UIView!
     @IBOutlet var cancelBtn: UIButton!
     @IBOutlet var emailTF: UITextField!
-   
     //callBacks
     var forgotPasswordcallBack: ((_ id: String) -> Void)?
     var forgotPasswordCallBackNetworkDialogBox: (() -> Void)?
@@ -48,9 +46,7 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
         })
     }
     // MARK: Make setUpProperties Method
-    func setUpProperties()
-    {
-        
+    func setUpProperties(){
         //set the title text of dilogBox
         titleOutlet.text  = "Reset Password".localized()
         //set the message text of dilogBox
@@ -70,7 +66,6 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
                 emailTF.delegate = self
         //add button On keyboard
         addButtonOnkeyboard()
-        
     }
     // MARK: Make textfield delegate Method
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -83,7 +78,6 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
     // MARK: Make textfield delegate Method
     func textFieldDidEndEditing(_ textField: UITextField) {
         animateViewMoving(up: false, moveValue: 80)
-        
     }
     // MARK: Make animateMoving Method
     func animateViewMoving (up:Bool, moveValue :CGFloat){
@@ -101,8 +95,7 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
         validate()
     }
      // MARK: Make addButtonOnkeyboard Method
-    func addButtonOnkeyboard()
-    {
+    func addButtonOnkeyboard(){
         let numberToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
         numberToolbar.barStyle = UIBarStyle.default
         numberToolbar.items = [
@@ -117,8 +110,7 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
          view.endEditing(true)
     }
     // MARK: Make validate Method
-    func validate()
-    {
+    func validate(){
         if((emailTF.text?.isEmpty)!)
         {
             emailErrorMessage.isHidden = false
@@ -149,8 +141,7 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
         }
     }
    // MARK: Make showNetworkDialogBox Method
-    func showNetworkDialogBox()
-    {
+    func showNetworkDialogBox(){
         let userVC = self.storyboard?.instantiateViewController(withIdentifier: "NetworkdialogBoxViewController") as!  NetworkdialogBoxViewController
         userVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         self.present(userVC, animated: true, completion: nil)
@@ -160,7 +151,6 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
         let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailPred.evaluate(with: emailStr)
     }
-    
     // MARK: Make cancelBtn click Listener Method
     @IBAction func cancelBtn(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)

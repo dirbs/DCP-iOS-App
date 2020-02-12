@@ -18,67 +18,48 @@ import Material
 class ScanImeiTest: XCTestCase {
 var homeView: HomeViewController!
     override func setUp() {
-        getHomeViewContoller()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        getHomeViewController()
     }
-    
-    
-    
-    func getHomeViewContoller()
-    {
-        
+     // MARK: Make  getHomeViewController Method
+    func getHomeViewController(){
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
         homeView = vc
         let _ = homeView.view
-        
     }
-   
-    func testForScanInputDialogBox()
-    {
-        
-        
+     // MARK: Make  testForScanInputDialogBox Method
+    func testForScanInputDialogBox(){
         UIApplication.shared.keyWindow?.rootViewController = homeView
         homeView.scanImeiBtn.sendActions(for: .touchUpInside)
         homeView.scanImeiViewController?.getImei = "123456789234567"
         homeView.scanImeiViewController?.showScanImeiDialogBoxVC()
         let scanInputDialogBoxExpectation = self.expectation(description: "scanInputDialogBoxExpectation")
-        
         DispatchQueue.main.asyncAfter(deadline: .now() + 6.0, execute: {
-            
             scanInputDialogBoxExpectation.fulfill()
         })
-        
         waitForExpectations(timeout: 6, handler: nil)
         XCTAssertEqual("Scan Result".localized(), homeView.scanImeiViewController?.inputDialogBox?.enterImeiTextField!.attributedPlaceholder?.string)
-        
         //test for enterImeiTextField
         XCTAssertEqual("123456789234567", homeView.scanImeiViewController?.inputDialogBox?.enterImeiTextField.text)
-        
-        
         //test for Imei text field with integar input
         homeView.scanImeiViewController?.inputDialogBox?.enterImeiTextField.text = "12345"
-        homeView.scanImeiViewController?.inputDialogBox?.okBtnOutlet.sendActions(for: .touchUpInside)
-        
+    homeView.scanImeiViewController?.inputDialogBox?.okBtnOutlet.sendActions(for: .touchUpInside)
         XCTAssertEqual("Please enter 14-16 digit IMEI".localized(), homeView.scanImeiViewController?.inputDialogBox?.errorMessageOutlet.text)
-        XCTAssertFalse((homeView.scanImeiViewController?.inputDialogBox?.errorMessageOutlet.isHidden)!)
-        
+    XCTAssertFalse((homeView.scanImeiViewController?.inputDialogBox?.errorMessageOutlet.isHidden)!)
         //test for Imei text field with empty input
         homeView.scanImeiViewController?.inputDialogBox?.enterImeiTextField.text = ""
-        homeView.scanImeiViewController?.inputDialogBox?.okBtnOutlet.sendActions(for: .touchUpInside)
+    homeView.scanImeiViewController?.inputDialogBox?.okBtnOutlet.sendActions(for: .touchUpInside)
         XCTAssertEqual("Please enter 14-16 digit IMEI".localized(), homeView.scanImeiViewController?.inputDialogBox?.errorMessageOutlet.text)
-        XCTAssertFalse((homeView.scanImeiViewController?.inputDialogBox?.errorMessageOutlet.isHidden)!)
-        
+    XCTAssertFalse((homeView.scanImeiViewController?.inputDialogBox?.errorMessageOutlet.isHidden)!)
         //test for Imei text field with alphanumeric input
         homeView.scanImeiViewController?.inputDialogBox?.enterImeiTextField.text = "rtyryy"
-        homeView.scanImeiViewController?.inputDialogBox?.okBtnOutlet.sendActions(for: .touchUpInside)
+    homeView.scanImeiViewController?.inputDialogBox?.okBtnOutlet.sendActions(for: .touchUpInside)
         XCTAssertEqual("IMEI must only contain numbers".localized(), homeView.scanImeiViewController?.inputDialogBox?.errorMessageOutlet.text)
-        XCTAssertFalse((homeView.scanImeiViewController?.inputDialogBox?.errorMessageOutlet.isHidden)!)
-        
+    XCTAssertFalse((homeView.scanImeiViewController?.inputDialogBox?.errorMessageOutlet.isHidden)!)
         //test for Imei text field with valid input
         homeView.scanImeiViewController?.inputDialogBox?.enterImeiTextField.text = "123456789123456"
-        homeView.scanImeiViewController?.inputDialogBox?.okBtnOutlet.sendActions(for: .touchUpInside)
+    homeView.scanImeiViewController?.inputDialogBox?.okBtnOutlet.sendActions(for: .touchUpInside)
         XCTAssertEqual("Please enter 14-16 digit IMEI".localized(), homeView.scanImeiViewController?.inputDialogBox?.errorMessageOutlet.text!)
-        XCTAssertTrue((homeView.scanImeiViewController?.inputDialogBox?.errorMessageOutlet.isHidden)!)
+    XCTAssertTrue((homeView.scanImeiViewController?.inputDialogBox?.errorMessageOutlet.isHidden)!)
         //test for title text
         XCTAssertEqual(  "Verify Scan".localized(), homeView.scanImeiViewController?.inputDialogBox?.titleOutlet.text!)
         //test for message text

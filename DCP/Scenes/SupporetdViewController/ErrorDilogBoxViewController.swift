@@ -20,7 +20,6 @@ class ErrorDilogBoxViewController: UIViewController {
     @IBOutlet var titleOutlet: UILabel!
     //variable
     var message = ""
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -32,8 +31,7 @@ class ErrorDilogBoxViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     // MARK: Make setUpProperties Method
-    func setUpPrperties()
-    {
+    func setUpPrperties(){
         titleOutlet.text = "Oops...".localized()
         okBtn.setTitle("Ok".localized(), for: .normal)
         messageOutlet.text = message

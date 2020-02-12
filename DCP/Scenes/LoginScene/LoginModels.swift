@@ -12,11 +12,9 @@
  */
 import UIKit
 import SwiftyJSON
-
 enum Login
 {
   // MARK: Use cases
-  
   enum LoginResponse
   {
     struct Request

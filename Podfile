@@ -18,10 +18,7 @@ target 'DCP' do
   pod 'AMPopTip'
   pod 'SwiftyJSON'
   pod  'ImagePicker'
-  
-  
   use_frameworks!
-  
   # Pods for DVS
   
   target 'DCPTests' do

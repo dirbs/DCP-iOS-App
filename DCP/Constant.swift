@@ -13,6 +13,5 @@
 import Foundation
 import Foundation
 struct Constants {
-static var Base_Url = "Enter the base_url"
-    
+static var Base_Url = "Enter the base_url"    
 }

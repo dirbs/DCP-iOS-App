@@ -126,8 +126,5 @@ class LoginWorker
             }
         }
     }
-    
-  
-
 }
 
