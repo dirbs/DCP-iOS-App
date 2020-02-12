@@ -16,10 +16,9 @@ import SlideMenuControllerSwift
 import Localize_Swift
 import JGProgressHUD
 protocol FeedBackDisplayLogic: class{
-  func displayFeedback(viewModel: FeedBack.Feedback.ViewModel)
+    func displayFeedback(viewModel: FeedBack.Feedback.ViewModel)
 }
-class FeedBackViewController: UIViewController, FeedBackDisplayLogic , UITextViewDelegate
-{
+class FeedBackViewController: UIViewController, FeedBackDisplayLogic , UITextViewDelegate{
     // outlet
     @IBOutlet var errorMessage: UILabel!
     @IBOutlet var submitFeedBackBtn: UIButton!
@@ -32,67 +31,64 @@ class FeedBackViewController: UIViewController, FeedBackDisplayLogic , UITextVie
     var access_token = ""
     var language = "en"
     let spinner = JGProgressHUD(style: .extraLight)
-  var interactor: FeedBackBusinessLogic?
-  var router: (NSObjectProtocol & FeedBackRoutingLogic & FeedBackDataPassing)?
-
-  // MARK: Object lifecycle
-  
-  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?){
-    super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    setup()
-  }
-  
-  required init?(coder aDecoder: NSCoder){
-    super.init(coder: aDecoder)
-    setup()
-  }
-  // MARK: Setup
-  private func setup(){
-    let viewController = self
-    let interactor = FeedBackInteractor()
-    let presenter = FeedBackPresenter()
-    let router = FeedBackRouter()
-    viewController.interactor = interactor
-    viewController.router = router
-    interactor.presenter = presenter
-    presenter.viewController = viewController
-    router.viewController = viewController
-    router.dataStore = interactor
-  }
-     // MARK: Make textView delegate Method
+    var interactor: FeedBackBusinessLogic?
+    var router: (NSObjectProtocol & FeedBackRoutingLogic & FeedBackDataPassing)?
+    // MARK: Object lifecycle
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?){
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        setup()
+    }
+    required init?(coder aDecoder: NSCoder){
+        super.init(coder: aDecoder)
+        setup()
+    }
+    // MARK: Setup
+    private func setup(){
+        let viewController = self
+        let interactor = FeedBackInteractor()
+        let presenter = FeedBackPresenter()
+        let router = FeedBackRouter()
+        viewController.interactor = interactor
+        viewController.router = router
+        interactor.presenter = presenter
+        presenter.viewController = viewController
+        router.viewController = viewController
+        router.dataStore = interactor
+    }
+    // MARK: Make textView delegate Method
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let newText = (textView.text as NSString).replacingCharacters(in: range, with: text)
         let numberOfChars = newText.count
         return numberOfChars <= 255
     }
-     // MARK: Make extension showLoading Method
+    // MARK: Make extension showLoading Method
     func showLoading(){
         self.spinner.textLabel.text = "Submitting FeedBack".localized()
         self.spinner.textLabel.textColor = UIColor.black
         self.spinner.show(in: self.view)
     }
-     // MARK: Make textViewDidchange event Method
+    // MARK: Make textViewDidchange event Method
     func textViewDidChange(_ textView: UITextView) {
         var countText = 0
         countText  = (feedBackTextView.text?.count)!
         countOutlet.text = "\(countText) / 255"
-           }
-  // MARK: Routing
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?){
-    if let scene = segue.identifier {
-      let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-      if let router = router, router.responds(to: selector) {
-        router.perform(selector, with: segue)
-      }
     }
-  }
-  // MARK: View lifecycle
-  override func viewDidLoad(){
-    super.viewDidLoad()
-    setUpView()
-    getLanguage()
-  }
-     // MARK: Make getLanguage Method
+    // MARK: Routing
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
+        if let scene = segue.identifier {
+            let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
+            if let router = router, router.responds(to: selector) {
+                router.perform(selector, with: segue)
+            }
+        }
+    }
+    // MARK: View lifecycle
+    override func viewDidLoad(){
+        super.viewDidLoad()
+        setUpView()
+        getLanguage()
+    }
+    // MARK: Make getLanguage Method
     func getLanguage(){
         let preferences = UserDefaults.standard
         if(preferences.object(forKey: "CurrentLanguage") == nil) {
@@ -104,23 +100,23 @@ class FeedBackViewController: UIViewController, FeedBackDisplayLogic , UITextVie
         if (preferences.object(forKey: "CurrentLanguage") != nil) {
             language = (preferences.object(forKey: "CurrentLanguage") as? String)!
             if(language == "vi") {
-                 language = "vi"
+                language = "vi"
             } else {
                 language = "en"
             }
         }
     }
-     // MARK: Make setUpView Method
+    // MARK: Make setUpView Method
     func setUpView(){
         feedBackTextView.delegate = self
         dcpFeedBackTitleOutlet.text = "feedBack".localized()
         submitFeedBackBtn.setTitle("SUBMIT FEEDBACK".localized(), for: .normal)
         feedbackTitle.text = "Send Feedback".localized()
-         feedBackTextView.layer.cornerRadius = 10
-         feedBackTextView.layer.borderColor = UIColor(red:0.07, green:0.36, blue:0.55, alpha:1.0).cgColor
+        feedBackTextView.layer.cornerRadius = 10
+        feedBackTextView.layer.borderColor = UIColor(red:0.07, green:0.36, blue:0.55, alpha:1.0).cgColor
         feedBackTextView.textContainerInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-         feedBackTextView.layer.borderWidth = 2
-         // set gradient color of submit feedback btn
+        feedBackTextView.layer.borderWidth = 2
+        // set gradient color of submit feedback btn
         let gradientLayer:CAGradientLayer = CAGradientLayer()
         gradientLayer.frame.size = submitFeedBackBtn.frame.size
         let startColor = UIColor(red: 18/255, green: 93/255, blue: 141/255, alpha: 1.0)
@@ -143,7 +139,7 @@ class FeedBackViewController: UIViewController, FeedBackDisplayLogic , UITextVie
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
-     // MARK: Make showNetworkDiologBox Method
+    // MARK: Make showNetworkDiologBox Method
     func showNetworkDialogBox(){
         let userVC = self.storyboard?.instantiateViewController(withIdentifier: "NetworkdialogBoxViewController") as!  NetworkdialogBoxViewController
         userVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
@@ -179,60 +175,57 @@ class FeedBackViewController: UIViewController, FeedBackDisplayLogic , UITextVie
     }
     // MARK: Make submitFeedBackClick Method
     @IBAction func submitFeedBackClick(_ sender: UIButton) {
-    let getFeedbackString = feedBackTextView.text.trimmingCharacters(in: .whitespaces)
-        if(getFeedbackString.isEmpty)
-        {
+        let getFeedbackString = feedBackTextView.text.trimmingCharacters(in: .whitespaces)
+        if(getFeedbackString.isEmpty){
             errorMessage.isHidden = false
         }
-        
+            
         else{
             errorMessage.isHidden = true
             feedBackTextView.resignFirstResponder()
-             if Reachability.isConnectedToNetwork() == true {
-            showLoading()
-          requestForFeedback()
+            if Reachability.isConnectedToNetwork() == true {
+                showLoading()
+                requestForFeedback()
             }
-             else{
+            else{
                 showNetworkDialogBox()
             }
         }
     }
     // MARK: Make requestForFeedBack Method
-  func requestForFeedback(){
-    let request = FeedBack.Feedback.Request(message:feedBackTextView.text, access_Token:access_token,language:language)
-    interactor?.doFeedBack(request: request)
-    
+    func requestForFeedback(){
+        let request = FeedBack.Feedback.Request(message:feedBackTextView.text, access_Token:access_token,language:language)
+        interactor?.doFeedBack(request: request)
+        
     }
     // MARK: Make displayFeedback Method
-  func displayFeedback(viewModel: FeedBack.Feedback.ViewModel){
-    if(viewModel.status_code == 200)
-    {
-        spinner.dismiss()
-        feedBackTextView.text = ""
-        let userVC = self.storyboard?.instantiateViewController(withIdentifier: "successDilogBoxViewController") as!  SuccessDilogBoxViewController
-        let message = viewModel.message
-        userVC.message  = message
-        userVC.messagetitle = "Feedback sent".localized()
-        userVC.okBtnFlag = "FeeddbackScreen"
-        userVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-        self.present(userVC, animated: true, completion: nil)
+    func displayFeedback(viewModel: FeedBack.Feedback.ViewModel){
+        if(viewModel.status_code == 200){
+            spinner.dismiss()
+            feedBackTextView.text = ""
+            let userVC = self.storyboard?.instantiateViewController(withIdentifier: "successDilogBoxViewController") as!  SuccessDilogBoxViewController
+            let message = viewModel.message
+            userVC.message  = message
+            userVC.messagetitle = "Feedback sent".localized()
+            userVC.okBtnFlag = "FeeddbackScreen"
+            userVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            self.present(userVC, animated: true, completion: nil)
+        }
+        if(viewModel.status_code == 401){
+            self.spinner.dismiss()
+            let userVC = self.storyboard?.instantiateViewController(withIdentifier: "SessionDialogBoxViewController") as!  SessionDialogBoxViewController
+            userVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            self.present(userVC, animated: true, completion: nil)
+        }
+            
+        else{
+            self.spinner.dismiss()
+            let userVC = self.storyboard?.instantiateViewController(withIdentifier: "ErrorDilogBoxViewController") as!  ErrorDilogBoxViewController
+            userVC.message = "Sorry, somthing went wrong. Try again a little later.".localized()
+            userVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            self.present(userVC, animated: true, completion: nil)
+        }
     }
-    if(viewModel.status_code == 401)
-    {
-        self.spinner.dismiss()
-        let userVC = self.storyboard?.instantiateViewController(withIdentifier: "SessionDialogBoxViewController") as!  SessionDialogBoxViewController
-        userVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-        self.present(userVC, animated: true, completion: nil)
-    }
-        
-    else{
-        self.spinner.dismiss()
-                let userVC = self.storyboard?.instantiateViewController(withIdentifier: "ErrorDilogBoxViewController") as!  ErrorDilogBoxViewController
-        userVC.message = "Sorry, somthing went wrong. Try again a little later.".localized()
-        userVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-        self.present(userVC, animated: true, completion: nil)
-    }
-  }
 }
 
 

@@ -10,7 +10,6 @@
  *  This notice may not be removed or altered from any source distribution.
  * NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE GRANTED BY THIS LICENSE. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
 import UIKit
 import Foundation
 import SystemConfiguration
@@ -52,7 +51,7 @@ class inputDialogBoxViewController: UIViewController ,UITextFieldDelegate  {
         messageOutlet.text = messageTitle
         errorMessageOutlet.isHidden = true
         errorMessageOutlet.text = "Please enter 14-16 digit IMEI".localized()
-         //set the propertiess of enterImeiTextfield
+        //set the propertiess of enterImeiTextfield
         enterImeiTextField.layer.cornerRadius = 5
         enterImeiTextField.layer.borderColor  = UIColor(red:0.46, green:0.46, blue:0.46, alpha:1.0).cgColor
         enterImeiTextField.layer.borderWidth = 2
@@ -62,7 +61,7 @@ class inputDialogBoxViewController: UIViewController ,UITextFieldDelegate  {
         enterImeiTextField.leftViewMode = .always
         //set the title of okbtn
         okBtnOutlet.setTitle("Ok".localized(), for: .normal)
-         //set the title of cancelbtn
+        //set the title of cancelbtn
         cancelBtnOutlet.setTitle("CANCEL".localized(), for: .normal)
         if #available(iOS 10.0, *) {
             enterImeiTextField.keyboardType = .asciiCapableNumberPad
@@ -72,12 +71,12 @@ class inputDialogBoxViewController: UIViewController ,UITextFieldDelegate  {
         enterImeiTextField.delegate = self
         addButtonOnkeyBoard()
     }
-     // MARK: Make valiadete Method
+    // MARK: Make valiadete Method
     func validate(){
         if(((enterImeiTextField.text?.isEmpty)!) || (enterImeiTextField.text?.count)!<14) {
             errorMessageOutlet.isHidden = false
             errorMessageOutlet.text = "Please enter 14-16 digit IMEI".localized()
-             enterImeiTextField.layer.borderColor = UIColor(red:0.85, green:0.13, blue:0.01, alpha:1.0).cgColor
+            enterImeiTextField.layer.borderColor = UIColor(red:0.85, green:0.13, blue:0.01, alpha:1.0).cgColor
         }
         let enteredText = Int(enterImeiTextField.text!)
         if enteredText == nil {
@@ -89,28 +88,27 @@ class inputDialogBoxViewController: UIViewController ,UITextFieldDelegate  {
             errorMessageOutlet.isHidden = true
             errorMessageOutlet.isHidden = false
             errorMessageOutlet.text = "Please enter 14-16 digit IMEI".localized()
-             enterImeiTextField.layer.borderColor = UIColor(red:0.85, green:0.13, blue:0.01, alpha:1.0).cgColor
+            enterImeiTextField.layer.borderColor = UIColor(red:0.85, green:0.13, blue:0.01, alpha:1.0).cgColor
             
         }
         if(enteredText != nil) {
             errorMessageOutlet.isHidden = false
             errorMessageOutlet.text = "Please enter 14-16 digit IMEI".localized()
-             enterImeiTextField.layer.borderColor = UIColor(red:0.85, green:0.13, blue:0.01, alpha:1.0).cgColor
+            enterImeiTextField.layer.borderColor = UIColor(red:0.85, green:0.13, blue:0.01, alpha:1.0).cgColor
         }
         if(((enterImeiTextField.text?.count)!) >= 14 && ((enterImeiTextField.text?.count)!) <= 16 && enteredText != nil ) {
             let enteredText = Int(enterImeiTextField.text!)
             if enteredText == nil {
                 errorMessageOutlet.isHidden = false
                 errorMessageOutlet.text = "IMEI must only contain numbers".localized()
-                 enterImeiTextField.layer.borderColor = UIColor(red:0.85, green:0.13, blue:0.01, alpha:1.0).cgColor
+                enterImeiTextField.layer.borderColor = UIColor(red:0.85, green:0.13, blue:0.01, alpha:1.0).cgColor
             }
             else{
                 if Reachability.isConnectedToNetwork() == true {
                     errorMessageOutlet.isHidden = true
                     enterImeiTextField.resignFirstResponder()
-                     enterImeiTextField.layer.borderColor = UIColor(red:0.07, green:0.36, blue:0.55, alpha:1.0).cgColor
-                    if(sharedFlag == true)
-                    {
+                    enterImeiTextField.layer.borderColor = UIColor(red:0.07, green:0.36, blue:0.55, alpha:1.0).cgColor
+                    if(sharedFlag == true){
                         self.dismiss(animated: true, completion: nil)
                         self.scanImeicallBack!(enterImeiTextField.text!)
                     }
@@ -122,12 +120,11 @@ class inputDialogBoxViewController: UIViewController ,UITextFieldDelegate  {
                     errorMessageOutlet.isHidden = true
                     enterImeiTextField.resignFirstResponder()
                     self.dismiss(animated: true, completion: nil)
-                    if(sharedFlag == true)
-                    {
-                    self.scanImeishowNetworkDialogBox!()
+                    if(sharedFlag == true){
+                        self.scanImeishowNetworkDialogBox!()
                     }
                     else{
-                      self.typeImeishowNetworkDialogBox!()
+                        self.typeImeishowNetworkDialogBox!()
                     }
                 }
             }
@@ -138,17 +135,17 @@ class inputDialogBoxViewController: UIViewController ,UITextFieldDelegate  {
                 print(" Not integar3")
                 errorMessageOutlet.isHidden = false
                 errorMessageOutlet.text = "IMEI must only contain numbers".localized()
-                 enterImeiTextField.layer.borderColor = UIColor(red:0.85, green:0.13, blue:0.01, alpha:1.0).cgColor
+                enterImeiTextField.layer.borderColor = UIColor(red:0.85, green:0.13, blue:0.01, alpha:1.0).cgColor
             }
             else{
-             errorMessageOutlet.isHidden = true
+                errorMessageOutlet.isHidden = true
             }
         }
     }
-     // MARK: Make addButtonOnKeyBoard Method
+    // MARK: Make addButtonOnKeyBoard Method
     func addButtonOnkeyBoard(){
         let doneBtn  = UIBarButtonItem(title: "DONE".localized(), style: UIBarButtonItem.Style.plain, target: self, action: #selector(ReportViewController.doneBtnPressed))
-          doneBtn.tintColor = UIColor(red:0.07, green:0.36, blue:0.55, alpha:1.0)
+        doneBtn.tintColor = UIColor(red:0.07, green:0.36, blue:0.55, alpha:1.0)
         let numberToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
         numberToolbar.barStyle = UIBarStyle.default
         numberToolbar.items = [
@@ -177,13 +174,12 @@ class inputDialogBoxViewController: UIViewController ,UITextFieldDelegate  {
             self.customViewOulet.frame.origin.y = self.customViewOulet.frame.origin.y - 80
         })
     }
-    
-     // MARK: Make textFieldDidBegainInEditing Method
+    // MARK: Make textFieldDidBegainInEditing Method
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if UIDevice.current.userInterfaceIdiom == .phone {
             animateViewMoving(up: true, moveValue: 50)
         }
-         enterImeiTextField.layer.borderColor = UIColor(red:0.07, green:0.36, blue:0.55, alpha:1.0).cgColor
+        enterImeiTextField.layer.borderColor = UIColor(red:0.07, green:0.36, blue:0.55, alpha:1.0).cgColor
     }
     // MARK: Make textFieldDidEndEditing Method
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -206,20 +202,19 @@ class inputDialogBoxViewController: UIViewController ,UITextFieldDelegate  {
     @IBAction func OkBtn(_ sender: UIButton) {
         validate()
     }
-     // MARK: Make cancelBtnClick Method
+    // MARK: Make cancelBtnClick Method
     @IBAction func cancelBtn(_ sender: UIButton) {
-      if(sharedFlag == true)
-      {
-        self.scanImeiresetCallBackCancelBtn!()
-         self.dismiss(animated: true, completion: nil)
-        
+        if(sharedFlag == true){
+            self.scanImeiresetCallBackCancelBtn!()
+            self.dismiss(animated: true, completion: nil)
+            
         }
-      else{
-     self.dismiss(animated: true, completion: nil)
+        else{
+            self.dismiss(animated: true, completion: nil)
         }
     }
 }
- // MARK: Make Reachability class
+// MARK: Make Reachability class
 public class Reachability {
     class func isConnectedToNetwork() -> Bool {
         var zeroAddress = sockaddr_in()

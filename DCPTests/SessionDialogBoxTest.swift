@@ -18,14 +18,14 @@ class SessionDialogBoxTest: XCTestCase {
     override func setUp() {
         getSessionDialogBoxViewController()
     }
-     // MARK: Make  getSessionDialogBoxViewController Method
+    // MARK: Make  getSessionDialogBoxViewController Method
     func getSessionDialogBoxViewController(){
         
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SessionDialogBoxViewController") as! SessionDialogBoxViewController
         sessionDialogBoxView = vc
         let _ = sessionDialogBoxView.view
     }
-     // MARK: Make  testForSessionDialogBox Method
+    // MARK: Make  testForSessionDialogBox Method
     func testForSesssionDialogBox(){
         UIApplication.shared.keyWindow?.rootViewController = sessionDialogBoxView
         //test for title Image view

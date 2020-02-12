@@ -26,7 +26,6 @@
 "CANCEL" = "HỦY BỎ";
 "Verify Input" = "Xác minh đầu vào";
 "Please verify IMEI number you entered.Press OK to continue or CANCAL to re-enter"= "Vui lòng xác minh số IMEI bạn đã nhập. Nhấn OK để tiếp tục hoặc CANCEL để nhập lại";
-
 "Verify Scan" = "Xác minh quét";
 "Please verify IMEI number from scan and  press OK to continue" = "Vui lòng xác minh số IMEI từ quá trình quét và nhấn OK để tiếp tục";
 "Scan Result" = "Kết quả quét";
@@ -49,7 +48,6 @@
 "Enter the valid address where the device is located." =" Nhập địa chỉ hợp lệ nơi đặt thiết bị.";
 "Add description for your device" = "Thêm mô tả cho thiết bị của bạn";
 "Upload valid images of the device" = "Tải lên hình ảnh hợp lệ của thiết bị";
-
 "History" = "Lịch sử";
 "Logout" = "Đăng xuất";
 "Are you sure you want to logout?" = "Bạn có chắc chắn muốn đăng xuất?";
@@ -99,7 +97,6 @@
 "  not found in database. This device may be a counterfeit or illegal. Please report this device through DCP!.To fill the form press Report Mobile Phone" = "not found in database. This device may be a counterfeit or illegal. Please report this device through DCP!    To fill the form press Report Mobile Phone";
 "Session Expired!" = "Phiên hết hạn!";
 "Your session has expired.Please login again to continue using DCP." = "Phiên của bạn đã hết hạn. Vui lòng đăng nhập lại để tiếp tục sử dụng DCP.";
-
 "Submitting FeedBack" = "Gửi phản hồi";
 "Feedback sent" = "Phản hồi đã gửi.";
 "Verifiying" =  "Đang xác minh";

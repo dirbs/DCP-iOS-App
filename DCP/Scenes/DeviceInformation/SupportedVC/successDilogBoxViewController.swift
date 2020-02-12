@@ -35,26 +35,20 @@ class SuccessDilogBoxViewController: UIViewController {
     }
     // MARK: Make  okBtnClick Method
     @IBAction func okBtnClick(_ sender: UIButton) {
-        if(okBtnFlag == "FeeddbackScreen")
-        {
-        self.dismiss(animated: true, completion: nil)
-        }
-        if(okBtnFlag == "DeviceInfo")
-        {
-            if deviceInfo == false
-            {
-           resetCallBackOkBtn!()
+        if(okBtnFlag == "FeeddbackScreen"){
             self.dismiss(animated: true, completion: nil)
+        }
+        if(okBtnFlag == "DeviceInfo"){
+            if deviceInfo == false{
+                resetCallBackOkBtn!()
+                self.dismiss(animated: true, completion: nil)
             }
-            
-            if deviceInfo == true
-            {
+            if deviceInfo == true{
                 deviceInfoResetCallBackOkBtn!()
                 self.dismiss(animated: true, completion: nil)
             }
         }
-         if(okBtnFlag == "Report")
-         {
+        if(okBtnFlag == "Report"){
             reportbackResetCallBackOkBtn!()
             self.dismiss(animated: true, completion: nil)
         }

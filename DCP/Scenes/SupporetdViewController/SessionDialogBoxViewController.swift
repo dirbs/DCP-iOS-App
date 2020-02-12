@@ -24,7 +24,7 @@ class SessionDialogBoxViewController: UIViewController {
         animateView()
         setUpProperties()
     }
-     // MARK: Make okBtnClick Method
+    // MARK: Make okBtnClick Method
     @IBAction func okBtnClick(_ sender: UIButton) {
         let defaults = UserDefaults.standard
         defaults.removeObject(forKey: "loginFlag")
@@ -32,7 +32,7 @@ class SessionDialogBoxViewController: UIViewController {
         defaults.removeObject(forKey: "LiscenceFlag")
         defaults.removeObject(forKey: "AccessToken")
         defaults.removeObject(forKey: "User_id")
-          defaults.removeObject(forKey: "email")
+        defaults.removeObject(forKey: "email")
         defaults.removeObject(forKey: "user_Name")
         defaults.synchronize()
         let userVC = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as!  LoginViewController
@@ -43,7 +43,7 @@ class SessionDialogBoxViewController: UIViewController {
     func setUpProperties(){
         titleOutlet.text = "Session Expired!".localized()
         messageOulet.text = "Your session has expired.Please login again to continue using DCP.".localized()
-         okBtn.setTitle("Ok".localized(), for: .normal)
+        okBtn.setTitle("Ok".localized(), for: .normal)
     }
     // MARK: Make setUpView Method
     func setupView() {

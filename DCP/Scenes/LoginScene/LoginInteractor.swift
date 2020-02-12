@@ -11,44 +11,38 @@
  * NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE GRANTED BY THIS LICENSE. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 import UIKit
-protocol LoginBusinessLogic
-{
-  func loginRequest(request: Login.LoginResponse.Request)
+protocol LoginBusinessLogic{
+    func loginRequest(request: Login.LoginResponse.Request)
     func forgotPasswordRequest(request: Login.ForgotPassword.Request)
 }
-
-protocol LoginDataStore
-{
+protocol LoginDataStore{
     var accessToken: String? {get set}
     var roles: String? {get set}
     var liscense: String? {get set}
 }
-class LoginInteractor: LoginBusinessLogic, LoginDataStore
-{
-   var presenter: LoginPresentationLogic?
-   var worker: LoginWorker?
-   var accessToken: String? = ""
-   var roles: String? = ""
-   var liscense: String? = ""
-   var  status_code: Int = 0
-  func loginRequest(request: Login.LoginResponse.Request)
-  {
-    worker = LoginWorker()
-    worker?.getLoginResponse(email: request.email!, password: request.password!){(accessToken, roles,liscense, status_code ,agreed,user_id,active_id) in
-       self.accessToken = accessToken
-       self.roles = roles
-       self.liscense = liscense
-        let response = Login.LoginResponse.Response(accessToken: accessToken, roles: roles , liscense: liscense , status_code: status_code,agreed:agreed , user_id:user_id,active_id:active_id )
-        self.presenter?.presentLogin(response: response)
-  }
-}
+class LoginInteractor: LoginBusinessLogic, LoginDataStore{
+    var presenter: LoginPresentationLogic?
+    var worker: LoginWorker?
+    var accessToken: String? = ""
+    var roles: String? = ""
+    var liscense: String? = ""
+    var  status_code: Int = 0
+    func loginRequest(request: Login.LoginResponse.Request){
+        worker = LoginWorker()
+        worker?.getLoginResponse(email: request.email!, password: request.password!){(accessToken, roles,liscense, status_code ,agreed,user_id,active_id) in
+            self.accessToken = accessToken
+            self.roles = roles
+            self.liscense = liscense
+            let response = Login.LoginResponse.Response(accessToken: accessToken, roles: roles , liscense: liscense , status_code: status_code,agreed:agreed , user_id:user_id,active_id:active_id )
+            self.presenter?.presentLogin(response: response)
+        }
+    }
     // MARK: Make forgotPasswordrequest Method
-    func forgotPasswordRequest(request: Login.ForgotPassword.Request)
-    {
+    func forgotPasswordRequest(request: Login.ForgotPassword.Request){
         worker = LoginWorker()
         worker?.setForgetPassword(email: request.email!, acess_token: request.access_token!){( status_code) in
-    let response = Login.ForgotPassword.Response(status_code: status_code)
-    self.presenter?.presentForgotPassword(response: response)
-    }
+            let response = Login.ForgotPassword.Response(status_code: status_code)
+            self.presenter?.presentForgotPassword(response: response)
+        }
     }
 }

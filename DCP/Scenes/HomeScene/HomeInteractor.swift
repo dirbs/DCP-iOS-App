@@ -12,18 +12,15 @@
  */
 import UIKit
 import SwiftyJSON
-protocol HomeBusinessLogic
-{
-  func doGetImei(request: Home.GetImei.Request)
+protocol HomeBusinessLogic{
+    func doGetImei(request: Home.GetImei.Request)
 }
-protocol HomeDataStore
-{
+protocol HomeDataStore{
     var statusCode: Int? {get set}
 }
-class HomeInteractor: HomeBusinessLogic, HomeDataStore
-{
-  var presenter: HomePresentationLogic?
-  var worker: HomeWorker?
+class HomeInteractor: HomeBusinessLogic, HomeDataStore{
+    var presenter: HomePresentationLogic?
+    var worker: HomeWorker?
     var statusCode: Int? = 0
     var statusMessage: String? = ""
     var deviceId :  String?  = ""
@@ -43,31 +40,31 @@ class HomeInteractor: HomeBusinessLogic, HomeDataStore
     var manufacturer:  String? = ""
     var tacApprovedDate :  String? = ""
     var gsmaApprovedTac : String? = ""
-  // MARK: Do doGetImei
-  func doGetImei(request: Home.GetImei.Request){
-    worker = HomeWorker()
-    worker?.getImei(Imei: request.imei!, flag: request.imeiflag, acess_token: request.access_Token!){(statusCode,statusMessage,deviceId,brandName,modelName,internalModelName,marketingName,equipmentType,simSupport,nfcSupport,wlanSupport,blueToothSupport,operatingSystem  ,radioInterface ,lpwan,deviceCertifybody,manufacturer,tacApprovedDate,gsmaApprovedTac) in
-        self.statusCode = statusCode
-         self.statusMessage = statusMessage
-         self.deviceId = deviceId
-          self.brandName =  brandName
-         self.modelName = modelName
-         self.internalModelName  = internalModelName
-         self.marketingName = marketingName
-         self.equipmentType = equipmentType
-         self.simSupport = simSupport
-         self.nfcSupport = nfcSupport
-         self.wlanSupport = wlanSupport
-         self.blueToothSupport = blueToothSupport
-        self.operatingSystem = operatingSystem!
-        self.radioInterface = radioInterface!
-         self.lpwan = lpwan
-        self.deviceCertifybody = deviceCertifybody!
-         self.manufacturer = manufacturer
-         self.tacApprovedDate = tacApprovedDate
-         self.gsmaApprovedTac = gsmaApprovedTac
-        let response = Home.GetImei.Response(statusCode:statusCode,statusMessage:statusMessage,deviceId:deviceId,brandName:brandName,modelName:modelName,internalModelName:internalModelName,marketingName:marketingName,equipmentType:equipmentType,simSupport:simSupport,nfcSupport:nfcSupport,wlanSupport:wlanSupport,blueToothSupport:blueToothSupport,operatingSystem:operatingSystem!,radioInterface:radioInterface!,lpwan:lpwan,deviceCertifybody:deviceCertifybody!,manufacturer:manufacturer,tacApprovedDate:tacApprovedDate,gsmaApprovedTac:gsmaApprovedTac)
-        self.presenter?.presentGetImei(response: response)
+    // MARK: Do doGetImei
+    func doGetImei(request: Home.GetImei.Request){
+        worker = HomeWorker()
+        worker?.getImei(Imei: request.imei!, flag: request.imeiflag, acess_token: request.access_Token!){(statusCode,statusMessage,deviceId,brandName,modelName,internalModelName,marketingName,equipmentType,simSupport,nfcSupport,wlanSupport,blueToothSupport,operatingSystem  ,radioInterface ,lpwan,deviceCertifybody,manufacturer,tacApprovedDate,gsmaApprovedTac) in
+            self.statusCode = statusCode
+            self.statusMessage = statusMessage
+            self.deviceId = deviceId
+            self.brandName =  brandName
+            self.modelName = modelName
+            self.internalModelName  = internalModelName
+            self.marketingName = marketingName
+            self.equipmentType = equipmentType
+            self.simSupport = simSupport
+            self.nfcSupport = nfcSupport
+            self.wlanSupport = wlanSupport
+            self.blueToothSupport = blueToothSupport
+            self.operatingSystem = operatingSystem!
+            self.radioInterface = radioInterface!
+            self.lpwan = lpwan
+            self.deviceCertifybody = deviceCertifybody!
+            self.manufacturer = manufacturer
+            self.tacApprovedDate = tacApprovedDate
+            self.gsmaApprovedTac = gsmaApprovedTac
+            let response = Home.GetImei.Response(statusCode:statusCode,statusMessage:statusMessage,deviceId:deviceId,brandName:brandName,modelName:modelName,internalModelName:internalModelName,marketingName:marketingName,equipmentType:equipmentType,simSupport:simSupport,nfcSupport:nfcSupport,wlanSupport:wlanSupport,blueToothSupport:blueToothSupport,operatingSystem:operatingSystem!,radioInterface:radioInterface!,lpwan:lpwan,deviceCertifybody:deviceCertifybody!,manufacturer:manufacturer,tacApprovedDate:tacApprovedDate,gsmaApprovedTac:gsmaApprovedTac)
+            self.presenter?.presentGetImei(response: response)
+        }
     }
-  }
 }

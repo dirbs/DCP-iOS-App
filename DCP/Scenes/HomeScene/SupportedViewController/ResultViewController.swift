@@ -13,13 +13,13 @@
 import UIKit
 import Material
 class ResultViewController: UIViewController {
-   // Outlet
+    // Outlet
     @IBOutlet var MainView: UIView!
     @IBOutlet var reportMobilePhoneBtn: UIButton!
     @IBOutlet var responseMessageOutlet: UILabel!
     @IBOutlet var titleOutlet: UILabel!
     @IBOutlet var titleImageOutlet: UIImageView!
-     var imei = ""
+    var imei = ""
     var language = "en"
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,21 +27,18 @@ class ResultViewController: UIViewController {
         setupView()
         animateView()
     }
-     // MARK: Make setUpProperties Method
+    // MARK: Make setUpProperties Method
     func setUpProperties(){
         titleOutlet.text = "Imei not Found".localized()
         reportMobilePhoneBtn.setTitle("REPORT MOBILE PHONE".localized(), for: .normal)
-        if (language == "en")
-        {
-        responseMessageOutlet.text = imei + " " + "not found in database. This device may be" + "\n" + "counterfeit or illegal. Please report this device through DCP!" + "\n\n" + "To fill the form press Report Mobile " + "\n" + "Phone"
-    }
-          if (language == "vi")
-          {
-        
-        responseMessageOutlet.text = imei + " " + "không tìm thấy trong cơ sở dữ liệu. Thiết bị này có thể là hàng giả hoặc bất hợp pháp. Vui lòng báo cáo thiết bị này qua DCP!" + "\n\n" + "Để điền vào biểu mẫu nhấn Báo cáo" + "\n" + "Điện thoại di động."
+        if (language == "en"){
+            responseMessageOutlet.text = imei + " " + "not found in database. This device may be" + "\n" + "counterfeit or illegal. Please report this device through DCP!" + "\n\n" + "To fill the form press Report Mobile " + "\n" + "Phone"
+        }
+        if (language == "vi"){
+            responseMessageOutlet.text = imei + " " + "không tìm thấy trong cơ sở dữ liệu. Thiết bị này có thể là hàng giả hoặc bất hợp pháp. Vui lòng báo cáo thiết bị này qua DCP!" + "\n\n" + "Để điền vào biểu mẫu nhấn Báo cáo" + "\n" + "Điện thoại di động."
         }
     }
-     // MARK: Make reportMobilePhoneBtn Click Method
+    // MARK: Make reportMobilePhoneBtn Click Method
     @IBAction func ReportMobilePhoneBtn(_ sender: UIButton) {
         showReportVC()
     }
@@ -59,8 +56,7 @@ class ResultViewController: UIViewController {
             self.MainView.frame.origin.y = self.MainView.frame.origin.y - 80
         })
     }
-    
-     // MARK: Make showReportVC Method
+    // MARK: Make showReportVC Method
     func showReportVC(){
         let userVC = self.storyboard?.instantiateViewController(withIdentifier: "ReportViewController") as!  ReportViewController
         userVC.imei = imei

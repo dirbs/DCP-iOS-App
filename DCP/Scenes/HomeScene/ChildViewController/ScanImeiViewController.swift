@@ -71,16 +71,15 @@ class ScanImeiViewController: UIViewController {
     }
     // MARK: Make flashLightBtnClick Method
     @IBAction func flashLightBtnClick(_ sender: UIButton) {
-                if let ButtonImage = flashLightBtn.image(for: .normal),
-                    let Image = UIImage(named: "ic_flash_off"),
-                    ButtonImage.pngData() == Image.pngData()
-                {
-                    flashLightBtn.setImage(UIImage(named: "ic_flash_on"), for: .normal)
-                    self.scanner?.torchMode = MTBTorchMode.on
-                } else {
-                    flashLightBtn.setImage(UIImage(named: "ic_flash_off"), for: .normal)
-                    self.scanner?.torchMode = MTBTorchMode.off
-                }
+        if let ButtonImage = flashLightBtn.image(for: .normal),
+            let Image = UIImage(named: "ic_flash_off"),
+            ButtonImage.pngData() == Image.pngData(){
+            flashLightBtn.setImage(UIImage(named: "ic_flash_on"), for: .normal)
+            self.scanner?.torchMode = MTBTorchMode.on
+        } else {
+            flashLightBtn.setImage(UIImage(named: "ic_flash_off"), for: .normal)
+            self.scanner?.torchMode = MTBTorchMode.off
+        }
     }
     // MARK: Make creatCameraView Method
     func creatCameraView() {
@@ -88,7 +87,7 @@ class ScanImeiViewController: UIViewController {
         )
         self.scanner?.didStartScanningBlock = {
             self.scanner?.scanRect = CGRect(center: (self.view.bounds.center), size: CGSize(width: self.scanView.frame.size.width, height: 145))
-              MyVariables.scannerVisible = true
+            MyVariables.scannerVisible = true
         }
         self.scanner?.allowTapToFocus = false
         do {
@@ -114,7 +113,7 @@ class ScanImeiViewController: UIViewController {
             NSLog("Unable to start scanning")
         }
     }
-// MARK: Make showScanImeiDialogBoxVC Method
+    // MARK: Make showScanImeiDialogBoxVC Method
     func showScanImeiDialogBoxVC() {
         let userVC = self.storyboard?.instantiateViewController(withIdentifier: "inputDialogBoxViewController") as!  inputDialogBoxViewController
         userVC.titleText = "Verify Scan".localized()
@@ -122,12 +121,12 @@ class ScanImeiViewController: UIViewController {
         userVC.enterImeiTextFieldPlaceholder = "Scan Result".localized()
         userVC.sharedFlag = true
         userVC.getImei = getImei
-         inputDialogBox = userVC
+        inputDialogBox = userVC
         userVC.scanImeicallBack = { (id) -> Void in
             (self.parent as?  HomeViewController)?.requsetForImei(Imei: id , sharedFlag: true)
         }
         userVC.scanImeiresetCallBackCancelBtn = {
-              self.creatCameraView()
+            self.creatCameraView()
         }
         userVC.scanImeishowNetworkDialogBox = {
             (self.parent as?  HomeViewController)?.showNetworkDialogBox(flag: true)

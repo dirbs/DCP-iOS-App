@@ -16,27 +16,23 @@ import UIKit
 import Alamofire
 import AVFoundation
 import SwiftyJSON
-
-
-class LoginWorker
-{
-     // get base_Url in constant File
+class LoginWorker{
+    // get base_Url in constant File
     var baseUrl = Constants.Base_Url
     var jsonResult: JSON!
-     var liscenceData = [JSON]()
+    var liscenceData = [JSON]()
     var url = ""
-     // MARK: Make getLoginResponse Method
+    // MARK: Make getLoginResponse Method
     func getLoginResponse(email: String, password: String, completionHandler: @escaping (String?, String?, String? ,Int?,String?,Int?,Int?) -> Void) {
         let parameters: Parameters = [ "email": email,
                                        "password": password]
-         let headers = [ "Content-Type": "application/json",
-                         "Accept":"application/json"
-                         ]
+        let headers = [ "Content-Type": "application/json",
+                        "Accept":"application/json"
+        ]
         let url =  baseUrl+"api/login"
         Alamofire.request(url, method:.post, parameters:parameters, encoding: JSONEncoding.default, headers:headers).responseJSON { response in
             let status = response.response?.statusCode
-            if (status == 200)
-            {
+            if (status == 200){
                 let data = response.data
                 self.jsonResult = JSON(data!)
                 var user_Name = ""
@@ -54,17 +50,17 @@ class LoginWorker
                         }
                     }
                 }
-                    if let get_access_token = self.jsonResult["meta"]["token"].string {
-                        access_token = get_access_token
-                    }
-                if let get_active_Liscence = self.jsonResult["current_active_license"]["user_name"].string {
-                   var  get_active_Liscence = get_active_Liscence
+                if let get_access_token = self.jsonResult["meta"]["token"].string {
+                    access_token = get_access_token
                 }
-               //save value in shareed Preferncess
+                if let get_active_Liscence = self.jsonResult["current_active_license"]["user_name"].string {
+                    var  get_active_Liscence = get_active_Liscence
+                }
+                //save value in shareed Preferncess
                 let userDefaults = UserDefaults.standard
                 userDefaults.set(access_token , forKey: "AccessToken")
                 if let agreedValue = self.jsonResult["data"]["agreement"].string {
-                     agreed  = agreedValue
+                    agreed  = agreedValue
                 }
                 if let Liscence = self.jsonResult["licenses"].array {
                     for item in Liscence {
@@ -73,14 +69,13 @@ class LoginWorker
                     var user_id = 0
                     var get_user_id = 0
                     var   get_active_id = 0
-                    if(self.liscenceData.count > 0)
-                    {
+                    if(self.liscenceData.count > 0){
                         get_user_id = self.liscenceData[0]["id"].int!
                         get_active_id   = self.jsonResult["current_active_license"]["id"].int!
-                     }
+                    }
                     if let User_id = self.jsonResult["data"]["id"].int {
-                         user_id = User_id
-                         userDefaults.set(get_user_id, forKey: "User_id")
+                        user_id = User_id
+                        userDefaults.set(get_user_id, forKey: "User_id")
                     }
                     if let first_name  = self.jsonResult["data"]["first_name"].string {
                         first_Name = first_name
@@ -88,13 +83,12 @@ class LoginWorker
                     if let last_name  = self.jsonResult["data"]["last_name"].string {
                         last_Name = last_name
                     }
-                     user_Name = first_Name + " " + last_Name
-                     userDefaults.set(user_Name, forKey: "user_Name")
-                 completionHandler(access_token,roles,nil,status,agreed,get_user_id,get_active_id)
+                    user_Name = first_Name + " " + last_Name
+                    userDefaults.set(user_Name, forKey: "user_Name")
+                    completionHandler(access_token,roles,nil,status,agreed,get_user_id,get_active_id)
                 }
             }
-            if (status == 401)
-            {
+            if (status == 401){
                 completionHandler(nil,nil,nil,status,nil,0,0)
             }
             else{
@@ -103,20 +97,17 @@ class LoginWorker
             }
         }
     }
-    
-     // MARK: Make setForgotPassword Method
+    // MARK: Make setForgotPassword Method
     func setForgetPassword(email: String, acess_token:String, completionHandler: @escaping (Int? ) -> Void) {
         let parameters: Parameters = [ "email": email]
         url =  baseUrl+"api/recover"
         Alamofire.request(url, method: .post, parameters: parameters, encoding: URLEncoding(), headers:  nil).responseJSON { (test) in
             let status = test.response?.statusCode
-            if (status == 200)
-            {
+            if (status == 200){
                 print(self.jsonResult)
                 completionHandler(status)
             }
-            if (status == 401)
-            {
+            if (status == 401){
                 completionHandler(status)
             }
                 

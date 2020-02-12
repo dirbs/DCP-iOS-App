@@ -18,13 +18,13 @@ class ErrorDialogBoxTest: XCTestCase {
     override func setUp() {
         getErrorDialogBoxViewController()
     }
-     // MARK: Make  getErrorDialogBoxViewController Method
+    // MARK: Make  getErrorDialogBoxViewController Method
     func getErrorDialogBoxViewController(){
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ErrorDilogBoxViewController") as! ErrorDilogBoxViewController
         errorDialogBoxView = vc
         let _ = errorDialogBoxView.view
     }
-     // MARK: Make  testForErrorDialogBox Method
+    // MARK: Make  testForErrorDialogBox Method
     func testForErrorDialogBox(){
         UIApplication.shared.keyWindow?.rootViewController = errorDialogBoxView
         //test for title Image view
@@ -36,5 +36,4 @@ class ErrorDialogBoxTest: XCTestCase {
         XCTAssertEqual("Ok".localized(), errorDialogBoxView.okBtn.currentTitle)
         errorDialogBoxView.okBtn.sendActions(for: .touchUpInside)
     }
-
 }

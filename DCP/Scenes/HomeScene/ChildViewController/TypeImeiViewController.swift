@@ -25,16 +25,16 @@ class TypeImeiViewController: UIViewController,UITextFieldDelegate {
         super.viewDidLoad()
         setUpView()   // Do any additional setup after loading the view.
     }
-     // MARK: Make setUpView Method
+    // MARK: Make setUpView Method
     func setUpView(){
-      //set Propertiess of enterImei textfield
+        //set Propertiess of enterImei textfield
         enterImeiTextField.layer.cornerRadius = 5
         enterImeiTextField.layer.borderColor = UIColor(red:0.46, green:0.46, blue:0.46, alpha:1.0).cgColor
         enterImeiTextField.attributedPlaceholder = NSAttributedString(string:"Enter Imei e.g. 123456789012345" .localized(), attributes:[NSAttributedString.Key.foregroundColor:UIColor(red:0.46, green:0.46, blue:0.46, alpha:1.0)])
         enterImeiTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: enterImeiTextField.frame.height))
         enterImeiTextField.leftViewMode = .always
         enterImeiTextField.layer.borderWidth = 2
-       
+        
         errorMessage.text = "Please enter 14-16 digit IMEI".localized()
         errorMessage.isHidden = true
         enterImeiTextField.delegate = self
@@ -46,10 +46,10 @@ class TypeImeiViewController: UIViewController,UITextFieldDelegate {
         setUpButtonStyle()
         addButtonOnkeyBoard()
     }
-     // MARK: Make addButtonOnKeyBoard Method
+    // MARK: Make addButtonOnKeyBoard Method
     func addButtonOnkeyBoard(){
         let doneBtn  = UIBarButtonItem(title: "DONE".localized(), style: UIBarButtonItem.Style.plain, target: self, action: #selector(ReportViewController.doneBtnPressed))
-         doneBtn.tintColor = UIColor(red:0.07, green:0.36, blue:0.55, alpha:1.0)
+        doneBtn.tintColor = UIColor(red:0.07, green:0.36, blue:0.55, alpha:1.0)
         let numberToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
         numberToolbar.barStyle = UIBarStyle.default
         numberToolbar.items = [
@@ -62,9 +62,9 @@ class TypeImeiViewController: UIViewController,UITextFieldDelegate {
     }
     // MARK: donebtnPressed Method
     @objc func doneBtnPressed() {
-         view.endEditing(true)
+        view.endEditing(true)
     }
-     // MARK: Make checkBtnClick Method
+    // MARK: Make checkBtnClick Method
     @IBAction func checkBtnClick(_ sender: UIButton) {
         checkBtnFalg = true
         validate()
@@ -74,7 +74,7 @@ class TypeImeiViewController: UIViewController,UITextFieldDelegate {
         if(((enterImeiTextField.text?.isEmpty)!) || (enterImeiTextField.text?.count)!<14) {
             errorMessage.isHidden = false
             errorMessage.text = "Please enter 14-16 digit IMEI".localized()
-               enterImeiTextField.layer.borderColor = UIColor(red:0.72, green:0.11, blue:0.11, alpha:1.0).cgColor
+            enterImeiTextField.layer.borderColor = UIColor(red:0.72, green:0.11, blue:0.11, alpha:1.0).cgColor
         }
         let enteredText = Int(enterImeiTextField.text!)
         if enteredText == nil {
@@ -92,13 +92,13 @@ class TypeImeiViewController: UIViewController,UITextFieldDelegate {
         if(enteredText != nil) {
             errorMessage.isHidden = false
             errorMessage.text = "Please enter 14-16 digit IMEI".localized()
-             enterImeiTextField.layer.borderColor = UIColor(red:0.72, green:0.11, blue:0.11, alpha:1.0).cgColor       }
+            enterImeiTextField.layer.borderColor = UIColor(red:0.72, green:0.11, blue:0.11, alpha:1.0).cgColor       }
         if(((enterImeiTextField.text?.count)!) >= 14 && ((enterImeiTextField.text?.count)!) <= 16) {
             let enteredText = Int(enterImeiTextField.text!)
             if enteredText == nil {
                 errorMessage.isHidden = false
                 errorMessage.text = "IMEI must only contain numbers".localized()
-               enterImeiTextField.layer.borderColor = UIColor(red:0.85, green:0.13, blue:0.01, alpha:1.0).cgColor
+                enterImeiTextField.layer.borderColor = UIColor(red:0.85, green:0.13, blue:0.01, alpha:1.0).cgColor
             }
             else{
                 errorMessage.isHidden = true
@@ -116,7 +116,7 @@ class TypeImeiViewController: UIViewController,UITextFieldDelegate {
                 enterImeiTextField.layer.borderColor = UIColor(red:0.85, green:0.13, blue:0.01, alpha:1.0).cgColor
             }
             else{
-               errorMessage.isHidden = true
+                errorMessage.isHidden = true
                 
             }
         }
@@ -182,7 +182,7 @@ class TypeImeiViewController: UIViewController,UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if(errorMessage.isHidden == true)
         {
-         enterImeiTextField.layer.borderColor = UIColor(red:0.07, green:0.36, blue:0.55, alpha:1.0).cgColor
+            enterImeiTextField.layer.borderColor = UIColor(red:0.07, green:0.36, blue:0.55, alpha:1.0).cgColor
         }
     }
     // MARK: Make showTypeDialogBoxVc Method
@@ -192,7 +192,7 @@ class TypeImeiViewController: UIViewController,UITextFieldDelegate {
         userVC.messageTitle = "Please verify IMEI number you entered.Press OK to continue or CANCAL to re-enter".localized()
         userVC.enterImeiTextFieldPlaceholder = "IMEI"
         userVC.getImei = enterImeiTextField.text!
-         inputDialogBox = userVC
+        inputDialogBox = userVC
         userVC.typeImeicallBack = { (id) -> Void in
             (self.parent as?  HomeViewController)?.requsetForImei(Imei: id , sharedFlag: false)
         }
@@ -204,7 +204,7 @@ class TypeImeiViewController: UIViewController,UITextFieldDelegate {
         userVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         self.present(userVC, animated: true, completion: nil)
     }
-     // MARK: Make setUpButtonStyleMethod
+    // MARK: Make setUpButtonStyleMethod
     func setUpButtonStyle(){
         let gradientLayer:CAGradientLayer = CAGradientLayer()
         gradientLayer.frame.size = checkBtn.frame.size

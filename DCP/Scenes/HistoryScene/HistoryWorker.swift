@@ -13,14 +13,12 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
-
-class HistoryWorker
-{
+class HistoryWorker{
     var baseUrl = Constants.Base_Url
     var jsonResult: JSON!
     // MARK: Make  getHistory Method
     func getHistory(access_token:String ,language: String,page_No:String,
-                              completionHandler: @escaping ( Int?,[String?],[String?],[String?],[String?],[String?],[String?], Int?) -> Void) {
+                    completionHandler: @escaping ( Int?,[String?],[String?],[String?],[String?],[String?],[String?], Int?) -> Void) {
         let headers = ["Authorization": "Bearer \(access_token)",
             "Content-Type": "application/x-www-form-urlencoded",
             "Accept":"application/json",
@@ -31,8 +29,7 @@ class HistoryWorker
         let  url =  baseUrl+"api/datatable/my-activity?page=\(page_No)"
         Alamofire.request(url, method: .get, parameters: parameters, encoding: URLEncoding.default, headers: headers).responseJSON { (response:DataResponse<Any>) -> Void in
             let status = response.response?.statusCode
-            if (status == 200)
-            {
+            if (status == 200){
                 let data = response.data
                 self.jsonResult = JSON(data!)
                 var id = [String]()
@@ -45,7 +42,7 @@ class HistoryWorker
                 if let data = self.jsonResult["activity"]["data"].array {
                     for item in data {
                         if let result = item["imei_number"].string {
-                           id.append(result)
+                            id.append(result)
                         }
                         if let result = item["created_at"].string {
                             date.append(result)
@@ -54,7 +51,7 @@ class HistoryWorker
                             user_name.append(result)
                         }
                         if let result = item["result"].string {
-                          result1.append(result)
+                            result1.append(result)
                         }
                         
                         if let result = item["user_device"].string {
@@ -65,13 +62,12 @@ class HistoryWorker
                         }   
                     }
                 }
-                if let Last_page = self.jsonResult["activity"]["last_page"].int {
+                if let Last_page = self.jsonResult["activity"]["last_page"].int{
                     last_Page = Last_page
-                    }
-           completionHandler(status,id,date,user_name,result1,user_device,visitor_ip,last_Page)
+                }
+                completionHandler(status,id,date,user_name,result1,user_device,visitor_ip,last_Page)
             }
-            else if(status == 401)
-            {
+            else if(status == 401){
                 completionHandler(status,[],[],[],[],[], [],0)
             }
             else
@@ -82,7 +78,7 @@ class HistoryWorker
     }
     // MARK: Make  getSearchHistory Method
     func getSearchtHistory(access_token:String ,language: String,page_No:String,imei_number: String,
-                    completionHandler: @escaping ( Int?,[String?],[String?],[String?],[String?],[String?],[String?],Int?) -> Void) {
+                           completionHandler: @escaping ( Int?,[String?],[String?],[String?],[String?],[String?],[String?],Int?) -> Void) {
         let headers = ["Authorization": "Bearer \(access_token)",
             "Content-Type": "application/json",
             "Accept":"application/json",
@@ -92,8 +88,7 @@ class HistoryWorker
         let  url =  baseUrl+"api/search_users_activity?page=\(page_No)"
         Alamofire.request(url, method:.post, parameters:parameters1, encoding: JSONEncoding.default, headers:headers).responseJSON { response in
             let status = response.response?.statusCode
-            if (status == 200)
-            {
+            if (status == 200){
                 let data = response.data
                 self.jsonResult = JSON(data!)
                 var id = [String]()
@@ -126,11 +121,10 @@ class HistoryWorker
                         }
                     }
                 }
-                if let Last_page = self.jsonResult["activity"]["last_page"].int {
+                if let Last_page = self.jsonResult["activity"]["last_page"].int{
                     last_Page = Last_page
                 }
-                
-    completionHandler(status,id,date,user_name,result1,user_device,visitor_ip,last_Page)
+                completionHandler(status,id,date,user_name,result1,user_device,visitor_ip,last_Page)
             }
             else if(status == 401)
             {

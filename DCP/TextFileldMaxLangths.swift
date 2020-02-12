@@ -32,7 +32,6 @@ extension UITextField {
             )
         }
     }
-    
     @objc func limitLength(textField: UITextField) {
         guard let prospectiveText = textField.text, prospectiveText.characters.count > maxLength else {
             return
@@ -45,6 +44,5 @@ extension UITextField {
         text = String(prospectiveText[start..<end])
         selectedTextRange = selection
     }
-    
 }
 

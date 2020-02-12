@@ -12,30 +12,28 @@
  */
 import UIKit
 protocol DeviceInformationBusinessLogic{
-  func doMatchedImei(request: DeviceInformation.ImeiMatched.Request)
-     func doNotMatchedImei(request: DeviceInformation.ImeiNotMatched.Request)
+    func doMatchedImei(request: DeviceInformation.ImeiMatched.Request)
+    func doNotMatchedImei(request: DeviceInformation.ImeiNotMatched.Request)
 }
 protocol DeviceInformationDataStore{
-  //var name: String { get set }
+    //var name: String { get set }
 }
 
-class DeviceInformationInteractor: DeviceInformationBusinessLogic, DeviceInformationDataStore
-{
-  var presenter: DeviceInformationPresentationLogic?
-  var worker: DeviceInformationWorker?
-  var status_code : Int? = 0
-  var success: Bool = false
-  var message: String? = ""
-  // MARK: Do MatchedImei
-  func doMatchedImei(request: DeviceInformation.ImeiMatched.Request){
-    worker = DeviceInformationWorker()
-    worker?.getImeiMatched(Imei: request.imei_number!, acess_token: request.access_Token!){
-        (status_code,success,message) in
-    
-        let response = DeviceInformation.ImeiMatched.Response(status_code: status_code, success: success ,message: message)
-        self.presenter?.presentMatchedImei(response: response)
-  }
-}
+class DeviceInformationInteractor: DeviceInformationBusinessLogic, DeviceInformationDataStore{
+    var presenter: DeviceInformationPresentationLogic?
+    var worker: DeviceInformationWorker?
+    var status_code : Int? = 0
+    var success: Bool = false
+    var message: String? = ""
+    // MARK: Do MatchedImei
+    func doMatchedImei(request: DeviceInformation.ImeiMatched.Request){
+        worker = DeviceInformationWorker()
+        worker?.getImeiMatched(Imei: request.imei_number!, acess_token: request.access_Token!){
+            (status_code,success,message) in
+            let response = DeviceInformation.ImeiMatched.Response(status_code: status_code, success: success ,message: message)
+            self.presenter?.presentMatchedImei(response: response)
+        }
+    }
     // MARK: Do NotMatchedImei
     func doNotMatchedImei(request: DeviceInformation.ImeiNotMatched.Request){
         worker = DeviceInformationWorker()

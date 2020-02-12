@@ -12,7 +12,7 @@
  */
 import UIKit
 class LogOutDialogBoxViewController: UIViewController {
-     // Outlet
+    // Outlet
     @IBOutlet var titleImageView: UIImageView!
     @IBOutlet var noBtn: UIButton!
     @IBOutlet var yasBtn: UIButton!
@@ -25,18 +25,18 @@ class LogOutDialogBoxViewController: UIViewController {
         setupView()
         animateView()
     }
-     // MARK: Make setUpProperties Method
+    // MARK: Make setUpProperties Method
     func setUpProperties(){
         titleOutlet.text = "Logout".localized()
         messageOutlet.text = "Are you sure you want to logout?".localized()
         yasBtn.setTitle("YES".localized(), for: .normal)
         noBtn.setTitle("NO".localized(), for: .normal)
     }
-     // MARK: Make yasBtnClick Method
+    // MARK: Make yasBtnClick Method
     @IBAction func yasBtnClick(_ sender: UIButton) {
         logout()
     }
-     // MARK: Make Logout Method
+    // MARK: Make Logout Method
     func logout(){
         let defaults = UserDefaults.standard
         defaults.removeObject(forKey: "loginFlag")
@@ -51,7 +51,7 @@ class LogOutDialogBoxViewController: UIViewController {
         let appDlg = UIApplication.shared.delegate as? AppDelegate
         appDlg?.window?.rootViewController = userVC
     }
-     // MARK: Make noBtnClick Method
+    // MARK: Make noBtnClick Method
     @IBAction func noBtnClick(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }

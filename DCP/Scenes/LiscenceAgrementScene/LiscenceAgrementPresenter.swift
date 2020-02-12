@@ -12,20 +12,14 @@
  */
 
 import UIKit
-
-protocol LiscenceAgrementPresentationLogic
-{
-  func presentLiscence(response: LiscenceAgrement.LiscenceUpdate.Response)
+protocol LiscenceAgrementPresentationLogic{
+    func presentLiscence(response: LiscenceAgrement.LiscenceUpdate.Response)
 }
-
-class LiscenceAgrementPresenter: LiscenceAgrementPresentationLogic
-{
-  weak var viewController: LiscenceAgrementDisplayLogic?
-  
-  // MARK: Present Liscence
-  
-  func presentLiscence(response: LiscenceAgrement.LiscenceUpdate.Response){
-    let viewModel = LiscenceAgrement.LiscenceUpdate.ViewModel(status_code:response.status_code)
-    viewController?.displayLiscenceUpdateResponse(viewModel: viewModel)
-  }
+class LiscenceAgrementPresenter: LiscenceAgrementPresentationLogic{
+    weak var viewController: LiscenceAgrementDisplayLogic?
+    // MARK: Present Liscence
+    func presentLiscence(response: LiscenceAgrement.LiscenceUpdate.Response){
+        let viewModel = LiscenceAgrement.LiscenceUpdate.ViewModel(status_code:response.status_code)
+        viewController?.displayLiscenceUpdateResponse(viewModel: viewModel)
+    }
 }

@@ -18,14 +18,13 @@ class ResultTest: XCTestCase {
     override func setUp() {
         getHomeViewController()
     }
-     // MARK: Make  testForTypeImei Method
+    // MARK: Make  testForTypeImei Method
     func getHomeViewController(){
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
         homeView = vc
         let _ = homeView.view
-        
     }
-     // MARK: Make  testForTypeImeiIValidResponse Method
+    // MARK: Make  testForTypeImeiIValidResponse Method
     func testForTypeImeiInvalidImeiResponse(){
         let url = URL(string: "http://ec2-34-220-143-232.us-west-2.compute.amazonaws.com:81/api/lookup/iOSApp/manual")!
         var stub = StubRequest(method: .POST, url: url)
@@ -41,27 +40,22 @@ class ResultTest: XCTestCase {
         homeView.typeImeiViewController?.checkBtn.sendActions(for: .touchUpInside)
         let inputDialogBoxExpectationApi = self.expectation(description: "inputDialogBoxExpectationApi")
         DispatchQueue.main.asyncAfter(deadline: .now() + 6.0, execute: {
-
             inputDialogBoxExpectationApi.fulfill()
         })
-
         waitForExpectations(timeout: 6, handler: nil)
         homeView.typeImeiViewController?.inputDialogBox?.okBtnOutlet.sendActions(for: .touchUpInside)
         let typeImeiResultViewControllerExpactions = self.expectation(description: "typeImeiResultViewControllerExpactions")
         DispatchQueue.main.asyncAfter(deadline: .now() + 6.0, execute: {
-             typeImeiResultViewControllerExpactions.fulfill()
+            typeImeiResultViewControllerExpactions.fulfill()
         })
         waitForExpectations(timeout: 6, handler: nil)
         let inputViewController = homeView.presentedViewController as! ResultViewController
-        if(inputViewController.language == "en")
-        {
-        var messages = "555555555555555" + " " + "not found in database. This device may be" + "\n" + "counterfeit or illegal. Please report this device through DCP!" + "\n\n" + "To fill the form press Report Mobile " + "\n" + "Phone"
+        if(inputViewController.language == "en"){
+            var messages = "555555555555555" + " " + "not found in database. This device may be" + "\n" + "counterfeit or illegal. Please report this device through DCP!" + "\n\n" + "To fill the form press Report Mobile " + "\n" + "Phone"
             XCTAssertEqual("IMEI not found!".localized(), inputViewController.titleOutlet.text!)
-        XCTAssertEqual(messages, inputViewController.responseMessageOutlet.text!)
+            XCTAssertEqual(messages, inputViewController.responseMessageOutlet.text!)
         }
-        
         else{
-            
             var messages = "555555555555555" + " " + "không tìm thấy trong cơ sở dữ liệu. Thiết bị này có thể là hàng giả hoặc bất hợp pháp. Vui lòng báo cáo thiết bị này qua DCP!" + "\n\n" + "Để điền vào biểu mẫu nhấn Báo cáo" + "\n" + "Điện thoại di động."
             XCTAssertEqual("IMEI not found!".localized(), inputViewController.titleOutlet.text!)
             XCTAssertEqual(messages, inputViewController.responseMessageOutlet.text!)
@@ -89,27 +83,22 @@ class ResultTest: XCTestCase {
         })
         waitForExpectations(timeout: 6, handler: nil)
         homeView.language = "vi"
-  homeView.scanImeiViewController?.inputDialogBox?.okBtnOutlet.sendActions(for: .touchUpInside)
+        homeView.scanImeiViewController?.inputDialogBox?.okBtnOutlet.sendActions(for: .touchUpInside)
         let scanImeiResultViewControllerExpactions = self.expectation(description: "scanImeiResultViewControllerExpactions")
-        
         DispatchQueue.main.asyncAfter(deadline: .now() + 6.0, execute: {
             scanImeiResultViewControllerExpactions.fulfill()
         })
         waitForExpectations(timeout: 6, handler: nil)
         let inputViewController = homeView.presentedViewController as! ResultViewController
-        if(inputViewController.language == "en")
-        {
+        if(inputViewController.language == "en"){
             var messages = "555555555555555" + " " + "not found in database. This device may be" + "\n" + "counterfeit or illegal. Please report this device through DCP!" + "\n\n" + "To fill the form press Report Mobile " + "\n" + "Phone"
             XCTAssertEqual("IMEI not found!".localized(), inputViewController.titleOutlet.text!)
             XCTAssertEqual(messages, inputViewController.responseMessageOutlet.text!)
         }
-            
         else{
-            
             var messages = "555555555555555" + " " + "không tìm thấy trong cơ sở dữ liệu. Thiết bị này có thể là hàng giả hoặc bất hợp pháp. Vui lòng báo cáo thiết bị này qua DCP!" + "\n\n" + "Để điền vào biểu mẫu nhấn Báo cáo" + "\n" + "Điện thoại di động."
             XCTAssertEqual("IMEI not found!".localized(), inputViewController.titleOutlet.text!)
             XCTAssertEqual(messages, inputViewController.responseMessageOutlet.text!)
-            
         }
         XCTAssertEqual("REPORT MOBILE PHONE".localized(), inputViewController.reportMobilePhoneBtn.currentTitle)
         inputViewController.reportMobilePhoneBtn.sendActions(for: .touchUpInside)

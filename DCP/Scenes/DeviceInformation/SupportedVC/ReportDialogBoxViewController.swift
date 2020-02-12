@@ -60,29 +60,28 @@ class ReportDialogBoxViewController: UIViewController {
         noReportBtn.layer.cornerRadius = 5
         noReportBtn.layer.addSublayer(gradientLayer1)
     }
-    
-     // MARK: Make  yasBtnClick Method
+    // MARK: Make  yasBtnClick Method
     @IBAction func YasBtnClick(_ sender: UIButton) {
         if Reachability.isConnectedToNetwork() == true {
-        ReportResetCallBackDoneBtn!()
-        self.dismiss(animated: true, completion: nil)
+            ReportResetCallBackDoneBtn!()
+            self.dismiss(animated: true, completion: nil)
         }
         else{
             showNetworkDialogBox()
         }
     }
     
-     // MARK: Make  showNetworkDialogBox Method
+    // MARK: Make  showNetworkDialogBox Method
     func showNetworkDialogBox(){
         let userVC = self.storyboard?.instantiateViewController(withIdentifier: "NetworkdialogBoxViewController") as!  NetworkdialogBoxViewController
         userVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         self.present(userVC, animated: true, completion: nil)
     }
-     // MARK: Make  noReportClick Method
+    // MARK: Make  noReportClick Method
     @IBAction func noReportClick(_ sender: UIButton) {
         if Reachability.isConnectedToNetwork() == true {
-        reportResetCallBackCancelBtn!()
-         self.dismiss(animated: true, completion: nil)
+            reportResetCallBackCancelBtn!()
+            self.dismiss(animated: true, completion: nil)
         }
         else{
             showNetworkDialogBox()

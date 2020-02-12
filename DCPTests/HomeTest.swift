@@ -26,14 +26,14 @@ class HomeTest: XCTestCase {
         let _ = homeView.view
     }
     // MARK: Make  testForHomeScreen Method
-   func testForHomeScreen(){
+    func testForHomeScreen(){
         //test for title text
         XCTAssertEqual("Home".localized(), homeView.dcpToolBar.title)
-         //test for menueBtn
-         var getIconBtn = IconButton(image: Icon.cm.menu, tintColor: .white)
+        //test for menueBtn
+        var getIconBtn = IconButton(image: Icon.cm.menu, tintColor: .white)
         XCTAssertEqual(getIconBtn.image, homeView.menuButton.image)
         homeView.menuButton.sendActions(for: .touchUpInside)
-     //test for InfoImage view
+        //test for InfoImage view
         var getInfoImage = UIImage(named: "ic_info")
         XCTAssertEqual(getInfoImage, homeView.infoImageView.image)
         //test for Instruction title
@@ -46,5 +46,5 @@ class HomeTest: XCTestCase {
         XCTAssertEqual("The IMEI (International Mobile Equipment Identity) is a globally unique number to identify any SIM based mobile device. You can view the mobile phone's IMEI by pressing *#06# on dialpad of the device. If the device has two simcards, you will see two 14-16 digit codes. Enter the 14-16 digit IMEI number in the box and click on the check  box to view its detail.".localized(), homeView.paragraphOutlet.text)
         homeView.showNetworkDialogBox(flag: false)
     }
-
+    
 }

@@ -12,7 +12,7 @@
  */
 import UIKit
 class NetworkdialogBoxViewController: UIViewController {
-// outlet
+    // outlet
     @IBOutlet var titleImageView: UIImageView!
     @IBOutlet var noBtn: UIButton!
     @IBOutlet var enableItBtn: UIButton!
@@ -62,8 +62,7 @@ class NetworkdialogBoxViewController: UIViewController {
                 }
             }
         }
-        if(sharedFlag == true)
-        {
+        if(sharedFlag == true){
             self.dismiss(animated: true, completion: nil)
             self.scanresetCallBackNoBtn!()
             
@@ -83,13 +82,12 @@ class NetworkdialogBoxViewController: UIViewController {
     }
     // MARK: Make noBtnClick Method
     @IBAction func noBtnClick(_ sender: UIButton) {
-        if(sharedFlag == true)
-        {
-           self.dismiss(animated: true, completion: nil)
-           self.scanresetCallBackNoBtn!()
+        if(sharedFlag == true){
+            self.dismiss(animated: true, completion: nil)
+            self.scanresetCallBackNoBtn!()
         }
         else{
-           self.dismiss(animated: true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
         }
     }
 }

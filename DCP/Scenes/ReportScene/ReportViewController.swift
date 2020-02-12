@@ -17,12 +17,10 @@ import Foundation
 import AMPopTip
 import JGProgressHUD
 import ImagePicker
-protocol ReportDisplayLogic: class
-{
-  func displayReport(viewModel: Report.Report.ViewModel)
+protocol ReportDisplayLogic: class{
+    func displayReport(viewModel: Report.Report.ViewModel)
 }
-class ReportViewController: UIViewController,UITextFieldDelegate, ReportDisplayLogic , UICollectionViewDelegate, UICollectionViewDataSource
-{
+class ReportViewController: UIViewController,UITextFieldDelegate, ReportDisplayLogic , UICollectionViewDelegate, UICollectionViewDataSource{
     // outlet
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var submitHeight: NSLayoutConstraint!
@@ -65,17 +63,17 @@ class ReportViewController: UIViewController,UITextFieldDelegate, ReportDisplayL
     var language = "en"
     let spinner = JGProgressHUD(style: .extraLight)
     var selectImageFlag  = false
-  var interactor: ReportBusinessLogic?
-  var router: (NSObjectProtocol & ReportRoutingLogic & ReportDataPassing)?
-  // MARK: Object lifecycle
-  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?){
-    super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    setup()
-  }
-  required init?(coder aDecoder: NSCoder){
-    super.init(coder: aDecoder)
-    setup()
-  }
+    var interactor: ReportBusinessLogic?
+    var router: (NSObjectProtocol & ReportRoutingLogic & ReportDataPassing)?
+    // MARK: Object lifecycle
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?){
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        setup()
+    }
+    required init?(coder aDecoder: NSCoder){
+        super.init(coder: aDecoder)
+        setup()
+    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return arrayOfImage.count
     }
@@ -92,8 +90,7 @@ class ReportViewController: UIViewController,UITextFieldDelegate, ReportDisplayL
         print("Button \(sender.tag) Clicked")
         arrayOfImage.remove(at: sender.tag)
         collectionView.reloadData()
-        if(arrayOfImage.count == 0)
-        {
+        if(arrayOfImage.count == 0){
             viewHeight.constant = 590
             submitHeight.constant = 60
             collectionView.isHidden = true
@@ -101,18 +98,18 @@ class ReportViewController: UIViewController,UITextFieldDelegate, ReportDisplayL
             selectImageFlag  = false
         }
     }
-   // MARK: Make setUpTooltip Method
-   func setUpToolTip(){
-    popTip.edgeMargin = 5
-    popTip.offset = 2
-    popTip.edgeInsets = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 10)
-    popTip.backgroundColor = UIColor(red:0.46, green:0.46, blue:0.46, alpha:1.0)
-    popTip.shouldDismissOnTap = true
-    popTip.shouldDismissOnTapOutside = true
-    popTip.shouldDismissOnSwipeOutside = true
-    popTip.textColor = Color.white
-    popTip.shadowColor = Color.white
-    popTip.bubbleColor = Color.black
+    // MARK: Make setUpTooltip Method
+    func setUpToolTip(){
+        popTip.edgeMargin = 5
+        popTip.offset = 2
+        popTip.edgeInsets = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 10)
+        popTip.backgroundColor = UIColor(red:0.46, green:0.46, blue:0.46, alpha:1.0)
+        popTip.shouldDismissOnTap = true
+        popTip.shouldDismissOnTapOutside = true
+        popTip.shouldDismissOnSwipeOutside = true
+        popTip.textColor = Color.white
+        popTip.shadowColor = Color.white
+        popTip.bubbleColor = Color.black
     }
     // MARK: Make saveReportData Method
     func saveReportDate(){
@@ -136,13 +133,13 @@ class ReportViewController: UIViewController,UITextFieldDelegate, ReportDisplayL
         if(preferences.object(forKey: "StoreName") == nil) {
             preferences.set(saveStoreName, forKey: "StoreName")
             _ = preferences.synchronize()
-
+            
         }
         if(preferences.object(forKey: "Address") == nil) {
             
             preferences.set(saveAddress, forKey: "Address")
             _ = preferences.synchronize()
-
+            
         }
         if(preferences.object(forKey: "Description") == nil) {
             
@@ -165,29 +162,28 @@ class ReportViewController: UIViewController,UITextFieldDelegate, ReportDisplayL
     }
     // MARK: Make getSaveData Method
     func getSaveData(){
-       reportStateSave   = UserDefaults.standard.bool(forKey: "ReportStatusFlage")
-        if(reportStateSave == true)
-        {
+        reportStateSave   = UserDefaults.standard.bool(forKey: "ReportStatusFlage")
+        if(reportStateSave == true){
             let preferences = UserDefaults.standard
             if(preferences.object(forKey: "MobilePhoneBrand") != nil) {
-            (preferences.object(forKey: "MobilePhoneBrand") as? String)!
-                 mobilePhoneBrandTf.text = (preferences.object(forKey: "MobilePhoneBrand") as? String)!
+                (preferences.object(forKey: "MobilePhoneBrand") as? String)!
+                mobilePhoneBrandTf.text = (preferences.object(forKey: "MobilePhoneBrand") as? String)!
             }
             if(preferences.object(forKey: "ModelName") != nil) {
-           modelNameTf.text = (preferences.object(forKey: "ModelName") as? String)!
+                modelNameTf.text = (preferences.object(forKey: "ModelName") as? String)!
             }
             if(preferences.object(forKey: "StoreName") != nil) {
-                  storeNameTf.text = (preferences.object(forKey: "StoreName") as? String)!
+                storeNameTf.text = (preferences.object(forKey: "StoreName") as? String)!
             }
             if(preferences.object(forKey: "Address") != nil) {
-                 addressTf.text = (preferences.object(forKey: "Address") as? String)!
+                addressTf.text = (preferences.object(forKey: "Address") as? String)!
             }
             if(preferences.object(forKey: "Description") != nil) {
                 descriptionTf.text = (preferences.object(forKey: "Description") as? String)!
             }
             if(preferences.object(forKey: "Imei") != nil) {
-                  imei = (preferences.object(forKey: "Imei") as? String)!
-
+                imei = (preferences.object(forKey: "Imei") as? String)!
+                
             }
             let defaults = UserDefaults.standard
             defaults.removeObject(forKey: "MobilePhoneBrand")
@@ -213,13 +209,12 @@ class ReportViewController: UIViewController,UITextFieldDelegate, ReportDisplayL
         // set properties of  model Name text field
         modelNameTf.layer.cornerRadius = 5
         modelNameTf.layer.borderColor = UIColor(red:0.46, green:0.46, blue:0.46, alpha:1.0).cgColor
-         modelNameTf.layer.borderWidth = 2
-         modelNameTf.placeholder = "Model Name".localized()
-         modelNameTf.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height:  modelNameTf.frame.height))
+        modelNameTf.layer.borderWidth = 2
+        modelNameTf.placeholder = "Model Name".localized()
+        modelNameTf.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height:  modelNameTf.frame.height))
         modelNameTf.leftViewMode = .always
         modelNameTf.delegate = self
         // set properties of   store name   text field
-        
         storeNameTf.layer.cornerRadius = 5
         storeNameTf.layer.borderColor = UIColor(red:0.46, green:0.46, blue:0.46, alpha:1.0).cgColor
         storeNameTf.layer.borderWidth = 2
@@ -228,7 +223,6 @@ class ReportViewController: UIViewController,UITextFieldDelegate, ReportDisplayL
         storeNameTf.leftViewMode = .always
         storeNameTf.delegate = self
         // set properties of address text field
-        
         addressTf.layer.cornerRadius = 5
         addressTf.layer.borderColor = UIColor(red:0.46, green:0.46, blue:0.46, alpha:1.0).cgColor
         addressTf.layer.borderWidth = 2
@@ -249,7 +243,6 @@ class ReportViewController: UIViewController,UITextFieldDelegate, ReportDisplayL
         // set properties of submit btn
         submitBtnOutlet.setTitle("SUBMIT".localized(), for: .normal)
         reportMobilePhoneOutlet.text = "Report Mobile Phone".localized()
-        
         // set gradient color of submit btn
         let gradientLayer:CAGradientLayer = CAGradientLayer()
         gradientLayer.frame.size = submitBtnOutlet.frame.size
@@ -272,16 +265,16 @@ class ReportViewController: UIViewController,UITextFieldDelegate, ReportDisplayL
         // set properties of mobile phone brand error message
         mobilePhoneBrandErrorMessage.text = "can't be empty!".localized()
         mobilePhoneBrandErrorMessage.isHidden = true
-         // set properties of model name  error message
+        // set properties of model name  error message
         modelNameErrorMessage.text = "can't be empty!".localized()
         modelNameErrorMessage.isHidden = true
-         // set properties of store name error message
+        // set properties of store name error message
         storeNameErrorMessage.text = "can't be empty!".localized()
         storeNameErrorMessage.isHidden = true
-         // set properties of address error message
+        // set properties of address error message
         addressErrorMessage.text = "can't be empty!".localized()
         addressErrorMessage.isHidden = true
-         // set properties of decription error message
+        // set properties of decription error message
         descriptionErrorMessage.text = "can't be empty!".localized()
         descriptionErrorMessage.isHidden = true
         addButtonOnkeyboard()
@@ -305,10 +298,10 @@ class ReportViewController: UIViewController,UITextFieldDelegate, ReportDisplayL
         numberToolbar.sizeToFit()
         numberToolbar.sizeToFit()
         mobilePhoneBrandTf.inputAccessoryView = numberToolbar
-         modelNameTf.inputAccessoryView = numberToolbar
-         storeNameTf.inputAccessoryView = numberToolbar
-         addressTf.inputAccessoryView = numberToolbar
-         descriptionTf.inputAccessoryView = numberToolbar
+        modelNameTf.inputAccessoryView = numberToolbar
+        storeNameTf.inputAccessoryView = numberToolbar
+        addressTf.inputAccessoryView = numberToolbar
+        descriptionTf.inputAccessoryView = numberToolbar
     }
     // MARK: donebtnPressed Method
     @objc func doneBtnPressed() {
@@ -321,78 +314,65 @@ class ReportViewController: UIViewController,UITextFieldDelegate, ReportDisplayL
         let getStoreName = storeNameTf.text!.trimmingCharacters(in: .whitespaces)
         let getAddress = addressTf.text!.trimmingCharacters(in: .whitespaces)
         let getDescription = descriptionTf.text!.trimmingCharacters(in: .whitespaces)
-        if((getModelName.isEmpty))
-        {
+        if((getModelName.isEmpty)){
             modelNameErrorMessage.isHidden = false
             modelNameTf.layer.borderColor = UIColor(red:0.85, green:0.13, blue:0.01, alpha:1.0).cgColor
         }
-        if(!(getModelName.isEmpty))
-        {
+        if(!(getModelName.isEmpty)){
             modelNameErrorMessage.isHidden = true
-             modelNameTf.layer.borderColor = UIColor(red:0.07, green:0.36, blue:0.55, alpha:1.0).cgColor
+            modelNameTf.layer.borderColor = UIColor(red:0.07, green:0.36, blue:0.55, alpha:1.0).cgColor
         }
-        if(getMobilePhoneBrand.isEmpty)
-        {
+        if(getMobilePhoneBrand.isEmpty){
             mobilePhoneBrandErrorMessage.isHidden = false
             mobilePhoneBrandTf.layer.borderColor = UIColor(red:0.85, green:0.13, blue:0.01, alpha:1.0).cgColor
         }
-        if(!(getMobilePhoneBrand.isEmpty))
-        {
+        if(!(getMobilePhoneBrand.isEmpty)){
             
             mobilePhoneBrandErrorMessage.isHidden = true
             mobilePhoneBrandTf.layer.borderColor = UIColor(red:0.07, green:0.36, blue:0.55, alpha:1.0).cgColor
         }
-        
-        if(getStoreName.isEmpty)
-        {
-         storeNameErrorMessage.isHidden = false
-          storeNameTf.layer.borderColor = UIColor(red:0.85, green:0.13, blue:0.01, alpha:1.0).cgColor
+        if(getStoreName.isEmpty){
+            storeNameErrorMessage.isHidden = false
+            storeNameTf.layer.borderColor = UIColor(red:0.85, green:0.13, blue:0.01, alpha:1.0).cgColor
         }
-        if(!(getStoreName.isEmpty))
-        {
+        if(!(getStoreName.isEmpty)){
             storeNameErrorMessage.isHidden = true
             storeNameTf.layer.borderColor = UIColor(red:0.07, green:0.36, blue:0.55, alpha:1.0).cgColor
         }
-        if((getAddress.isEmpty))
-        {
+        if((getAddress.isEmpty)){
             addressErrorMessage.isHidden = false
             addressTf.layer.borderColor = UIColor(red:0.85, green:0.13, blue:0.01, alpha:1.0).cgColor
         }
-        if(!(getAddress.isEmpty))
-        {
+        if(!(getAddress.isEmpty)){
             addressErrorMessage.isHidden = true
             addressTf.layer.borderColor = UIColor(red:0.07, green:0.36, blue:0.55, alpha:1.0).cgColor
         }
-        if((getDescription.isEmpty))
-        {
+        if((getDescription.isEmpty)){
             descriptionErrorMessage.isHidden = false
             descriptionTf.layer.borderColor = UIColor(red:0.85, green:0.13, blue:0.01, alpha:1.0).cgColor
         }
-        
-        if(!(getDescription.isEmpty))
-        {
+        if(!(getDescription.isEmpty)){
             descriptionErrorMessage.isHidden = true
             descriptionTf.layer.borderColor = UIColor(red:0.07, green:0.36, blue:0.55, alpha:1.0).cgColor
         }
-        if(((!(getMobilePhoneBrand.isEmpty)) && !(getModelName.isEmpty)   && !(getStoreName.isEmpty) && !(getAddress.isEmpty) && !(getDescription.isEmpty)))
-            {
-                  mobilePhoneBrandTf.resignFirstResponder()
-                  modelNameTf.resignFirstResponder()
-                  storeNameTf.resignFirstResponder()
-                  addressTf.resignFirstResponder()
-                  descriptionTf.resignFirstResponder()
-         modelNameErrorMessage.isHidden = true
-         mobilePhoneBrandErrorMessage.isHidden = true
-         storeNameErrorMessage.isHidden = true
-         addressErrorMessage.isHidden = true
-         descriptionErrorMessage.isHidden = true
-                if Reachability.isConnectedToNetwork() == true {
-                      showLoading()
-              requestForReport(imei_number: imei, access_Token: access_Token, language:language , brand_name: mobilePhoneBrandTf.text, model_name: modelNameTf.text, store_name: storeNameTf.text, address: addressTf.text, description: descriptionTf.text, arrayOfImage: arrayOfImage)
-                }
-                else{
-                    showNetworkDialogBox()
-                }
+        if(((!(getMobilePhoneBrand.isEmpty)) && !(getModelName.isEmpty)   && !(getStoreName.isEmpty) && !(getAddress.isEmpty) && !(getDescription.isEmpty))){
+            mobilePhoneBrandTf.resignFirstResponder()
+            modelNameTf.resignFirstResponder()
+            storeNameTf.resignFirstResponder()
+            addressTf.resignFirstResponder()
+            descriptionTf.resignFirstResponder()
+            modelNameErrorMessage.isHidden = true
+            mobilePhoneBrandErrorMessage.isHidden = true
+            storeNameErrorMessage.isHidden = true
+            addressErrorMessage.isHidden = true
+            descriptionErrorMessage.isHidden = true
+            if Reachability.isConnectedToNetwork() == true {
+                showLoading()
+                requestForReport(imei_number: imei, access_Token: access_Token, language:language , brand_name: mobilePhoneBrandTf.text, model_name: modelNameTf.text, store_name: storeNameTf.text, address: addressTf.text, description: descriptionTf.text, arrayOfImage: arrayOfImage)
+            }
+            else{
+                showNetworkDialogBox()
+            }
         }
     }
     // MARK: Make showNetworkdialogBox Method
@@ -431,10 +411,8 @@ class ReportViewController: UIViewController,UITextFieldDelegate, ReportDisplayL
     }
     // MARK: Make modelNameBtnClick Method
     @IBAction func modelNameBtnClick(_ sender: UIButton) {
-         popTip.show(text: "Enter the valid model name of the device".localized(), direction: .down, maxWidth: 250, in: self.contentView, from: self.modelNameBtn.frame)
+        popTip.show(text: "Enter the valid model name of the device".localized(), direction: .down, maxWidth: 250, in: self.contentView, from: self.modelNameBtn.frame)
     }
-    
-    
     // MARK: Make storeNameClick Method
     @IBAction func storeNameClick(_ sender: UIButton) {
         popTip.show(text: "Enter the valid store name of the device".localized(), direction: .down, maxWidth: 250, in: self.contentView, from: self.storeNameBtn.frame)
@@ -445,13 +423,12 @@ class ReportViewController: UIViewController,UITextFieldDelegate, ReportDisplayL
     }
     // MARK: Make descriptionBtnClick Method
     @IBAction func descriptionBtnClick(_ sender: UIButton) {
-         popTip.show(text: "Add description for your device".localized(), direction: .down, maxWidth: 250, in: self.contentView, from: self.descriptionBtn.frame)
+        popTip.show(text: "Add description for your device".localized(), direction: .down, maxWidth: 250, in: self.contentView, from: self.descriptionBtn.frame)
     }
     // MARK: Make selectImagetoolTipClick Method
     @IBAction func selectImagetoolTipClick(_ sender: UIButton) {
-         popTip.show(text: "Upload valid images of the device".localized(), direction: .down, maxWidth: 250, in: self.contentView, from: self.selectImageDescriptionBtn.frame)
+        popTip.show(text: "Upload valid images of the device".localized(), direction: .down, maxWidth: 250, in: self.contentView, from: self.selectImageDescriptionBtn.frame)
     }
-    
     // MARK: Make checkPermission Method
     func checkPermission() {
         let photoAuthorizationStatus = PHPhotoLibrary.authorizationStatus()
@@ -462,19 +439,16 @@ class ReportViewController: UIViewController,UITextFieldDelegate, ReportDisplayL
             PHPhotoLibrary.requestAuthorization({
                 (newStatus) in
                 if newStatus ==  PHAuthorizationStatus.authorized {
-                  
+                    
                 }
             })
         case .restricted:
-    
+            
             print("User do not have access to photo album.")
         case .denied:
             showPermissionDialogBox()
         }
     }
-    
-    
-    
     // MARK: Make AllowPermissionDialogBox Method
     func AllowPermissionDialogBox(){
         allowPermissionOfcamera()
@@ -489,7 +463,7 @@ class ReportViewController: UIViewController,UITextFieldDelegate, ReportDisplayL
                         self.saveReportDate()
                     })
                 } else {
-            
+                    
                 }
             }
         }))
@@ -504,7 +478,6 @@ class ReportViewController: UIViewController,UITextFieldDelegate, ReportDisplayL
         case .restricted:
             print("Restricted, device owner must approve")
         case .authorized:
-            
             let configuration = Configuration()
             configuration.recordLocation = false
             configuration.doneButtonTitle = "DONE".localized()
@@ -513,7 +486,6 @@ class ReportViewController: UIViewController,UITextFieldDelegate, ReportDisplayL
             imagePickerController.imageLimit = 5
             imagePickerController.delegate = self
             present(imagePickerController, animated: true, completion: nil)
-            
         case .notDetermined:
             AVCaptureDevice.requestAccess(for: .video) { success in
                 if success {
@@ -534,7 +506,6 @@ class ReportViewController: UIViewController,UITextFieldDelegate, ReportDisplayL
                         self.saveReportDate()
                     })
                 } else {
-                    
                     print ("open the camera")
                     // Fallback on earlier versions
                 }
@@ -543,42 +514,41 @@ class ReportViewController: UIViewController,UITextFieldDelegate, ReportDisplayL
         alert.addAction(UIAlertAction(title: "Deny".localized(), style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
-    
     // MARK: Setup
-  private func setup(){
-    let viewController = self
-    let interactor = ReportInteractor()
-    let presenter = ReportPresenter()
-    let router = ReportRouter()
-    viewController.interactor = interactor
-    viewController.router = router
-    interactor.presenter = presenter
-    presenter.viewController = viewController
-    router.viewController = viewController
-    router.dataStore = interactor
-  }
-  override func viewDidLoad(){
-    super.viewDidLoad()
-    getSaveData()
-    getLanguage()
-    setUpProperties()
-    addScrolViewHide()
-    collectionView.dataSource = self
-    collectionView.delegate = self
-    viewHeight.constant = 590
-    submitHeight.constant = 60
-    collectionView.isHidden = true
-  }
-      // MARK: Make  selectImageBtnClick Method
-    @IBAction func selectImageBtnClick(_ sender: UIButton) {
-      arrayOfImage.removeAll()
-       checkPermission()
+    private func setup(){
+        let viewController = self
+        let interactor = ReportInteractor()
+        let presenter = ReportPresenter()
+        let router = ReportRouter()
+        viewController.interactor = interactor
+        viewController.router = router
+        interactor.presenter = presenter
+        presenter.viewController = viewController
+        router.viewController = viewController
+        router.dataStore = interactor
     }
-      // MARK: Make  selectImgaedescriptionBtnClick Method
+    override func viewDidLoad(){
+        super.viewDidLoad()
+        getSaveData()
+        getLanguage()
+        setUpProperties()
+        addScrolViewHide()
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        viewHeight.constant = 590
+        submitHeight.constant = 60
+        collectionView.isHidden = true
+    }
+    // MARK: Make  selectImageBtnClick Method
+    @IBAction func selectImageBtnClick(_ sender: UIButton) {
+        arrayOfImage.removeAll()
+        checkPermission()
+    }
+    // MARK: Make  selectImgaedescriptionBtnClick Method
     @IBAction func selectImagedescriptionBtnClick(_ sender: UIButton) {
         print("select Image description")
     }
-      // MARK: Make  submitBtnClick Method
+    // MARK: Make  submitBtnClick Method
     @IBAction func submitBtnClick(_ sender: UIButton) {
         let defaults = UserDefaults.standard
         defaults.removeObject(forKey: "MobilePhoneBrand")
@@ -591,7 +561,7 @@ class ReportViewController: UIViewController,UITextFieldDelegate, ReportDisplayL
         defaults.synchronize()
         valiadte()
     }
-      // MARK: Make  textFieldDidBegainEditing Method
+    // MARK: Make  textFieldDidBegainEditing Method
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == addressTf {
             textField.layer.borderWidth = 2
@@ -618,13 +588,11 @@ class ReportViewController: UIViewController,UITextFieldDelegate, ReportDisplayL
     func addScrolViewHide(){
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        
     }
-      // MARK: Make  keyboardWillShow delegate Method
+    // MARK: Make  keyboardWillShow delegate Method
     @objc func keyboardWillShow(notification: NSNotification) {
         if ((notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
-            if(selectImageFlag == true)
-            {
+            if(selectImageFlag == true){
                 viewHeight.constant = 1000
             }
             else{
@@ -632,84 +600,73 @@ class ReportViewController: UIViewController,UITextFieldDelegate, ReportDisplayL
             }
         }
     }
-      // MARK: Make  keyboardWillHide delegate Method
+    // MARK: Make  keyboardWillHide delegate Method
     @objc func keyboardWillHide(notification: NSNotification) {
-         if(selectImageFlag == true)
-         {
+        if(selectImageFlag == true){
             viewHeight.constant = 690
         }
-         if(selectImageFlag == false)
-         {
-           viewHeight.constant = 590
+        if(selectImageFlag == false){
+            viewHeight.constant = 590
         }
     }
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        
         print("ligh content")
         return .lightContent
     }
     // MARK: Make  requestForreport Method
     func requestForReport( imei_number: String?,
-    access_Token: String?,language: String?,brand_name: String?,model_name: String?,store_name: String?,address: String?,description: String?,arrayOfImage: [UIImage]){
-    let request = Report.Report.Request(imei_number: imei_number,access_Token: access_Token,language:language,brand_name:brand_name,model_name:model_name,store_name:store_name,address:address,description:description,arrayOfImage:arrayOfImage)
-    interactor?.doReport(request: request)
-  }
-// MARK: Make  displayReport Method
-  func displayReport(viewModel: Report.Report.ViewModel){
-    if(viewModel.status_code == 200)
-    {
-        spinner.dismiss()
-        let userVC = self.storyboard?.instantiateViewController(withIdentifier: "successDilogBoxViewController") as!  SuccessDilogBoxViewController
-        let message = viewModel.message
-        userVC.message  = message
-        userVC.messagetitle = "Reported".localized()
-        userVC.okBtnFlag = "Report"
-        userVC.reportbackResetCallBackOkBtn = {
-            self.showHomeVC()
+                           access_Token: String?,language: String?,brand_name: String?,model_name: String?,store_name: String?,address: String?,description: String?,arrayOfImage: [UIImage]){
+        let request = Report.Report.Request(imei_number: imei_number,access_Token: access_Token,language:language,brand_name:brand_name,model_name:model_name,store_name:store_name,address:address,description:description,arrayOfImage:arrayOfImage)
+        interactor?.doReport(request: request)
+    }
+    // MARK: Make  displayReport Method
+    func displayReport(viewModel: Report.Report.ViewModel){
+        if(viewModel.status_code == 200){
+            spinner.dismiss()
+            let userVC = self.storyboard?.instantiateViewController(withIdentifier: "successDilogBoxViewController") as!  SuccessDilogBoxViewController
+            let message = viewModel.message
+            userVC.message  = message
+            userVC.messagetitle = "Reported".localized()
+            userVC.okBtnFlag = "Report"
+            userVC.reportbackResetCallBackOkBtn = {
+                self.showHomeVC()
+                
+            }
+            userVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            self.present(userVC, animated: true, completion: nil)
+        }
+        if(viewModel.status_code == 401){
+            self.spinner.dismiss()
+            let userVC = self.storyboard?.instantiateViewController(withIdentifier: "SessionDialogBoxViewController") as!  SessionDialogBoxViewController
+            
+            userVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            
+            self.present(userVC, animated: true, completion: nil)
             
         }
-        userVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-        self.present(userVC, animated: true, completion: nil)
+        else{
+            self.spinner.dismiss()
+            let userVC = self.storyboard?.instantiateViewController(withIdentifier: "ErrorDilogBoxViewController") as!  ErrorDilogBoxViewController
+            userVC.message = "Sorry, somthing went wrong. Try again a little later.".localized()
+            userVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            self.present(userVC, animated: true, completion: nil)
+        }
     }
-    if(viewModel.status_code == 401)
-    {
-        self.spinner.dismiss()
-        let userVC = self.storyboard?.instantiateViewController(withIdentifier: "SessionDialogBoxViewController") as!  SessionDialogBoxViewController
-        
-        userVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-        
-        self.present(userVC, animated: true, completion: nil)
-        
-    }
-        
-    else{
-        
-        self.spinner.dismiss()
-        let userVC = self.storyboard?.instantiateViewController(withIdentifier: "ErrorDilogBoxViewController") as!  ErrorDilogBoxViewController
-        userVC.message = "Sorry, somthing went wrong. Try again a little later.".localized()
-        userVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-        self.present(userVC, animated: true, completion: nil)
-    }
-  }
-      // MARK: Make  showHomeVC Method
+    // MARK: Make  showHomeVC Method
     func showHomeVC(){
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        
         let HomeVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
         let appDlg = UIApplication.shared.delegate as? AppDelegate
         appDlg?.window?.rootViewController = HomeVC
     }
 }
-  // MARK:Make  extension  imgaePickerdelegate Method
-extension ReportViewController: ImagePickerDelegate
-{
+// MARK:Make  extension  imgaePickerdelegate Method
+extension ReportViewController: ImagePickerDelegate{
     func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]){
-       
+        
     }
     func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]){
-
-        if(images.count >= 1)
-        {
+        if(images.count >= 1){
             viewHeight.constant = 690
             submitHeight.constant = 160
             collectionView.isHidden = false
@@ -717,18 +674,16 @@ extension ReportViewController: ImagePickerDelegate
         }
         Imagecount = images.count - 1
         for i in 0..<images.count {
-            if(arrayOfImage.count < 5)
-            {
+            if(arrayOfImage.count < 5){
                 print(images[i].jpegData(compressionQuality: 0.7)!)
-            arrayOfImage.append(images[i])
+                arrayOfImage.append(images[i])
             }
         }
         collectionView.reloadData()
-         imagePicker.dismiss(animated: true, completion: nil)
+        imagePicker.dismiss(animated: true, completion: nil)
     }
-    
     func cancelButtonDidPress(_ imagePicker: ImagePickerController){
-         imagePicker.dismiss(animated: true, completion: nil)
+        imagePicker.dismiss(animated: true, completion: nil)
         
     }   
 }

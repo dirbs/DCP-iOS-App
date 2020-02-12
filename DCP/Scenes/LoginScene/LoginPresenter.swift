@@ -10,24 +10,19 @@
  *  This notice may not be removed or altered from any source distribution.
  * NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE GRANTED BY THIS LICENSE. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
 import UIKit
-
-protocol LoginPresentationLogic
-{
-  func presentLogin(response: Login.LoginResponse.Response)
+protocol LoginPresentationLogic{
+    func presentLogin(response: Login.LoginResponse.Response)
     func presentForgotPassword(response: Login.ForgotPassword.Response)
 }
-class LoginPresenter: LoginPresentationLogic
-{
-  weak var viewController: LoginDisplayLogic?
-  
-  // MARK: Make PresentLogin Method
-  func presentLogin(response: Login.LoginResponse.Response){
-    let viewModel = Login.LoginResponse.ViewModel(accessToken: response.accessToken, roles: response.roles, liscense: response.liscense , status_code: response.status_code, agreed : response.agreed,user_id : response.user_id, active_id :response.active_id)
-      viewController?.displayLoginResponse(viewModel: viewModel)
-  }
-     // MARK: Make presentForgotPassword Method
+class LoginPresenter: LoginPresentationLogic{
+    weak var viewController: LoginDisplayLogic?
+    // MARK: Make PresentLogin Method
+    func presentLogin(response: Login.LoginResponse.Response){
+        let viewModel = Login.LoginResponse.ViewModel(accessToken: response.accessToken, roles: response.roles, liscense: response.liscense , status_code: response.status_code, agreed : response.agreed,user_id : response.user_id, active_id :response.active_id)
+        viewController?.displayLoginResponse(viewModel: viewModel)
+    }
+    // MARK: Make presentForgotPassword Method
     func presentForgotPassword(response: Login.ForgotPassword.Response){
         let viewModel = Login.ForgotPassword.ViewModel(status_code: response.status_code)
         viewController?.displayForgotPasswordResponse(viewModel: viewModel)

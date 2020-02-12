@@ -11,23 +11,20 @@
  * NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE GRANTED BY THIS LICENSE. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 import UIKit
-protocol ReportBusinessLogic
-{
-  func doReport(request: Report.Report.Request)
+protocol ReportBusinessLogic{
+    func doReport(request: Report.Report.Request)
 }
-protocol ReportDataStore
-{
-  //var name: String { get set }
+protocol ReportDataStore{
+    //var name: String { get set }
 }
-class ReportInteractor: ReportBusinessLogic, ReportDataStore
-{
-  var presenter: ReportPresentationLogic?
-  var worker: ReportWorker?
-  func doReport(request: Report.Report.Request){
-    worker = ReportWorker()
-    worker?.makeMultipartRequest(arrayOfImageToUpload: request.arrayOfImage, access_token: request.access_Token!, language: request.language!, imei_number: request.imei_number!, brand_name: request.brand_name!, model_name: request.model_name!, store_name: request.store_name!, address: request.address!, description: request.description!) {(status_code,success,message) in
-        let response = Report.Report.Response(status_code:status_code,success:success,message:message)
-        self.presenter?.presentReport(response: response)
+class ReportInteractor: ReportBusinessLogic, ReportDataStore{
+    var presenter: ReportPresentationLogic?
+    var worker: ReportWorker?
+    func doReport(request: Report.Report.Request){
+        worker = ReportWorker()
+        worker?.makeMultipartRequest(arrayOfImageToUpload: request.arrayOfImage, access_token: request.access_Token!, language: request.language!, imei_number: request.imei_number!, brand_name: request.brand_name!, model_name: request.model_name!, store_name: request.store_name!, address: request.address!, description: request.description!) {(status_code,success,message) in
+            let response = Report.Report.Response(status_code:status_code,success:success,message:message)
+            self.presenter?.presentReport(response: response)
+        }
     }
-  }
 }

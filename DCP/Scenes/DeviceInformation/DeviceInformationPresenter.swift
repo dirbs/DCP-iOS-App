@@ -12,20 +12,20 @@
  */
 import UIKit
 protocol DeviceInformationPresentationLogic{
-  func presentMatchedImei(response: DeviceInformation.ImeiMatched.Response)
+    func presentMatchedImei(response: DeviceInformation.ImeiMatched.Response)
     func presentNotMatchedImei(response: DeviceInformation.ImeiNotMatched.Response)
 }
 class DeviceInformationPresenter: DeviceInformationPresentationLogic{
-  weak var viewController: DeviceInformationDisplayLogic?
-  // MARK: Do presentMrthodImei
-  func presentMatchedImei(response: DeviceInformation.ImeiMatched.Response){
-    let viewModel = DeviceInformation.ImeiMatched.ViewModel(
-     status_code : response.status_code,
-     success: response.success,
-     message: response.message
-    )
-    viewController?.displayMatchedImei(viewModel: viewModel)
-  }
+    weak var viewController: DeviceInformationDisplayLogic?
+    // MARK: Do presentMrthodImei
+    func presentMatchedImei(response: DeviceInformation.ImeiMatched.Response){
+        let viewModel = DeviceInformation.ImeiMatched.ViewModel(
+            status_code : response.status_code,
+            success: response.success,
+            message: response.message
+        )
+        viewController?.displayMatchedImei(viewModel: viewModel)
+    }
     // MARK: Do  presentNotMatchedImei
     func presentNotMatchedImei(response: DeviceInformation.ImeiNotMatched.Response){
         let viewModel = DeviceInformation.ImeiNotMatched.ViewModel(

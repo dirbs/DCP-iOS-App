@@ -48,7 +48,6 @@
 "Enter the valid address where the device is located." = "Enter the valid address where the device is located.";
 "Add description for your device" = "Add description for your device";
 "Upload valid images of the device" = "Upload valid images of the device";
-
 "History" = "History";
 "Logout" = "Logout";
 "Are you sure you want to logout?" = "Are you sure you want to logout?";
@@ -108,7 +107,6 @@
 "Adding Device Information..." = "Adding Device Information...";
 "Search IMEI" =  "Search IMEI";
 "Search" =  "Search";
-
 "No record found!" = "No record found!";
 "Imei not Found" = "IMEI not found!";
 "Report Mobile Phone" = "Report Mobile Phone";

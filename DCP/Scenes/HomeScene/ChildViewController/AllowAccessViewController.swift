@@ -13,19 +13,17 @@
 import UIKit
 import Localize_Swift
 class AllowAccessViewController: UIViewController {
-  //Outlet
+    //Outlet
     @IBOutlet var camerAccessMessage: UILabel!
-    
     @IBOutlet var allowAccessBtn: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-         MyVariables.scannerVisible = true
-         setUpView()
+        MyVariables.scannerVisible = true
+        setUpView()
     }
     // MARK: Make setUpView Method
     func setUpView(){
-        
-       //set text of title message
+        //set text of title message
         camerAccessMessage.text = "Please Allow Camera  Access for Scanning Barcode Of IMEI".localized()
         //set properties of allowAccessBtn
         allowAccessBtn.setTitle("Allow Access".localized(), for: .normal)
@@ -42,6 +40,5 @@ class AllowAccessViewController: UIViewController {
             } else {
             }
         }
-       
     }
 }

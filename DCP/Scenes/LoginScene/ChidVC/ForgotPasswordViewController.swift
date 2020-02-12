@@ -63,17 +63,16 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
         okBtn.setTitle("Ok".localized(), for: .normal)
         //set the title of cancel Btn
         cancelBtn.setTitle("CANCEL".localized(), for: .normal)
-                emailTF.delegate = self
+        emailTF.delegate = self
         //add button On keyboard
         addButtonOnkeyboard()
     }
     // MARK: Make textfield delegate Method
     func textFieldDidBeginEditing(_ textField: UITextField) {
         animateViewMoving(up: true, moveValue: 80)
-        if(emailErrorMessage.isHidden == true)
-        {
-        emailTF.layer.borderColor = UIColor(red:0.07, green:0.36, blue:0.55, alpha:1.0).cgColor
-    }
+        if(emailErrorMessage.isHidden == true){
+            emailTF.layer.borderColor = UIColor(red:0.07, green:0.36, blue:0.55, alpha:1.0).cgColor
+        }
     }
     // MARK: Make textfield delegate Method
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -90,11 +89,11 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
         self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
         UIView.commitAnimations()
     }
-   // MARK: Make okBtn click Listener Method
+    // MARK: Make okBtn click Listener Method
     @IBAction func okBtn(_ sender: UIButton) {
         validate()
     }
-     // MARK: Make addButtonOnkeyboard Method
+    // MARK: Make addButtonOnkeyboard Method
     func addButtonOnkeyboard(){
         let numberToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
         numberToolbar.barStyle = UIBarStyle.default
@@ -107,28 +106,26 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
     }
     // MARK: donebtnPressed Method
     @objc func doneBtnPressed() {
-         view.endEditing(true)
+        view.endEditing(true)
     }
     // MARK: Make validate Method
     func validate(){
-        if((emailTF.text?.isEmpty)!)
-        {
+        if((emailTF.text?.isEmpty)!){
             emailErrorMessage.isHidden = false
             emailErrorMessage.text =  "can't be empty!".localized()
             emailTF.layer.borderColor = UIColor(red:0.72, green:0.11, blue:0.11, alpha:1.0).cgColor
         }
-       
-        if(!(emailTF.text?.isEmpty)!)
-        {
+        
+        if(!(emailTF.text?.isEmpty)!){
             emailErrorMessage.isHidden = true
             if (isValidEmail(emailStr: (emailTF.text)!)) {
-                 emailTF.layer.borderColor = UIColor(red:0.46, green:0.46, blue:0.46, alpha:1.0).cgColor
-            if Reachability.isConnectedToNetwork() == true {
-                self.dismiss(animated: true, completion: nil)
-                self.forgotPasswordcallBack!(emailTF.text!)
-            }
-        else{
-                 self.dismiss(animated: true, completion: nil)
+                emailTF.layer.borderColor = UIColor(red:0.46, green:0.46, blue:0.46, alpha:1.0).cgColor
+                if Reachability.isConnectedToNetwork() == true {
+                    self.dismiss(animated: true, completion: nil)
+                    self.forgotPasswordcallBack!(emailTF.text!)
+                }
+                else{
+                    self.dismiss(animated: true, completion: nil)
                     self.forgotPasswordCallBackNetworkDialogBox!()
                 }
             }
@@ -140,7 +137,7 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
             }
         }
     }
-   // MARK: Make showNetworkDialogBox Method
+    // MARK: Make showNetworkDialogBox Method
     func showNetworkDialogBox(){
         let userVC = self.storyboard?.instantiateViewController(withIdentifier: "NetworkdialogBoxViewController") as!  NetworkdialogBoxViewController
         userVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext

@@ -86,12 +86,12 @@ class GetDeviceInformationDataViewController: UIViewController {
         super.viewDidLoad()
         setUpView()
     }
-     // MARK: Make  setUpView Method
+    // MARK: Make  setUpView Method
     func setUpView(){
-       deviceIdTV.text = "Device ID".localized()
-       deviceIdTV.textContainerInset = UIEdgeInsets(top: 8, left: 30, bottom: 0, right: 0)
-       deviceIdDetailTV.text = Imei
-       deviceIdDetailTV.textContainerInset = UIEdgeInsets(top: 10, left: 30, bottom: 10, right: 0)
+        deviceIdTV.text = "Device ID".localized()
+        deviceIdTV.textContainerInset = UIEdgeInsets(top: 8, left: 30, bottom: 0, right: 0)
+        deviceIdDetailTV.text = Imei
+        deviceIdDetailTV.textContainerInset = UIEdgeInsets(top: 10, left: 30, bottom: 10, right: 0)
         manufacturedTV.text = "Manufacturer".localized()
         manufacturedTV.textContainerInset = UIEdgeInsets(top: 8, left: 30, bottom: 0, right: 0)
         manufacturedDetailTV.textContainerInset = UIEdgeInsets(top: 10, left: 30, bottom: 10, right: 0)
@@ -131,8 +131,7 @@ class GetDeviceInformationDataViewController: UIViewController {
         radioInterfaceDetailTv.textContainerInset = UIEdgeInsets(top: 10, left: 30, bottom: 10, right: 0)
         var getradioInterface = ""
         for obj in radioInterface {
-            if(radioInterface.count > 1)
-            {
+            if(radioInterface.count > 1){
                 getradioInterface  = getradioInterface   + "\u{2022}" + " " +  obj.stringValue + "\n"
             }
             else{
@@ -145,12 +144,11 @@ class GetDeviceInformationDataViewController: UIViewController {
         OperatingSystemTV.textContainerInset = UIEdgeInsets(top: 8, left: 30, bottom: 0, right: 0)
         var getOperatingValue = ""
         for obj in operatingSystem {
-          if(operatingSystem.count > 1)
-          {
-            getOperatingValue =  getOperatingValue + "\u{2022}" + " "  +  obj.stringValue + "\n"
+            if(operatingSystem.count > 1){
+                getOperatingValue =  getOperatingValue + "\u{2022}" + " "  +  obj.stringValue + "\n"
             }
-          else{
-            getOperatingValue = obj.stringValue
+            else{
+                getOperatingValue = obj.stringValue
             }
         }
         opertaingSystemDetailTV.textContainerInset = UIEdgeInsets(top: 10, left: 30, bottom: 10, right: 0)

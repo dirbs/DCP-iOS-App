@@ -15,14 +15,12 @@ import Material
 import Localize_Swift
 import SlideMenuControllerSwift
 import JGProgressHUD
-protocol LoginDisplayLogic: class
-{
-  func displayLoginResponse(viewModel: Login.LoginResponse.ViewModel)
+protocol LoginDisplayLogic: class{
+    func displayLoginResponse(viewModel: Login.LoginResponse.ViewModel)
     func displayForgotPasswordResponse(viewModel: Login.ForgotPassword.ViewModel)
 }
 
-class LoginViewController: UIViewController, LoginDisplayLogic ,UITextFieldDelegate
-{
+class LoginViewController: UIViewController, LoginDisplayLogic ,UITextFieldDelegate{
     //Outlet
     @IBOutlet var scrollview: UIScrollView!
     @IBOutlet var changeLanguageBtn: UIButton!
@@ -37,9 +35,9 @@ class LoginViewController: UIViewController, LoginDisplayLogic ,UITextFieldDeleg
     @IBOutlet var passwordErrorMessage: UILabel!
     @IBOutlet var emailErrorMessage: UILabel!
     var forgotPasswordViewController: ForgotPasswordViewController?
-     var homeViewController: HomeViewController?
-     var successDialogBox: SuccessDilogBoxViewController?
-      var leftNeviagtionViewController: NeviagtionDrawerVC?
+    var homeViewController: HomeViewController?
+    var successDialogBox: SuccessDilogBoxViewController?
+    var leftNeviagtionViewController: NeviagtionDrawerVC?
     @IBOutlet var titleImageView: UIImageView!
     //variabless
     var accessToken  = ""
@@ -52,34 +50,31 @@ class LoginViewController: UIViewController, LoginDisplayLogic ,UITextFieldDeleg
     let spinner = JGProgressHUD(style: .extraLight)
     var interactor: LoginBusinessLogic?
     var router: (NSObjectProtocol & LoginRoutingLogic & LoginDataPassing)?
-  // MARK: Object lifecycle
-  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?){
-    super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    setup()
-  }
-  
-  required init?(coder aDecoder: NSCoder){
-    super.init(coder: aDecoder)
-    setup()
-  }
-  
-  // MARK: Setup
-  private func setup(){
-    let viewController = self
-    let interactor = LoginInteractor()
-    let presenter = LoginPresenter()
-    let router = LoginRouter()
-    viewController.interactor = interactor
-    viewController.router = router
-    interactor.presenter = presenter
-    presenter.viewController = viewController
-    router.viewController = viewController
-    router.dataStore = interactor
-  }
+    // MARK: Object lifecycle
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?){
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        setup()
+    }
+    required init?(coder aDecoder: NSCoder){
+        super.init(coder: aDecoder)
+        setup()
+    }
+    // MARK: Setup
+    private func setup(){
+        let viewController = self
+        let interactor = LoginInteractor()
+        let presenter = LoginPresenter()
+        let router = LoginRouter()
+        viewController.interactor = interactor
+        viewController.router = router
+        interactor.presenter = presenter
+        presenter.viewController = viewController
+        router.viewController = viewController
+        router.dataStore = interactor
+    }
     // MARK: Make save ValueInSharedPreferncess Method
     func saveValueInPrferncess( access_token:String ,roles:String , useremail: String){
-        if(roles == "admin")
-        {
+        if(roles == "admin"){
             adminFlag = true
             loginFlag = true
         }
@@ -88,7 +83,7 @@ class LoginViewController: UIViewController, LoginDisplayLogic ,UITextFieldDeleg
         let preferences = UserDefaults.standard
         preferences.set(loginFlag, forKey: "loginFlag")
         _ = preferences.synchronize()
-                preferences.set(adminFlag, forKey: "adminFlag")
+        preferences.set(adminFlag, forKey: "adminFlag")
         _ = preferences.synchronize()
         preferences.set(email, forKey: "email")
         _ = preferences.synchronize()
@@ -110,7 +105,7 @@ class LoginViewController: UIViewController, LoginDisplayLogic ,UITextFieldDeleg
         emailTF.leftViewMode = .always
         emailTF.delegate = self
         //set propertiess  of scroll View
-         scrollview.isScrollEnabled = false
+        scrollview.isScrollEnabled = false
         //set propertiess  of password text View
         passwordTF.layer.cornerRadius = 5
         passwordTF.layer.borderColor = UIColor(red:0.46, green:0.46, blue:0.46, alpha:1.0).cgColor
@@ -153,10 +148,9 @@ class LoginViewController: UIViewController, LoginDisplayLogic ,UITextFieldDeleg
     @IBAction func visiblityBtnClick(_ sender: UIButton) {
         if let ButtonImage = passwordVisibilityBtn.image(for: .normal),
             let Image = UIImage(named: "ic_visibility_off"),
-            ButtonImage.pngData() == Image.pngData()
-        {
-             passwordVisibilityBtn.setImage(UIImage(named: "ic_visibility"), for: .normal)
-             passwordTF.isSecureTextEntry.toggle()
+            ButtonImage.pngData() == Image.pngData(){
+            passwordVisibilityBtn.setImage(UIImage(named: "ic_visibility"), for: .normal)
+            passwordTF.isSecureTextEntry.toggle()
         } else {
             
             passwordVisibilityBtn.setImage(UIImage(named: "ic_visibility_off"), for: .normal)
@@ -166,7 +160,7 @@ class LoginViewController: UIViewController, LoginDisplayLogic ,UITextFieldDeleg
     // MARK: Make addButtonOnKeyBoard Method
     func addButtonOnkeyboard(){
         let doneBtn  = UIBarButtonItem(title: "DONE".localized(), style: UIBarButtonItem.Style.plain, target: self, action: #selector(LoginViewController.doneBtnPressed))
-       doneBtn.tintColor = UIColor(red:0.07, green:0.36, blue:0.55, alpha:1.0)
+        doneBtn.tintColor = UIColor(red:0.07, green:0.36, blue:0.55, alpha:1.0)
         let numberToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
         numberToolbar.barStyle = UIBarStyle.default
         numberToolbar.items = [
@@ -200,17 +194,15 @@ class LoginViewController: UIViewController, LoginDisplayLogic ,UITextFieldDeleg
             animateViewMoving(up: true, moveValue: 100)
         }
         if textField == emailTF {
-            if(emailErrorMessage.isHidden == true)
-            {
-            emailTF.layer.borderWidth = 2
-            emailTF.layer.borderColor = UIColor(red:0.07, green:0.36, blue:0.55, alpha:1.0).cgColor
+            if(emailErrorMessage.isHidden == true){
+                emailTF.layer.borderWidth = 2
+                emailTF.layer.borderColor = UIColor(red:0.07, green:0.36, blue:0.55, alpha:1.0).cgColor
             }
         }
         if textField == passwordTF {
-            if(passwordErrorMessage.isHidden == true)
-            {
-            passwordTF.layer.borderWidth = 2
-            passwordTF.layer.borderColor = UIColor(red:0.07, green:0.36, blue:0.55, alpha:1.0).cgColor
+            if(passwordErrorMessage.isHidden == true){
+                passwordTF.layer.borderWidth = 2
+                passwordTF.layer.borderColor = UIColor(red:0.07, green:0.36, blue:0.55, alpha:1.0).cgColor
             }
         }
     }
@@ -223,15 +215,15 @@ class LoginViewController: UIViewController, LoginDisplayLogic ,UITextFieldDeleg
         if textField == emailTF {
             if(emailErrorMessage.isHidden == true)
             {
-            emailTF.layer.borderWidth = 2
-            emailTF.layer.borderColor = UIColor(red:0.46, green:0.46, blue:0.46, alpha:1.0).cgColor
+                emailTF.layer.borderWidth = 2
+                emailTF.layer.borderColor = UIColor(red:0.46, green:0.46, blue:0.46, alpha:1.0).cgColor
             }
         }
         if textField == passwordTF {
             if(passwordErrorMessage.isHidden == true)
             {
-            passwordTF.layer.borderWidth = 2
-             passwordTF.layer.borderColor = UIColor(red:0.46, green:0.46, blue:0.46, alpha:1.0).cgColor
+                passwordTF.layer.borderWidth = 2
+                passwordTF.layer.borderColor = UIColor(red:0.46, green:0.46, blue:0.46, alpha:1.0).cgColor
             }
         }
     }
@@ -241,7 +233,7 @@ class LoginViewController: UIViewController, LoginDisplayLogic ,UITextFieldDeleg
         
         forgotPasswordViewController = userVC
         userVC.forgotPasswordcallBack = { (id) -> Void in
-        self.forgotPasswordRequest(access_token: "335", email: id)
+            self.forgotPasswordRequest(access_token: "335", email: id)
         }
         userVC.forgotPasswordCallBackNetworkDialogBox = {
             self.showNetworkDialogBox()
@@ -280,86 +272,77 @@ class LoginViewController: UIViewController, LoginDisplayLogic ,UITextFieldDeleg
             }
         }
     }
-  // MARK: View lifecycle
-  override func viewDidLoad(){
-    super.viewDidLoad()
-    addStatusBar()
-    getPrefrencessValue()
-    setUpView()
-    setLanguage()
-    reportStateFlag   = UserDefaults.standard.bool(forKey: "ReportStatusFlage")
-    if(reportStateFlag == true)
-    {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let HomeVC = storyboard.instantiateViewController(withIdentifier: "ReportViewController") as! ReportViewController
-        let appDlg = UIApplication.shared.delegate as? AppDelegate
-        appDlg?.window?.rootViewController = HomeVC
+    // MARK: View lifecycle
+    override func viewDidLoad(){
+        super.viewDidLoad()
+        addStatusBar()
+        getPrefrencessValue()
+        setUpView()
+        setLanguage()
+        reportStateFlag   = UserDefaults.standard.bool(forKey: "ReportStatusFlage")
+        if(reportStateFlag == true){
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let HomeVC = storyboard.instantiateViewController(withIdentifier: "ReportViewController") as! ReportViewController
+            let appDlg = UIApplication.shared.delegate as? AppDelegate
+            appDlg?.window?.rootViewController = HomeVC
+        }
+        else{
+            if(lisscentActiveFlag == true){
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let HomeVC = storyboard.instantiateViewController(withIdentifier: "LiscenceAgrementViewController") as! LiscenceAgrementViewController
+                let appDlg = UIApplication.shared.delegate as? AppDelegate
+                appDlg?.window?.rootViewController = HomeVC
+            }
+            else if  ( loginFlag == true){
+                let HomeVC = storyboard!.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+                HomeVC.getEmail = emailTF.text!
+                let LeftNeviagationDrawer = storyboard!.instantiateViewController(withIdentifier: "NeviagtionDrawerVC") as! NeviagtionDrawerVC
+                let slideMenuController = SlideMenuController(mainViewController: HomeVC, leftMenuViewController: LeftNeviagationDrawer)
+                let appDlg = UIApplication.shared.delegate as? AppDelegate
+                appDlg?.window?.rootViewController = slideMenuController
+            }
+        }
     }
-    else{
-    if(lisscentActiveFlag == true)
-    {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let HomeVC = storyboard.instantiateViewController(withIdentifier: "LiscenceAgrementViewController") as! LiscenceAgrementViewController
-        let appDlg = UIApplication.shared.delegate as? AppDelegate
-        appDlg?.window?.rootViewController = HomeVC
-    }
-     else if  ( loginFlag == true)
-    {
-        let HomeVC = storyboard!.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-        HomeVC.getEmail = emailTF.text!
-        
-        
-        let LeftNeviagationDrawer = storyboard!.instantiateViewController(withIdentifier: "NeviagtionDrawerVC") as! NeviagtionDrawerVC
-        let slideMenuController = SlideMenuController(mainViewController: HomeVC, leftMenuViewController: LeftNeviagationDrawer)
-       
-        let appDlg = UIApplication.shared.delegate as? AppDelegate
-        appDlg?.window?.rootViewController = slideMenuController
-    }
-    }
-  }
-   // MARK: Make getPrefrencessValue Method
-  func getPrefrencessValue(){
-    let preferences = UserDefaults.standard
-    if(preferences.object(forKey: "loginFlag") == nil) {
-        preferences.set(false, forKey: "loginFlag")
-        _ = preferences.synchronize()
-    }
-    if(preferences.object(forKey: "adminFlag") == nil) {
-        
-        preferences.set(false, forKey: "adminFlag")
-        _ = preferences.synchronize()
-    }
-    if(preferences.object(forKey: "email") == nil) {
-        preferences.set(email, forKey: "email")
-        _ = preferences.synchronize()
-    }
-    if(preferences.object(forKey: "LiscenceFlag") == nil) {
-        preferences.set(false, forKey: "LiscenceFlag")
-        _ = preferences.synchronize()
-    }
-     loginFlag   = UserDefaults.standard.bool(forKey: "loginFlag")
-     adminFlag   = UserDefaults.standard.bool(forKey: "adminFlag")
-     lisscentActiveFlag = UserDefaults.standard.bool(forKey: "LiscenceFlag")
-    if (preferences.object(forKey: "AccessToken") != nil) {
-        accessToken = (preferences.object(forKey: "AccessToken") as? String)!
-    }
+    // MARK: Make getPrefrencessValue Method
+    func getPrefrencessValue(){
+        let preferences = UserDefaults.standard
+        if(preferences.object(forKey: "loginFlag") == nil) {
+            preferences.set(false, forKey: "loginFlag")
+            _ = preferences.synchronize()
+        }
+        if(preferences.object(forKey: "adminFlag") == nil) {
+            
+            preferences.set(false, forKey: "adminFlag")
+            _ = preferences.synchronize()
+        }
+        if(preferences.object(forKey: "email") == nil) {
+            preferences.set(email, forKey: "email")
+            _ = preferences.synchronize()
+        }
+        if(preferences.object(forKey: "LiscenceFlag") == nil) {
+            preferences.set(false, forKey: "LiscenceFlag")
+            _ = preferences.synchronize()
+        }
+        loginFlag   = UserDefaults.standard.bool(forKey: "loginFlag")
+        adminFlag   = UserDefaults.standard.bool(forKey: "adminFlag")
+        lisscentActiveFlag = UserDefaults.standard.bool(forKey: "LiscenceFlag")
+        if (preferences.object(forKey: "AccessToken") != nil) {
+            accessToken = (preferences.object(forKey: "AccessToken") as? String)!
+        }
     }
     // MARK: Make validate Method
     func validate(){
-        if((emailTF.text?.isEmpty)!)
-        {
+        if((emailTF.text?.isEmpty)!){
             emailErrorMessage.isHidden = false
             emailErrorMessage.text =  "can't be empty!".localized()
             emailTF.layer.borderColor = UIColor(red:0.72, green:0.11, blue:0.11, alpha:1.0).cgColor
         }
-        if((passwordTF.text?.isEmpty)!)
-        {
+        if((passwordTF.text?.isEmpty)!){
             passwordErrorMessage.isHidden = false
             passwordErrorMessage.text =  "can't be empty!".localized()
             passwordTF.layer.borderColor = UIColor(red:0.72, green:0.11, blue:0.11, alpha:1.0).cgColor
         }
-        if(!(emailTF.text?.isEmpty)!)
-        {
+        if(!(emailTF.text?.isEmpty)!){
             emailErrorMessage.isHidden = true
             if (isValidEmail(emailStr: (emailTF.text)!)) {
                 emailTF.layer.borderColor = UIColor(red:0.46, green:0.46, blue:0.46, alpha:1.0).cgColor
@@ -370,35 +353,31 @@ class LoginViewController: UIViewController, LoginDisplayLogic ,UITextFieldDeleg
                 emailTF.layer.borderColor = UIColor(red:0.72, green:0.11, blue:0.11, alpha:1.0).cgColor
             }
         }
-        if(!(passwordTF.text?.isEmpty)!)
-        {
+        if(!(passwordTF.text?.isEmpty)!){
             passwordErrorMessage.isHidden = true
             passwordErrorMessage.layer.borderColor = UIColor(red:0.46, green:0.46, blue:0.46, alpha:1.0).cgColor
         }
-        if(((passwordTF.text?.count)!) <  6)
-        {
+        if(((passwordTF.text?.count)!) <  6){
             passwordErrorMessage.isHidden = false
             passwordErrorMessage.text =  "Must be at least minmimim 6 character".localized()
             passwordTF.layer.borderColor = UIColor(red:0.72, green:0.11, blue:0.11, alpha:1.0).cgColor
         }
-        if(((passwordTF.text?.count)!) == 0)
-        {
+        if(((passwordTF.text?.count)!) == 0){
             passwordErrorMessage.isHidden = false
             passwordErrorMessage.text =  "can't be empty!".localized()
             passwordTF.layer.borderColor = UIColor(red:0.72, green:0.11, blue:0.11, alpha:1.0).cgColor
         }
-        if(((passwordTF.text?.count)!) >= 6 && (isValidEmail(emailStr: (emailTF.text)!)) )
-        {
+        if(((passwordTF.text?.count)!) >= 6 && (isValidEmail(emailStr: (emailTF.text)!)) ){
             passwordErrorMessage.isHidden = true
             emailErrorMessage.isHidden = true
             emailTF.resignFirstResponder()
             passwordTF.resignFirstResponder()
             if Reachability.isConnectedToNetwork() == true {
-            showLoading(message: "Authenticating".localized())
-            loginRequest()
+                showLoading(message: "Authenticating".localized())
+                loginRequest()
             }
             else{
-              showNetworkDialogBox()
+                showNetworkDialogBox()
             }
         }
     }
@@ -409,8 +388,8 @@ class LoginViewController: UIViewController, LoginDisplayLogic ,UITextFieldDeleg
         userVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         self.present(userVC, animated: true, completion: nil)
     }
-
-     // MARK: Make setLanguage Method
+    
+    // MARK: Make setLanguage Method
     func setLanguage(){
         let preferences = UserDefaults.standard
         if(preferences.object(forKey: "CurrentLanguage") == nil) {
@@ -431,110 +410,105 @@ class LoginViewController: UIViewController, LoginDisplayLogic ,UITextFieldDeleg
             }
         }
     }
-   // MARK: Make loginRequest Method
-  func loginRequest(){
-    let request = Login.LoginResponse.Request(email: emailTF.text, password: passwordTF.text)
-    interactor?.loginRequest(request: request)
-  }
+    // MARK: Make loginRequest Method
+    func loginRequest(){
+        let request = Login.LoginResponse.Request(email: emailTF.text, password: passwordTF.text)
+        interactor?.loginRequest(request: request)
+    }
     // MARK: Make forgotPasswordRequest Method
     func forgotPasswordRequest(access_token: String,email:String){
         showLoading(message: "Verifiying".localized())
         let request = Login.ForgotPassword.Request(email: email, access_token: accessToken)
         interactor?.forgotPasswordRequest(request: request)
     }
-  // MARK: Make displayLoginResponse Method
-  func displayLoginResponse(viewModel: Login.LoginResponse.ViewModel){
-    if(viewModel.status_code == 200)
-    {
-        let preferences = UserDefaults.standard
-        preferences.set(true, forKey: "loginFlag")
-        _ = preferences.synchronize()
-        if(viewModel.roles == "admin")
-        {
-        preferences.set(false, forKey: "adminFlag")
-        _ = preferences.synchronize()
-            self.spinner.dismiss()
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let HomeVC = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-            HomeVC.getEmail = emailTF.text!
-            let LeftNeviagationDrawer = storyboard.instantiateViewController(withIdentifier: "NeviagtionDrawerVC") as! NeviagtionDrawerVC
-            let slideMenuController = SlideMenuController(mainViewController: HomeVC, leftMenuViewController: LeftNeviagationDrawer)
-            let appDlg = UIApplication.shared.delegate as? AppDelegate
-            appDlg!.window?.rootViewController = slideMenuController
-            appDlg?.window?.makeKeyAndVisible()
-        }
-        if(viewModel.roles == "staff")
-        {
-            preferences.set(true, forKey: "adminFlag")
+    // MARK: Make displayLoginResponse Method
+    func displayLoginResponse(viewModel: Login.LoginResponse.ViewModel){
+        if(viewModel.status_code == 200){
+            let preferences = UserDefaults.standard
+            preferences.set(true, forKey: "loginFlag")
             _ = preferences.synchronize()
-            if(viewModel.agreed == "Agreed" )
-            {
-                if(viewModel.active_id == viewModel.user_id)
+            if(viewModel.roles == "admin"){
+                preferences.set(false, forKey: "adminFlag")
+                _ = preferences.synchronize()
+                self.spinner.dismiss()
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let HomeVC = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+                HomeVC.getEmail = emailTF.text!
+                let LeftNeviagationDrawer = storyboard.instantiateViewController(withIdentifier: "NeviagtionDrawerVC") as! NeviagtionDrawerVC
+                let slideMenuController = SlideMenuController(mainViewController: HomeVC, leftMenuViewController: LeftNeviagationDrawer)
+                let appDlg = UIApplication.shared.delegate as? AppDelegate
+                appDlg!.window?.rootViewController = slideMenuController
+                appDlg?.window?.makeKeyAndVisible()
+            }
+            if(viewModel.roles == "staff"){
+                preferences.set(true, forKey: "adminFlag")
+                _ = preferences.synchronize()
+                if(viewModel.agreed == "Agreed" )
                 {
-                            self.spinner.dismiss()
-                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                            let HomeVC = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-                            homeViewController = HomeVC
-                            HomeVC.getEmail = emailTF.text!
-                            let LeftNeviagationDrawer = storyboard.instantiateViewController(withIdentifier: "NeviagtionDrawerVC") as! NeviagtionDrawerVC
-                            let slideMenuController = SlideMenuController(mainViewController: HomeVC, leftMenuViewController: LeftNeviagationDrawer)
-                            let appDlg = UIApplication.shared.delegate as? AppDelegate
-                            appDlg!.window?.rootViewController = slideMenuController
-                            appDlg?.window?.makeKeyAndVisible()
+                    if(viewModel.active_id == viewModel.user_id)
+                    {
+                        self.spinner.dismiss()
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        let HomeVC = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+                        homeViewController = HomeVC
+                        HomeVC.getEmail = emailTF.text!
+                        let LeftNeviagationDrawer = storyboard.instantiateViewController(withIdentifier: "NeviagtionDrawerVC") as! NeviagtionDrawerVC
+                        let slideMenuController = SlideMenuController(mainViewController: HomeVC, leftMenuViewController: LeftNeviagationDrawer)
+                        let appDlg = UIApplication.shared.delegate as? AppDelegate
+                        appDlg!.window?.rootViewController = slideMenuController
+                        appDlg?.window?.makeKeyAndVisible()
+                    }
+                        
+                    else{
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        let HomeVC = storyboard.instantiateViewController(withIdentifier: "LiscenceAgrementViewController") as! LiscenceAgrementViewController
+                        self.present(HomeVC, animated: true, completion: nil)
+                        let preferences = UserDefaults.standard
+                        preferences.set(true, forKey: "LiscenceFlag")
+                        _ = preferences.synchronize()
+                    }
                 }
-                
+                    
                 else{
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let HomeVC = storyboard.instantiateViewController(withIdentifier: "LiscenceAgrementViewController") as! LiscenceAgrementViewController
-                    self.present(HomeVC, animated: true, completion: nil)
                     let preferences = UserDefaults.standard
                     preferences.set(true, forKey: "LiscenceFlag")
                     _ = preferences.synchronize()
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let HomeVC = storyboard.instantiateViewController(withIdentifier: "LiscenceAgrementViewController") as! LiscenceAgrementViewController
+                    self.present(HomeVC, animated: true, completion: nil)
                 }
             }
-            
-            else{
-                let preferences = UserDefaults.standard
-                preferences.set(true, forKey: "LiscenceFlag")
-                _ = preferences.synchronize()
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let HomeVC = storyboard.instantiateViewController(withIdentifier: "LiscenceAgrementViewController") as! LiscenceAgrementViewController
-                self.present(HomeVC, animated: true, completion: nil)
-            }
+            preferences.set(emailTF.text!, forKey: "email")
+            _ = preferences.synchronize()
         }
-        preferences.set(emailTF.text!, forKey: "email")
-        _ = preferences.synchronize()
+        if(viewModel.status_code == 401){
+            self.spinner.dismiss()
+            let userVC = self.storyboard?.instantiateViewController(withIdentifier: "ErrorDilogBoxViewController") as!  ErrorDilogBoxViewController
+            userVC.message = "These credentials do not match our records".localized()
+            userVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            self.present(userVC, animated: true, completion: nil)
+        }
+            
+        else{
+            self.spinner.dismiss()
+            let userVC = self.storyboard?.instantiateViewController(withIdentifier: "ErrorDilogBoxViewController") as!  ErrorDilogBoxViewController
+            userVC.message = "Sorry, somthing went wrong. Try again a little later.".localized()
+            userVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            self.present(userVC, animated: true, completion: nil)
+        }
     }
-    if(viewModel.status_code == 401)
-    {
-        self.spinner.dismiss()
-        let userVC = self.storyboard?.instantiateViewController(withIdentifier: "ErrorDilogBoxViewController") as!  ErrorDilogBoxViewController
-        userVC.message = "These credentials do not match our records".localized()
-        userVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-        self.present(userVC, animated: true, completion: nil)
-  }
-
-    else{
-        self.spinner.dismiss()
-        let userVC = self.storyboard?.instantiateViewController(withIdentifier: "ErrorDilogBoxViewController") as!  ErrorDilogBoxViewController
-        userVC.message = "Sorry, somthing went wrong. Try again a little later.".localized()
-        userVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-        self.present(userVC, animated: true, completion: nil)
-    }
-    }
-     // MARK: Make isValidEmail Method
+    // MARK: Make isValidEmail Method
     func isValidEmail(emailStr:String) -> Bool {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailPred.evaluate(with: emailStr)
     }
-     // MARK: Make ForgotPassworfResponse Method
+    // MARK: Make ForgotPassworfResponse Method
     func displayForgotPasswordResponse(viewModel: Login.ForgotPassword.ViewModel) {
-        if(viewModel.status_code == 200)
-        {
+        if(viewModel.status_code == 200){
             spinner.dismiss()
             let userVC = self.storyboard?.instantiateViewController(withIdentifier: "successDilogBoxViewController") as!  SuccessDilogBoxViewController
-              successDialogBox = userVC
+            successDialogBox = userVC
             userVC.message  = "A reset email has been sent! Please check your email".localized()
             userVC.messagetitle =  "Succesful".localized()
             userVC.okBtnFlag = "FeeddbackScreen"
@@ -549,7 +523,7 @@ class LoginViewController: UIViewController, LoginDisplayLogic ,UITextFieldDeleg
             self.present(userVC, animated: true, completion: nil)
         }
     }
-     // MARK: Make addStatusBar Method
+    // MARK: Make addStatusBar Method
     func addStatusBar(){
         if #available(iOS 13.0, *) {            let statusBar =  UIView()
             statusBar.frame = UIApplication.shared.statusBarFrame

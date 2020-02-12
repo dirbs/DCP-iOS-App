@@ -12,22 +12,20 @@
  */
 import UIKit
 protocol FeedBackBusinessLogic{
-  func doFeedBack(request: FeedBack.Feedback.Request)
+    func doFeedBack(request: FeedBack.Feedback.Request)
 }
 protocol FeedBackDataStore{
-  //var name: String { get set }
 }
-class FeedBackInteractor: FeedBackBusinessLogic, FeedBackDataStore
-{
-  var presenter: FeedBackPresentationLogic?
-  var worker: FeedBackWorker?
-  // MARK: Do doFeedBack
-  func doFeedBack(request: FeedBack.Feedback.Request){
-    worker = FeedBackWorker()
-    worker?.submitFeedBack(access_token: request.access_Token!, message: request.message!, language: request.language!)
-    {(status_code,success,message) in
-        let response = FeedBack.Feedback.Response(status_code:status_code,success:success,message:message)
-        self.presenter?.presentFeedBack(response: response)
+class FeedBackInteractor: FeedBackBusinessLogic, FeedBackDataStore{
+    var presenter: FeedBackPresentationLogic?
+    var worker: FeedBackWorker?
+    // MARK: Do doFeedBack
+    func doFeedBack(request: FeedBack.Feedback.Request){
+        worker = FeedBackWorker()
+        worker?.submitFeedBack(access_token: request.access_Token!, message: request.message!, language: request.language!)
+        {(status_code,success,message) in
+            let response = FeedBack.Feedback.Response(status_code:status_code,success:success,message:message)
+            self.presenter?.presentFeedBack(response: response)
+        }
     }
-  }
 }

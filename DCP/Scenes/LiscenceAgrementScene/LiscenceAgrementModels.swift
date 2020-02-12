@@ -12,23 +12,17 @@
  */
 
 import UIKit
-enum LiscenceAgrement
-{
-  // MARK: Use cases
-  enum LiscenceUpdate
-  {
-    struct Request
-    {
-        var accessToken: String?
-        var User_id: String?
+enum LiscenceAgrement{
+    enum LiscenceUpdate{
+        struct Request{
+            var accessToken: String?
+            var User_id: String?
+        }
+        struct Response{
+            var status_code: Int?
+        }
+        struct ViewModel{
+            var status_code: Int?
+        }
     }
-    struct Response
-    {
-       var status_code: Int?
-    }
-    struct ViewModel
-    {
-         var status_code: Int?
-    }
-  }
 }

@@ -26,13 +26,12 @@ class LogoutDialogBoxTest: XCTestCase {
         let _ = logOutView.view
         UIApplication.shared.keyWindow?.rootViewController = logOutView
     }
-     // MARK: Make  testForLogoutScreen Method
+    // MARK: Make  testForLogoutScreen Method
     func testForLogoutScreen()
     {
         //test for title Image view
         var getTitleImage = UIImage(named: "ic_logout")
         XCTAssertEqual(getTitleImage, logOutView.titleImageView.image)
-        
         //test for titles text
         XCTAssertEqual("Logout".localized(), logOutView.titleOutlet.text)
         //test for message text

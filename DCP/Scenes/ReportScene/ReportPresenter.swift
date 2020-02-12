@@ -12,14 +12,13 @@
  */
 import UIKit
 protocol ReportPresentationLogic{
-  func presentReport(response: Report.Report.Response)
+    func presentReport(response: Report.Report.Response)
 }
-class ReportPresenter: ReportPresentationLogic
-{
-  weak var viewController: ReportDisplayLogic?
-  // MARK: Do presentReport
-  func presentReport(response: Report.Report.Response){
-    let viewModel = Report.Report.ViewModel(status_code: response.status_code,success:response.success,message:response.message)
-    viewController?.displayReport(viewModel: viewModel)
-  }
+class ReportPresenter: ReportPresentationLogic {
+    weak var viewController: ReportDisplayLogic?
+    // MARK: Do presentReport
+    func presentReport(response: Report.Report.Response){
+        let viewModel = Report.Report.ViewModel(status_code: response.status_code,success:response.success,message:response.message)
+        viewController?.displayReport(viewModel: viewModel)
+    }
 }

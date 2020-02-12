@@ -12,60 +12,55 @@
  */
 import UIKit
 import SwiftyJSON
-enum Home
-{
-  enum GetImei
-  {
-    struct Request
-    {
-        var imei: String?
-        var imeiflag: Bool
-        var access_Token: String?
-        
+enum Home{
+    enum GetImei{
+        struct Request{
+            var imei: String?
+            var imeiflag: Bool
+            var access_Token: String?
+            
+        }
+        struct Response{
+            var statusCode: Int?
+            var statusMessage: String?
+            var deviceId :  String?
+            var  brandName : String?
+            var modelName: String?
+            var internalModelName : String?
+            var marketingName: String?
+            var equipmentType: String?
+            var simSupport: String?
+            var nfcSupport: String?
+            var wlanSupport: String?
+            var blueToothSupport: String?
+            var operatingSystem = [JSON]()
+            var radioInterface = [JSON]()
+            var lpwan: String?
+            var deviceCertifybody = [JSON]()
+            var manufacturer:  String?
+            var tacApprovedDate :  String?
+            var gsmaApprovedTac : String?
+        }
+        struct ViewModel{
+            var statusCode: Int?
+            var statusMessage: String?
+            var deviceId :  String?
+            var  brandName : String?
+            var modelName: String?
+            var internalModelName : String?
+            var marketingName: String?
+            var equipmentType: String?
+            var simSupport: String?
+            var nfcSupport: String?
+            var wlanSupport: String?
+            var blueToothSupport: String?
+            var operatingSystem = [JSON]()
+            var radioInterface = [JSON]()
+            var lpwan: String?
+            var deviceCertifybody = [JSON]()
+            var manufacturer:  String?
+            var tacApprovedDate :  String?
+            var gsmaApprovedTac : String?
+        }
     }
-    struct Response
-    {
-        var statusCode: Int?
-        var statusMessage: String?
-        var deviceId :  String?
-        var  brandName : String?
-        var modelName: String?
-        var internalModelName : String?
-        var marketingName: String?
-        var equipmentType: String?
-        var simSupport: String?
-        var nfcSupport: String?
-        var wlanSupport: String?
-        var blueToothSupport: String?
-        var operatingSystem = [JSON]()
-        var radioInterface = [JSON]()
-        var lpwan: String?
-        var deviceCertifybody = [JSON]()
-        var manufacturer:  String?
-        var tacApprovedDate :  String?
-        var gsmaApprovedTac : String?
-    }
-    struct ViewModel
-    {
-        var statusCode: Int?
-        var statusMessage: String?
-        var deviceId :  String?
-        var  brandName : String?
-        var modelName: String?
-        var internalModelName : String?
-        var marketingName: String?
-        var equipmentType: String?
-        var simSupport: String?
-        var nfcSupport: String?
-        var wlanSupport: String?
-        var blueToothSupport: String?
-        var operatingSystem = [JSON]()
-        var radioInterface = [JSON]()
-        var lpwan: String?
-        var deviceCertifybody = [JSON]()
-        var manufacturer:  String?
-        var tacApprovedDate :  String?
-        var gsmaApprovedTac : String?
-    }
-  }
 }

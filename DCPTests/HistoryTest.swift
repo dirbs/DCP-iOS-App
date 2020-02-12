@@ -29,7 +29,7 @@ class HistoryTest: XCTestCase {
     // MARK: Make override testForHistoryScreen Method
     func testForHistoryScreen(){
         //test for title text
-         XCTAssertEqual("History".localized(), historyView.historyTitle.text)
+        XCTAssertEqual("History".localized(), historyView.historyTitle.text)
         XCTAssertEqual("History".localized(), historyView.titleOutlet.text)
         //test for search Image view
         var getsearchImage = UIImage(named: "ic_action_search")
@@ -38,7 +38,6 @@ class HistoryTest: XCTestCase {
     }
     // MARK: Make override testForApiResponse Method
     func testForApiResponse(){
-       
         let url = URL(string: "http://ec2-34-220-143-232.us-west-2.compute.amazonaws.com:81/api/datatable/my-activity?page=59")!
         var stub = StubRequest(method: .POST, url: url)
         var response = StubResponse()
@@ -48,21 +47,14 @@ class HistoryTest: XCTestCase {
         Hippolyte.shared.add(stubbedRequest: stub)
         Hippolyte.shared.start()
         Constants.Base_Url = "http://ec2-34-220-143-232.us-west-2.compute.amazonaws.com:81/"
-       
         let historyExpectationApi = self.expectation(description: "historyExpectationApi")
         DispatchQueue.main.asyncAfter(deadline: .now() + 6.0, execute: {
-            
             historyExpectationApi.fulfill()
         })
-        
         waitForExpectations(timeout: 6, handler: nil)
-        
-        
-        
     }
     // MARK: Make  testForSearchApiResponse Method
     func testForSearchApiResponse(){
-        
         let url = URL(string: "http://ec2-34-220-143-232.us-west-2.compute.amazonaws.com:81/api/search_users_activity?page=1")!
         var stub = StubRequest(method: .POST, url: url)
         var response = StubResponse()
@@ -92,7 +84,6 @@ class HistoryTest: XCTestCase {
         // UIApplication.shared.keyWindow?.rootViewController = historyView
         let historyExpectationApi1 = self.expectation(description: "historyExpectationApi1")
         DispatchQueue.main.asyncAfter(deadline: .now() + 6.0, execute: {
-            
             historyExpectationApi1.fulfill()
         })
         waitForExpectations(timeout: 6, handler: nil)

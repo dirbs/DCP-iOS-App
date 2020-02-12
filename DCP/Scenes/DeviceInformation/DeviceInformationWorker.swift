@@ -12,8 +12,7 @@
  */import UIKit
 import Alamofire
 import  SwiftyJSON
-class DeviceInformationWorker
-{
+class DeviceInformationWorker{
     var baseUrl = Constants.Base_Url
     var jsonResult: JSON!
     var url = ""
@@ -27,61 +26,54 @@ class DeviceInformationWorker
         url =  baseUrl+"api/results-matched/\(Imei)"
         Alamofire.request(url, method:.put, parameters:parameters, encoding: JSONEncoding.default, headers:headers).responseJSON { response in
             let status = response.response?.statusCode
-            if (status == 200)
-            {
+            if (status == 200){
                 let data = response.data
                 self.jsonResult = JSON(data!)
                 var success = false
                 var message = ""
                 var status = ""
-                if self.jsonResult.count > 0
-                {
+                if self.jsonResult.count > 0{
                     success  = self.jsonResult["success"].bool!
                     message  = self.jsonResult["message"].string!
                     status  = self.jsonResult["status"].string!
                 }
                 completionHandler(response.response?.statusCode,success,message)
             }
-            if (status == 401)
-            {
+            if (status == 401){
                 completionHandler(response.response?.statusCode,false,nil)
                 
             }
-                
             else{
                 completionHandler(response.response?.statusCode,false,nil)
-               
+                
             }
         }
     }
-      // MARK: Make  getImeiNotMatched Method
+    // MARK: Make  getImeiNotMatched Method
     func getImeiNotMatched(Imei: String, acess_token:String, completionHandler: @escaping (Int? , Bool, String? ) -> Void) {
         let parameters: Parameters = [ "imei_number": Imei]
         let headers = ["Authorization": "Bearer \(acess_token)",
             "Content-Type": "application/json",
             "Accept":"application/json"
         ]
-       url =  baseUrl+"api/results-not-matched/\(Imei)"
+        url =  baseUrl+"api/results-not-matched/\(Imei)"
         Alamofire.request(url, method:.put, parameters:parameters, encoding: JSONEncoding.default, headers:headers).responseJSON { response in
             let status = response.response?.statusCode
-            if (status == 200)
-            {
+            if (status == 200){
                 let data = response.data
                 self.jsonResult = JSON(data!)
                 var success = false
                 var message = ""
                 var status = ""
                 print(self.jsonResult)
-                if self.jsonResult.count > 0
-                {
+                if self.jsonResult.count > 0{
                     success  = self.jsonResult["success"].bool!
                     message  = self.jsonResult["message"].string!
                     status  = self.jsonResult["status"].string!
                 }
                 completionHandler(response.response?.statusCode,success,message)
             }
-            if (status == 401)
-            {
+            if (status == 401){
                 completionHandler(response.response?.statusCode,false,nil)
             }
                 

@@ -13,13 +13,12 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
-class ReportWorker
-{
+class ReportWorker{
     var baseUrl = Constants.Base_Url
     var jsonResult: JSON!
     // MARK: Make makeMultipartRequest Method
     func makeMultipartRequest(arrayOfImageToUpload:[UIImage],access_token:String ,language: String,imei_number:String,brand_name:String,model_name:String,store_name :String,address:String,description:String,
-       completionHandler: @escaping (Int?,Bool, String?) -> Void) {
+                              completionHandler: @escaping (Int?,Bool, String?) -> Void) {
         let headers = ["Authorization": "Bearer \(access_token)",
             "Content-Type": "application/json",
             "Accept":"application/json",
@@ -33,12 +32,12 @@ class ReportWorker
                                        "address": address,
                                        "description": description,
                                        ]
-    
+        
         let url =  baseUrl+"api/counterfiet"
         Alamofire.upload(multipartFormData: { multipartFormData in
             let count = arrayOfImageToUpload.count
             for i in 0..<count{
-          multipartFormData.append(arrayOfImageToUpload[i].jpegData(compressionQuality: 0.7)!, withName: "counterImage[\(i)]", fileName: "photo\(i).jpeg" , mimeType: "image/jpeg")
+                multipartFormData.append(arrayOfImageToUpload[i].jpegData(compressionQuality: 0.7)!, withName: "counterImage[\(i)]", fileName: "photo\(i).jpeg" , mimeType: "image/jpeg")
             }
             for (key, value) in parameters {
                 if let data = (value as AnyObject).data(using: String.Encoding.utf8.rawValue) {
@@ -53,22 +52,19 @@ class ReportWorker
             case .success(let upload, _, _):
                 upload.responseJSON { response in
                     let status = response.response?.statusCode
-                    if (status == 200)
-                    {
+                    if (status == 200){
                         let data = response.data
                         self.jsonResult = JSON(data!)
                         print(self.jsonResult)
                         var success = false
                         var message = ""
-                        if self.jsonResult.count > 0
-                        {
+                        if self.jsonResult.count > 0{
                             success  = self.jsonResult["success"].bool!
                             message  = self.jsonResult["message"].string!
                         }
                         completionHandler(status,success,message)
                     }
-                    if (status == 401)
-                    {
+                    if (status == 401){
                         completionHandler(status,false,nil)
                     }
                         

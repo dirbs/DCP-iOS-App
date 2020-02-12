@@ -12,16 +12,13 @@
  */
 import UIKit
 protocol FeedBackPresentationLogic{
-  func presentFeedBack(response: FeedBack.Feedback.Response)
+    func presentFeedBack(response: FeedBack.Feedback.Response)
 }
-
-class FeedBackPresenter: FeedBackPresentationLogic
-{
-  weak var viewController: FeedBackDisplayLogic?
-  
-  // MARK: Do presentFeedBack
-  func presentFeedBack(response: FeedBack.Feedback.Response){
-    let viewModel = FeedBack.Feedback.ViewModel(status_code: response.status_code,success:response.success,message:response.message)
-    viewController?.displayFeedback(viewModel: viewModel)
-  }
+class FeedBackPresenter: FeedBackPresentationLogic{
+    weak var viewController: FeedBackDisplayLogic?
+    // MARK: Do presentFeedBack
+    func presentFeedBack(response: FeedBack.Feedback.Response){
+        let viewModel = FeedBack.Feedback.ViewModel(status_code: response.status_code,success:response.success,message:response.message)
+        viewController?.displayFeedback(viewModel: viewModel)
+    }
 }

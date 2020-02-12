@@ -12,23 +12,22 @@
  */
 import UIKit
 protocol HistoryBusinessLogic{
-  func doHistory(request: History.History.Request)
-     func doSearchHistory(request: History.SearchHistory.Request)
+    func doHistory(request: History.History.Request)
+    func doSearchHistory(request: History.SearchHistory.Request)
 }
 protocol HistoryDataStore{
-  //var name: String { get set }
+    //var name: String { get set }
 }
-class HistoryInteractor: HistoryBusinessLogic, HistoryDataStore
-{
-  var presenter: HistoryPresentationLogic?
-  var worker: HistoryWorker?
-  //var name: String = ""
-  // MARK: Do doHistory
-  func doHistory(request: History.History.Request){
-    worker = HistoryWorker()
-    worker?.getHistory(access_token: request.access_Token!, language: request.language!, page_No: request.page_No!)  {(status_code,id,date,user_name,result,user_device,visitor_ip, last_Page) in
-        let response = History.History.Response(status_code: status_code,id:id as! [String],date:date as! [String],result:result as! [String], user_device:user_device as! [String], user_name:user_name as! [String],visitor_ip:visitor_ip as! [String], last_Page: last_Page)
-        self.presenter?.presentHistory(response: response)
+class HistoryInteractor: HistoryBusinessLogic, HistoryDataStore{
+    var presenter: HistoryPresentationLogic?
+    var worker: HistoryWorker?
+    //var name: String = ""
+    // MARK: Do doHistory
+    func doHistory(request: History.History.Request){
+        worker = HistoryWorker()
+        worker?.getHistory(access_token: request.access_Token!, language: request.language!, page_No: request.page_No!)  {(status_code,id,date,user_name,result,user_device,visitor_ip, last_Page) in
+            let response = History.History.Response(status_code: status_code,id:id as! [String],date:date as! [String],result:result as! [String], user_device:user_device as! [String], user_name:user_name as! [String],visitor_ip:visitor_ip as! [String], last_Page: last_Page)
+            self.presenter?.presentHistory(response: response)
         }
     }
     // MARK: Do  doSearchHistory

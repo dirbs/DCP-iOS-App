@@ -12,41 +12,33 @@
  */
 import UIKit
 import SwiftyJSON
-enum Login
-{
-  // MARK: Use cases
-  enum LoginResponse
-  {
-    struct Request
-    {
-        var email: String?
-        var password: String?
+enum Login{
+    enum LoginResponse{
+        struct Request{
+            var email: String?
+            var password: String?
+        }
+        struct Response{
+            var accessToken: String?
+            var roles: String?
+            var liscense:String?
+            var status_code: Int?
+            var agreed : String?
+            var user_id : Int?
+            var active_id : Int?
+        }
+        struct ViewModel{
+            var accessToken: String?
+            var roles: String?
+            var liscense:String?
+            var status_code: Int?
+            var agreed : String?
+            var user_id : Int?
+            var active_id : Int?
+        }
     }
-    struct Response
-    {
-        var accessToken: String?
-        var roles: String?
-        var liscense:String?
-        var status_code: Int?
-        var agreed : String?
-        var user_id : Int?
-        var active_id : Int?
-    }
-    struct ViewModel
-    {
-        var accessToken: String?
-        var roles: String?
-        var liscense:String?
-        var status_code: Int?
-        var agreed : String?
-        var user_id : Int?
-        var active_id : Int?
-    }
-  }
-    enum ForgotPassword
-    {
-        struct Request
-        {
+    enum ForgotPassword{
+        struct Request{
             var email: String?
             var access_token: String?
         }

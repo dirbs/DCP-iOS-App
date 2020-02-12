@@ -14,8 +14,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import AVFoundation
-class FeedBackWorker
-{
+class FeedBackWorker{
     var baseUrl = Constants.Base_Url
     var jsonResult: JSON!
     var url = ""
@@ -26,30 +25,26 @@ class FeedBackWorker
             "Content-Type": "application/json",
             "Accept":"application/json",
             "x-localization": language
-            
         ]
         let url =  baseUrl+"api/feedback"
         Alamofire.request(url, method:.post, parameters:parameters, encoding: JSONEncoding.default, headers:headers).responseJSON { response in
             let status = response.response?.statusCode
-            if (status == 200)
-            {
+            if (status == 200){
                 let data = response.data
                 self.jsonResult = JSON(data!)
                 var success = false
                 var message = ""
-                if self.jsonResult.count > 0
-                {
+                if self.jsonResult.count > 0{
                     success  = self.jsonResult["success"].bool!
                     message  = self.jsonResult["message"].string!
                 }
                 completionHandler(status,success,message)
             }
-            if (status == 401)
-            {
-                  completionHandler(status,false,nil)
+            if (status == 401){
+                completionHandler(status,false,nil)
             }
             else{
-                  completionHandler(status,false,nil)
+                completionHandler(status,false,nil)
                 print("error: "+response.error.debugDescription)
             }
         }

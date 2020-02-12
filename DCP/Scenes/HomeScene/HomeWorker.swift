@@ -38,26 +38,23 @@ class HomeWorker
     var manufacturer:  String? = ""
     var tacApprovedDate :  String? = ""
     var gsmaApprovedTac : String? = ""
-     // MARK: Make getImei Method
+    // MARK: Make getImei Method
     func getImei(Imei: String, flag: Bool, acess_token:String, completionHandler: @escaping (Int?, String?, String?, String?, String?, String?, String?, String?, String?, String?, String?,String?,[JSON]?,[JSON]?,String?,[JSON]?,String?,String?, String?) -> Void) {
         let parameters: Parameters = [ "imei": Imei]
         let headers = ["Authorization": "Bearer \(acess_token)",
             "Content-Type": "application/json",
-                "Accept":"application/json"
+            "Accept":"application/json"
         ]
-        if(flag == false)
-        {
-         url =  baseUrl+"api/lookup/iOSApp/manual"
+        if(flag == false){
+            url =  baseUrl+"api/lookup/iOSApp/manual"
         }
-        if(flag == true)
-        {
-             url =  baseUrl+"api/lookup/iOSApp/scanner"
+        if(flag == true){
+            url =  baseUrl+"api/lookup/iOSApp/scanner"
         }
         Alamofire.request(url, method:.post, parameters:parameters, encoding: JSONEncoding.default, headers:headers).responseJSON { response in
             let status = response.response?.statusCode
             self.statusCode = status
-            if (status == 200)
-            {
+            if (status == 200){
                 let data = response.data
                 self.jsonResult = JSON(data!)
                 // Parse json values
@@ -117,21 +114,17 @@ class HomeWorker
                 }
                 if let gsmaApprovedTac = self.jsonResult["data"]["gsmaApprovedTac"].string {
                     self.gsmaApprovedTac = gsmaApprovedTac
-                
+                    
                 }
                 completionHandler(self.statusCode,nil,self.deviceId,self.brandName,self.modelName,self.internalModelName,self.marketingName,self.equipmentType,self.simSupport,self.nfcSupport,self.wlanSupport,self.blueToothSupport,self.operatingSystem,self.radioInterface,self.lpwan,self.deviceCertifybody,self.manufacturer,self.tacApprovedDate,self.gsmaApprovedTac)
             }
             if (status == 401)
             {
                 completionHandler(self.statusCode,nil,self.deviceId,self.brandName,self.modelName,self.internalModelName,self.marketingName,self.equipmentType,self.simSupport,self.nfcSupport,self.wlanSupport,self.blueToothSupport,self.operatingSystem,self.radioInterface,self.lpwan,self.deviceCertifybody,self.manufacturer,self.tacApprovedDate,self.gsmaApprovedTac)
-                                
             }
                 
             else{
-                
-              completionHandler(self.statusCode,nil,self.deviceId,self.brandName,self.modelName,self.internalModelName,self.marketingName,self.equipmentType,self.simSupport,self.nfcSupport,self.wlanSupport,self.blueToothSupport,self.operatingSystem,self.radioInterface,self.lpwan,self.deviceCertifybody,self.manufacturer,self.tacApprovedDate,self.gsmaApprovedTac)
-                
-            
+                completionHandler(self.statusCode,nil,self.deviceId,self.brandName,self.modelName,self.internalModelName,self.marketingName,self.equipmentType,self.simSupport,self.nfcSupport,self.wlanSupport,self.blueToothSupport,self.operatingSystem,self.radioInterface,self.lpwan,self.deviceCertifybody,self.manufacturer,self.tacApprovedDate,self.gsmaApprovedTac)
             }
         }
     }

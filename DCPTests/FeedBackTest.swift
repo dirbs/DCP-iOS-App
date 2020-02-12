@@ -25,20 +25,20 @@ class FeedBackTest: XCTestCase {
         let _ = feedbackView.view
         
     }
-      // MARK: Make  testForFeedBackScreen Method
+    // MARK: Make  testForFeedBackScreen Method
     func testForFeedBackScreen(){
-       //test for title label
+        //test for title label
         XCTAssertEqual("feedBack".localized(), feedbackView.dcpFeedBackTitleOutlet.text)
-         //test for title label
+        //test for title label
         XCTAssertEqual( "Send Feedback".localized(), feedbackView.feedbackTitle.text)
-         //test for submit feedback Btn
+        //test for submit feedback Btn
         XCTAssertEqual("SUBMIT FEEDBACK".localized(), feedbackView.submitFeedBackBtn.currentTitle)
         //test for Feedback textfield invalid input
         feedbackView.feedBackTextView.text = ""
         feedbackView.submitFeedBackBtn.sendActions(for: .touchUpInside)
         XCTAssertEqual("can't be empty!".localized(), feedbackView.errorMessage.text)
         XCTAssertFalse((feedbackView.errorMessage.isHidden))
-          XCTAssertEqual("0 / 255", feedbackView.countOutlet.text)
+        XCTAssertEqual("0 / 255", feedbackView.countOutlet.text)
         //test for Feedback textfield Valid input
         feedbackView.feedBackTextView.text = "First App"
         feedbackView.submitFeedBackBtn.sendActions(for: .touchUpInside)
@@ -50,7 +50,7 @@ class FeedBackTest: XCTestCase {
         feedbackView.showNetworkDialogBox()
         feedbackView.doneBtnPressed()
     }
-      // MARK: Make  testForFeedBackApiResponse Method
+    // MARK: Make  testForFeedBackApiResponse Method
     func testForFeedbackApiResponse(){
         let url = URL(string: "http://ec2-34-220-143-232.us-west-2.compute.amazonaws.com:81/api/feedback")!
         var stub = StubRequest(method: .POST, url: url)
@@ -64,17 +64,14 @@ class FeedBackTest: XCTestCase {
         UIApplication.shared.keyWindow?.rootViewController = feedbackView
         feedbackView.feedBackTextView.text = "First App"
         feedbackView.submitFeedBackBtn.sendActions(for: .touchUpInside)
-      
         let feedBackExpectation = self.expectation(description: "feedBackExpectation")
         DispatchQueue.main.asyncAfter(deadline: .now() + 6.0, execute: {
-            
             feedBackExpectation.fulfill()
         })
-        
         waitForExpectations(timeout: 6, handler: nil)
         let inputViewController = feedbackView.presentedViewController as! SuccessDilogBoxViewController
         XCTAssertEqual("Feedback sent.".localized(), inputViewController.titleOutlet.text)
-         XCTAssertEqual("Feedback submitted successfully.", inputViewController.messageOutlet.text)
+        XCTAssertEqual("Feedback submitted successfully.", inputViewController.messageOutlet.text)
         inputViewController.okBtn.sendActions(for: .touchUpInside)
         feedbackView.backBtn.sendActions(for: .touchUpInside)
     }

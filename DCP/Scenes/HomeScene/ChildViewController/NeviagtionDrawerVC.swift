@@ -42,22 +42,20 @@ class NeviagtionDrawerVC: UIViewController {
             print("user_Name")
             userName.text = user_Name
         }
-         flag  = UserDefaults.standard.bool(forKey: "adminFlag")
+        flag  = UserDefaults.standard.bool(forKey: "adminFlag")
         setUpView()
     }
     
     
-   // MARK: Make setUpView Method
+    // MARK: Make setUpView Method
     func setUpView(){
-        
         //set the title of button
         homeBtn.setTitle("Home".localized(), for: .normal)
         historyBtn.setTitle("History".localized(), for: .normal)
         logoutBtn.setTitle("Logout".localized(), for: .normal)
         feedbackBtn.setTitle("feedBack".localized(), for: .normal)
         emailOutlet.text = email
-        if (flag == false)
-        {
+        if (flag == false){
             feedbackBtn.isHidden = true
             feedBackImageView.isHidden = true
         }
@@ -75,22 +73,20 @@ class NeviagtionDrawerVC: UIViewController {
             print("preferencess")
         }
         if (preferences.object(forKey: "CurrentLanguage") != nil) {
-             language = (preferences.object(forKey: "CurrentLanguage") as? String)!
+            language = (preferences.object(forKey: "CurrentLanguage") as? String)!
             if(language == "vi") {
-                 self.changeLanguageBtn.setImage(UIImage(named: "ic_english"), for: .normal)
-                 changeLanguageBtn.imageView?.contentMode = .scaleAspectFit
-                 Localize.setCurrentLanguage("vi")
+                self.changeLanguageBtn.setImage(UIImage(named: "ic_english"), for: .normal)
+                changeLanguageBtn.imageView?.contentMode = .scaleAspectFit
+                Localize.setCurrentLanguage("vi")
             } else {
-                 self.changeLanguageBtn.setImage(UIImage(named: "ic_vietnamese"), for: .normal)
-                 changeLanguageBtn.imageView?.contentMode = .scaleAspectFit
+                self.changeLanguageBtn.setImage(UIImage(named: "ic_vietnamese"), for: .normal)
+                changeLanguageBtn.imageView?.contentMode = .scaleAspectFit
             }
         }
     }
-    
     // MARK: Make feedBackBtnclick Method
     @IBAction func feedbackBtnClick(_ sender: UIButton) {
-        if (flag == false)
-        {
+        if (flag == false){
             showfeedback()
         }
         else{
@@ -138,7 +134,7 @@ class NeviagtionDrawerVC: UIViewController {
     }
     // MARK: Make historybtnTouchdown Method
     @IBAction func historyBtntouchDown(_ sender: UIButton) {
-         //change the tint color of btn
+        //change the tint color of btn
         historyBtn.backgroundColor = UIColor(red:0.96, green:0.96, blue:0.96, alpha:1.0)
         feedbackBtn.backgroundColor = UIColor.white
         logoutBtn.backgroundColor = UIColor.white
@@ -146,7 +142,7 @@ class NeviagtionDrawerVC: UIViewController {
     }
     // MARK: Make logoutTouchdown Method
     @IBAction func logouttouchdown(_ sender: UIButton) {
-         //change the tint color of btn
+        //change the tint color of btn
         logoutBtn.backgroundColor = UIColor(red:0.96, green:0.96, blue:0.96, alpha:1.0)
         feedbackBtn.backgroundColor = UIColor.white
         homeBtn.backgroundColor = UIColor.white
@@ -165,16 +161,15 @@ class NeviagtionDrawerVC: UIViewController {
     }
     // MARK: Make homeBtnClick Method
     @IBAction func homeBtnClick(_ sender: UIButton) {
-      showHomeVC()
+        showHomeVC()
     }
     // MARK: Make logOutBtn Method
     @IBAction func logOutBtn(_ sender: UIButton) {
-        if (flag == false)
-        {
-         showLogoutDialogBox()
+        if (flag == false){
+            showLogoutDialogBox()
         }
         else{
-             showfeedback()
+            showfeedback()
         }
     }
     // MARK: Make showHomeVC Method
@@ -237,11 +232,10 @@ class NeviagtionDrawerVC: UIViewController {
     }
     @IBAction func hh(_ sender: UIButton) {
         
-          print("drag outside")
+        print("drag outside")
     }
     // MARK: Make showHistoryVC Method
     func showHistoryVC(){
-        
         historyBtn.backgroundColor = UIColor(red:0.96, green:0.96, blue:0.96, alpha:1.0)
         homeBtn.backgroundColor = UIColor.white
         logoutBtn.backgroundColor = UIColor.white
@@ -272,7 +266,6 @@ class NeviagtionDrawerVC: UIViewController {
         appDlg!.window?.rootViewController = slideMenuController
         appDlg?.window?.makeKeyAndVisible()
     }
-    
     // MARK: Make changeLanguageBtn Method
     @IBAction func changeLanguageBtn(_ sender: UIButton) {
         let preferences = UserDefaults.standard
@@ -289,7 +282,7 @@ class NeviagtionDrawerVC: UIViewController {
                 let HomeVC = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
                 let LeftNeviagationDrawer = storyboard.instantiateViewController(withIdentifier: "NeviagtionDrawerVC") as! NeviagtionDrawerVC
                 let slideMenuController = SlideMenuController(mainViewController: HomeVC, leftMenuViewController: LeftNeviagationDrawer)
-                 let appDlg = UIApplication.shared.delegate as? AppDelegate
+                let appDlg = UIApplication.shared.delegate as? AppDelegate
                 appDlg!.window?.rootViewController = slideMenuController
                 appDlg!.window?.makeKeyAndVisible()
             } else {

@@ -10,13 +10,10 @@
  *  This notice may not be removed or altered from any source distribution.
  * NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE GRANTED BY THIS LICENSE. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
 import UIKit
 import Alamofire
 import SwiftyJSON
-
-class LiscenceAgrementWorker
-{
+class LiscenceAgrementWorker{
     // get base_Url in constant File
     var baseUrl = Constants.Base_Url
     var jsonResult: JSON!
@@ -30,12 +27,12 @@ class LiscenceAgrementWorker
                 completionHandler(response.response?.statusCode)
             }
             if response.response?.statusCode == 401 {
-                 completionHandler(response.response?.statusCode)
+                completionHandler(response.response?.statusCode)
             }
             else{
-                 completionHandler(response.response?.statusCode)
+                completionHandler(response.response?.statusCode)
             }
         }
-        }
     }
+}
 

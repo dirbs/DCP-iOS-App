@@ -12,18 +12,16 @@
  */
 import UIKit
 protocol HistoryPresentationLogic{
- func presentHistory(response: History.History.Response)
- func presentSearchHistory(response: History.SearchHistory.Response)
-
+    func presentHistory(response: History.History.Response)
+    func presentSearchHistory(response: History.SearchHistory.Response)
 }
-class HistoryPresenter: HistoryPresentationLogic
-{
-  weak var viewController: HistoryDisplayLogic?
-  // MARK: Do presentHistory
-  func presentHistory(response: History.History.Response){
-    let viewModel = History.History.ViewModel(status_code:response.status_code,id:response.id,date:response.date ,result:response.result ,user_device:response.user_device , user_name:response.user_name ,visitor_ip:response.visitor_ip, last_Page: response.last_Page )
-    viewController?.displayHistory(viewModel: viewModel)
-  }
+class HistoryPresenter: HistoryPresentationLogic{
+    weak var viewController: HistoryDisplayLogic?
+    // MARK: Do presentHistory
+    func presentHistory(response: History.History.Response){
+        let viewModel = History.History.ViewModel(status_code:response.status_code,id:response.id,date:response.date ,result:response.result ,user_device:response.user_device , user_name:response.user_name ,visitor_ip:response.visitor_ip, last_Page: response.last_Page )
+        viewController?.displayHistory(viewModel: viewModel)
+    }
     // MARK: Do presentSearchHistory
     func presentSearchHistory(response: History.SearchHistory.Response){
         let viewModel = History.SearchHistory.ViewModel(status_code:response.status_code,id:response.id,date:response.date ,result:response.result ,user_device:response.user_device , user_name:response.user_name ,visitor_ip:response.visitor_ip, last_Page: response.last_Page )

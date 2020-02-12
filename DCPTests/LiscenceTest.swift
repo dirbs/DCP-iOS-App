@@ -19,20 +19,20 @@ class LiscenceTest: XCTestCase {
         getLiscenceViewContoller()
         
     }
-// MARK: Make  getLiscenceViewController Method
+    // MARK: Make  getLiscenceViewController Method
     func getLiscenceViewContoller(){
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LiscenceAgrementViewController") as! LiscenceAgrementViewController
         liscenceView = vc
         let _ = liscenceView.view
     }
-   // MARK: Make  testForLiscencescreen Method
+    // MARK: Make  testForLiscencescreen Method
     func testForLiscenceScreen(){
-      //test for agrred check Btn
-          XCTAssertEqual("I agreed".localized(), liscenceView.agreedCheckBtn.currentTitle)
+        //test for agrred check Btn
+        XCTAssertEqual("I agreed".localized(), liscenceView.agreedCheckBtn.currentTitle)
         liscenceView.agreedCheckBtn.sendActions(for: .touchUpInside)
-              XCTAssertEqual(false, liscenceView.checkAgreedflag)
+        XCTAssertEqual(false, liscenceView.checkAgreedflag)
         liscenceView.agreedCheckBtn.sendActions(for: .touchUpInside)
-         //test for continue btn
+        //test for continue btn
         XCTAssertEqual("CONTINUE".localized(), liscenceView.continueBtn.currentTitle)
         liscenceView.continueBtn.sendActions(for: .touchUpInside)
         //test for webview
@@ -43,7 +43,6 @@ class LiscenceTest: XCTestCase {
         XCTAssertEqual(request, request)
         //test for others
         liscenceView.showNetworkDialogBox()
-        
     }
     // MARK: Make  testForLiscenceApiResponse Method
     func testForLiscenceApiResponse(){
@@ -57,7 +56,7 @@ class LiscenceTest: XCTestCase {
         Hippolyte.shared.start()
         Constants.Base_Url = "http://ec2-34-220-143-232.us-west-2.compute.amazonaws.com:81/"
         UIApplication.shared.keyWindow?.rootViewController = liscenceView
-         liscenceView.getUserId = 2
+        liscenceView.getUserId = 2
         liscenceView.continueBtn.sendActions(for: .touchUpInside)
         let liscenceExpectation = self.expectation(description: "liscenceExpectation")
         DispatchQueue.main.asyncAfter(deadline: .now() + 6.0, execute: {
@@ -66,5 +65,5 @@ class LiscenceTest: XCTestCase {
         })
         waitForExpectations(timeout: 6, handler: nil)
     }
-
+    
 }

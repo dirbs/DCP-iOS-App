@@ -15,7 +15,7 @@ import XCTest
 import Hippolyte
 class DeviceInformationTest: XCTestCase {
     var homeView: HomeViewController!
-     var deviceInformationView: DeviceInformationViewController!
+    var deviceInformationView: DeviceInformationViewController!
     override func setUp() {
         getHomeViewController()
     }
@@ -32,7 +32,7 @@ class DeviceInformationTest: XCTestCase {
         deviceInformationView = vc
         let _ = deviceInformationView.view
     }
-     // MARK: Make  testForTypeImeiIValidImeiResponse Method
+    // MARK: Make  testForTypeImeiIValidImeiResponse Method
     func testForTypeImeiValidImeiResponse(){
         let url = URL(string: "http://ec2-34-220-143-232.us-west-2.compute.amazonaws.com:81/api/lookup/iOSApp/manual")!
         var stub = StubRequest(method: .POST, url: url)
@@ -48,19 +48,16 @@ class DeviceInformationTest: XCTestCase {
         homeView.typeImeiViewController?.checkBtn.sendActions(for: .touchUpInside)
         let inputDialogBoxExpectationApi = self.expectation(description: "inputDialogBoxExpectationApi")
         DispatchQueue.main.asyncAfter(deadline: .now() + 6.0, execute: {
-            
             inputDialogBoxExpectationApi.fulfill()
         })
         waitForExpectations(timeout: 6, handler: nil)
         homeView.typeImeiViewController?.inputDialogBox?.okBtnOutlet.sendActions(for: .touchUpInside)
         let typeImeiResultViewControllerExpactions = self.expectation(description: "typeImeiResultViewControllerExpactions")
         DispatchQueue.main.asyncAfter(deadline: .now() + 6.0, execute: {
-            
             typeImeiResultViewControllerExpactions.fulfill()
-            
         })
         waitForExpectations(timeout: 6, handler: nil)
-      //test for device id
+        //test for device id
         XCTAssertEqual("Device ID".localized(), homeView.deviceInformationViewController?.getDeviceViewController?.deviceIdTV.text)
         XCTAssertEqual("3525830795465488", homeView.deviceInformationViewController?.getDeviceViewController?.deviceIdDetailTV.text)
         //test for manufactrurer
@@ -68,7 +65,6 @@ class DeviceInformationTest: XCTestCase {
         XCTAssertEqual("LG Electronics Inc.", homeView.deviceInformationViewController?.getDeviceViewController?.manufacturedDetailTV.text)
         //test for equipmentType
         XCTAssertEqual("Equipment Type".localized(), homeView.deviceInformationViewController?.getDeviceViewController?.equipmentTypeTV.text)
-        
         XCTAssertEqual("Smartphone", homeView.deviceInformationViewController?.getDeviceViewController?.equipmentDetailTV.text)
         //test for brand name
         XCTAssertEqual("Brand Name".localized(), homeView.deviceInformationViewController?.getDeviceViewController?.brandNameTV.text)
@@ -111,7 +107,6 @@ class DeviceInformationTest: XCTestCase {
         XCTAssertEqual("Not Known", homeView.deviceInformationViewController?.getDeviceViewController?.lpwanDetailTV.text)
         homeView.deviceInformationViewController?.showHomeVC()
         homeView.deviceInformationViewController?.showNetworkDialogBox()
-        
     }
     // MARK: Make  testForScanImeiIValidImeiResponse Method
     func testForScanImeiValidImeiResponse(){
@@ -130,15 +125,12 @@ class DeviceInformationTest: XCTestCase {
         homeView.scanImeiViewController?.showScanImeiDialogBoxVC()
         let inputDialogBoxExpectationScanApi = self.expectation(description: "inputDialogBoxExpectationScanApi")
         DispatchQueue.main.asyncAfter(deadline: .now() + 6.0, execute: {
-            
             inputDialogBoxExpectationScanApi.fulfill()
         })
-        
         waitForExpectations(timeout: 6, handler: nil)
         homeView.language = "vi"
         homeView.scanImeiViewController?.inputDialogBox?.okBtnOutlet.sendActions(for: .touchUpInside)
         let scanImeiResultViewControllerExpactions = self.expectation(description: "scanImeiResultViewControllerExpactions")
-        
         DispatchQueue.main.asyncAfter(deadline: .now() + 6.0, execute: {
             scanImeiResultViewControllerExpactions.fulfill()
         })
@@ -196,8 +188,7 @@ class DeviceInformationTest: XCTestCase {
         //test for yas btn title
         XCTAssertEqual("YES".localized(), homeView.deviceInformationViewController?.yasBtn.currentTitle)
         //test for no report title
-       XCTAssertEqual("NO,REPORT".localized(), homeView.deviceInformationViewController?.noBtn.currentTitle)
-        
+        XCTAssertEqual("NO,REPORT".localized(), homeView.deviceInformationViewController?.noBtn.currentTitle)
     }
     // MARK: Make  testForYasBtnApiResponse Method
     func testForYasBtnApiResponse(){
@@ -214,13 +205,10 @@ class DeviceInformationTest: XCTestCase {
         UIApplication.shared.keyWindow?.rootViewController = deviceInformationView
         deviceInformationView.Imei = "35858307123132"
         deviceInformationView.yasBtn.sendActions(for: .touchUpInside)
-        
         let yasBtnExpectation = self.expectation(description: " yasBtnExpectation")
         DispatchQueue.main.asyncAfter(deadline: .now() + 6.0, execute: {
-            
-             yasBtnExpectation.fulfill()
+            yasBtnExpectation.fulfill()
         })
-        
         waitForExpectations(timeout: 6, handler: nil)
         let successViewController = deviceInformationView.presentedViewController as! SuccessDilogBoxViewController
         XCTAssertEqual("Device status updated successfully".localized(), successViewController.message)
@@ -230,7 +218,7 @@ class DeviceInformationTest: XCTestCase {
     // MARK: Make  testForReportDialogBox Method
     func testForReportDialogBox(){
         getDeviceInformationViewContoller()
-          UIApplication.shared.keyWindow?.rootViewController = deviceInformationView
+        UIApplication.shared.keyWindow?.rootViewController = deviceInformationView
         deviceInformationView.backBtn.sendActions(for: .touchUpInside)
         let backBtnExpectation = self.expectation(description: "backBtnExpectation")
         DispatchQueue.main.asyncAfter(deadline: .now() + 6.0, execute: {
@@ -238,7 +226,7 @@ class DeviceInformationTest: XCTestCase {
             backBtnExpectation.fulfill()
         })
         waitForExpectations(timeout: 6, handler: nil)
-          let reportViewController = deviceInformationView.presentedViewController as! ReportDialogBoxViewController
+        let reportViewController = deviceInformationView.presentedViewController as! ReportDialogBoxViewController
         //test for customDialogBoxView
         XCTAssertEqual("Does the record field match with the device?".localized(), reportViewController.messageOutlet.text)
         //test for yas btn title
@@ -251,7 +239,7 @@ class DeviceInformationTest: XCTestCase {
     }
     // MARK: Make  testForNoReportBtnApiResponse Method
     func testForNoReportBtnApiResponse(){
-         getDeviceInformationViewContoller()
+        getDeviceInformationViewContoller()
         let url = URL(string: "http://ec2-34-220-143-232.us-west-2.compute.amazonaws.com:81/api/results-not-matched/35858307123132")!
         var stub = StubRequest(method: .PUT, url: url)
         var response = StubResponse()
@@ -266,10 +254,8 @@ class DeviceInformationTest: XCTestCase {
         deviceInformationView.noBtn.sendActions(for: .touchUpInside)
         let noReportExpectation = self.expectation(description: "noReportExpectation")
         DispatchQueue.main.asyncAfter(deadline: .now() + 6.0, execute: {
-            
-           noReportExpectation.fulfill()
+            noReportExpectation.fulfill()
         })
-        
         waitForExpectations(timeout: 6, handler: nil)
     }
 }

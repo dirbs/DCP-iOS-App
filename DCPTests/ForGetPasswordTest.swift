@@ -19,8 +19,7 @@ class ForGetPasswordTest: XCTestCase {
     override func setUp() {
         getLoginViewController()
     }
-
-  // MARK: Make  loginViewController Method
+    // MARK: Make  loginViewController Method
     func getLoginViewController(){
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
         loginView = vc
@@ -34,7 +33,6 @@ class ForGetPasswordTest: XCTestCase {
         DispatchQueue.main.asyncAfter(deadline: .now() + 6.0, execute: {
             forgotpasswordExpectation.fulfill()
         })
-        
         waitForExpectations(timeout: 6, handler: nil)
         //test for title and message outlet
         XCTAssertEqual("Reset Password".localized(), loginView.forgotPasswordViewController?.titleOutlet.text!)
@@ -55,39 +53,39 @@ class ForGetPasswordTest: XCTestCase {
         XCTAssertEqual("Invalid email!".localized(),loginView.forgotPasswordViewController?.emailErrorMessage.text!)
         XCTAssert((loginView.forgotPasswordViewController?.emailErrorMessage.isHidden)!)
         loginView.forgotPasswordViewController?.showNetworkDialogBox()
- loginView.forgotPasswordViewController?.textFieldDidBeginEditing((loginView.forgotPasswordViewController?.emailTF)!)
- loginView.forgotPasswordViewController?.textFieldDidEndEditing((loginView.forgotPasswordViewController?.emailTF)!)
-     loginView.forgotPasswordViewController?.cancelBtn.sendActions(for: .touchUpInside)
+        loginView.forgotPasswordViewController?.textFieldDidBeginEditing((loginView.forgotPasswordViewController?.emailTF)!)
+        loginView.forgotPasswordViewController?.textFieldDidEndEditing((loginView.forgotPasswordViewController?.emailTF)!)
+        loginView.forgotPasswordViewController?.cancelBtn.sendActions(for: .touchUpInside)
         loginView.forgotPasswordViewController?.doneBtnPressed()
     }
     // MARK: Make  testForgotPasswordApiResponse Method
     func testForForgotPasswordApiResponse(){
-    let url = URL(string: "http://ec2-34-220-143-232.us-west-2.compute.amazonaws.com:81/api/recover")!
-    var stub = StubRequest(method: .POST, url: url)
-    var response = StubResponse()
-    let body = " \"error\": true,\r\n    \"message\": \"You do not have enough permissions for this request, please contact system administrator for more details\""
-    response.body = body.data(using: .utf8)!
-    stub.response = response
-    Hippolyte.shared.add(stubbedRequest: stub)
-    Hippolyte.shared.start()
-    Constants.Base_Url = "http://ec2-34-220-143-232.us-west-2.compute.amazonaws.com:81/"
-    UIApplication.shared.keyWindow?.rootViewController = loginView
-    loginView.forgotPasswordBtn.sendActions(for: .touchUpInside)
-    let forgotpasswordExpectation = self.expectation(description: "forgotpasswordExpectation")
-    DispatchQueue.main.asyncAfter(deadline: .now() + 6.0, execute: {
-        forgotpasswordExpectation.fulfill()
-    })
-    waitForExpectations(timeout: 6, handler: nil)
-    loginView.forgotPasswordViewController?.emailTF.text = "shamas@3gca.org"
-    loginView.forgotPasswordViewController?.okBtn.sendActions(for: .touchUpInside)
-    let successDialogBox = self.expectation(description: "successDialogBox")
-    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
-        successDialogBox.fulfill()
-    })
-    waitForExpectations(timeout: 2, handler: nil)
-    let inputViewController = loginView.presentedViewController as! SuccessDilogBoxViewController
-    XCTAssertEqual( "Succesful".localized(), inputViewController.titleOutlet.text)
-    XCTAssertEqual("A reset email has been sent! Please check your email".localized(), inputViewController.messageOutlet.text)
-    inputViewController.okBtn.sendActions(for: .touchUpInside)
+        let url = URL(string: "http://ec2-34-220-143-232.us-west-2.compute.amazonaws.com:81/api/recover")!
+        var stub = StubRequest(method: .POST, url: url)
+        var response = StubResponse()
+        let body = " \"error\": true,\r\n    \"message\": \"You do not have enough permissions for this request, please contact system administrator for more details\""
+        response.body = body.data(using: .utf8)!
+        stub.response = response
+        Hippolyte.shared.add(stubbedRequest: stub)
+        Hippolyte.shared.start()
+        Constants.Base_Url = "http://ec2-34-220-143-232.us-west-2.compute.amazonaws.com:81/"
+        UIApplication.shared.keyWindow?.rootViewController = loginView
+        loginView.forgotPasswordBtn.sendActions(for: .touchUpInside)
+        let forgotpasswordExpectation = self.expectation(description: "forgotpasswordExpectation")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 6.0, execute: {
+            forgotpasswordExpectation.fulfill()
+        })
+        waitForExpectations(timeout: 6, handler: nil)
+        loginView.forgotPasswordViewController?.emailTF.text = "shamas@3gca.org"
+        loginView.forgotPasswordViewController?.okBtn.sendActions(for: .touchUpInside)
+        let successDialogBox = self.expectation(description: "successDialogBox")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
+            successDialogBox.fulfill()
+        })
+        waitForExpectations(timeout: 2, handler: nil)
+        let inputViewController = loginView.presentedViewController as! SuccessDilogBoxViewController
+        XCTAssertEqual( "Succesful".localized(), inputViewController.titleOutlet.text)
+        XCTAssertEqual("A reset email has been sent! Please check your email".localized(), inputViewController.messageOutlet.text)
+        inputViewController.okBtn.sendActions(for: .touchUpInside)
     }
 }

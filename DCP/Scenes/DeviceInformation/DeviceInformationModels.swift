@@ -12,42 +12,33 @@
  */
 import UIKit
 enum DeviceInformation{
-  // MARK: Use cases
-  enum ImeiMatched
-  {
-    struct Request
-    {
-        var imei_number: String?
-        var access_Token: String?
-    }
-    struct Response
-    {
-        var status_code : Int?
-        var success: Bool
-        var message: String?
-    }
-    struct ViewModel
-    {
-        var status_code : Int?
-        var success: Bool
-        var message: String?
-    }
-  }
-    enum ImeiNotMatched
-    {
-        struct Request
-        {
+    enum ImeiMatched{
+        struct Request{
             var imei_number: String?
             var access_Token: String?
         }
-        struct Response
-        {
+        struct Response{
             var status_code : Int?
             var success: Bool
             var message: String?
         }
-        struct ViewModel
-        {
+        struct ViewModel{
+            var status_code : Int?
+            var success: Bool
+            var message: String?
+        }
+    }
+    enum ImeiNotMatched{
+        struct Request{
+            var imei_number: String?
+            var access_Token: String?
+        }
+        struct Response{
+            var status_code : Int?
+            var success: Bool
+            var message: String?
+        }
+        struct ViewModel{
             var status_code : Int?
             var success: Bool
             var message: String?  

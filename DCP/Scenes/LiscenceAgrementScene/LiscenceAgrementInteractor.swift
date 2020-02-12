@@ -12,25 +12,21 @@
  */
 
 import UIKit
-protocol LiscenceAgrementBusinessLogic
-{
-  func doLiscenceUpdate(request: LiscenceAgrement.LiscenceUpdate.Request)
+protocol LiscenceAgrementBusinessLogic{
+    func doLiscenceUpdate(request: LiscenceAgrement.LiscenceUpdate.Request)
 }
-
-protocol LiscenceAgrementDataStore
-{
-  //var name: String { get set }
+protocol LiscenceAgrementDataStore{
+    
 }
-class LiscenceAgrementInteractor: LiscenceAgrementBusinessLogic, LiscenceAgrementDataStore
-{
-  var presenter: LiscenceAgrementPresentationLogic?
-  var worker: LiscenceAgrementWorker?
-  // MARK: Do LiscenceUpdate
-  func doLiscenceUpdate(request: LiscenceAgrement.LiscenceUpdate.Request){
-    worker = LiscenceAgrementWorker()
-    worker?.updateLiscence(access_Token: request.accessToken!, user_id:request.User_id ){(status_code) in
-        let response = LiscenceAgrement.LiscenceUpdate.Response(status_code:status_code)
-        self.presenter?.presentLiscence(response: response)
+class LiscenceAgrementInteractor: LiscenceAgrementBusinessLogic, LiscenceAgrementDataStore{
+    var presenter: LiscenceAgrementPresentationLogic?
+    var worker: LiscenceAgrementWorker?
+    // MARK: Do LiscenceUpdate
+    func doLiscenceUpdate(request: LiscenceAgrement.LiscenceUpdate.Request){
+        worker = LiscenceAgrementWorker()
+        worker?.updateLiscence(access_Token: request.accessToken!, user_id:request.User_id ){(status_code) in
+            let response = LiscenceAgrement.LiscenceUpdate.Response(status_code:status_code)
+            self.presenter?.presentLiscence(response: response)
+        }
     }
-  }
 }
