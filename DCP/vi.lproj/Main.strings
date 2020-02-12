@@ -12,27 +12,19 @@
  */
 /* Class = "UILabel"; text = "A paragraph is a series of related sentences developing a central idea, called the topic. Try to think about paragraphs in terms of thematic unity: a paragraph is a sentence or a group of sentences that supports one central, unified idea. Paragraphs add one idea at a time to your broader argument."; ObjectID = "1Io-4O-h9X"; */
 "1Io-4O-h9X.text" = "A paragraph is a series of related sentences developing a central idea, called the topic. Try to think about paragraphs in terms of thematic unity: a paragraph is a sentence or a group of sentences that supports one central, unified idea. Paragraphs add one idea at a time to your broader argument.";
-
 /* Class = "UIButton"; normalTitle = "SCAN IMEI"; ObjectID = "350-lx-K6I"; */
 "350-lx-K6I.normalTitle" = "SCAN IMEI";
-
 /* Class = "UIButton"; normalTitle = "Allow Access"; ObjectID = "92r-1l-Oos"; */
 "92r-1l-Oos.normalTitle" = "Allow Access";
-
 /* Class = "UILabel"; text = "Plese enter 14-16 digit Imei"; ObjectID = "Mgu-n9-l9K"; */
 "Mgu-n9-l9K.text" = "Plese enter 14-16 digit Imei";
-
 /* Class = "UIButton"; normalTitle = "CHECK"; ObjectID = "QGS-hf-Xfg"; */
 "QGS-hf-Xfg.normalTitle" = "CHECK";
-
 /* Class = "UILabel"; text = "Please Allow Camera  Access for Scanning Barcode Of Imei"; ObjectID = "avT-f0-q6H"; */
 "avT-f0-q6H.text" = "Please Allow Camera  Access for Scanning Barcode Of Imei";
-
 /* Class = "UILabel"; text = "Instructions"; ObjectID = "ibb-6f-qiG"; */
 "ibb-6f-qiG.text" = "Instructions";
-
 /* Class = "UIButton"; normalTitle = "TYPE IMEI"; ObjectID = "jAp-c0-n8n"; */
 "jAp-c0-n8n.normalTitle" = "TYPE IMEI";
-
 /* Class = "UITextField"; placeholder = "Enter Imei e.g. 123456789012345"; ObjectID = "m3c-ST-sVH"; */
 "m3c-ST-sVH.placeholder" = "Enter Imei e.g. 123456789012345";
