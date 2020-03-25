@@ -1,0 +1,131 @@
+/*
+ * Copyright (c) 2018-2019 Qualcomm Technologies, Inc.
+ * All rights reserved.
+ * Redistribution and use in source and binary forms, with or without modification, are permitted (subject to the limitations in the disclaimer below) provided that the following conditions are met:
+ *  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ *  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+ *  Neither the name of Qualcomm Technologies, Inc. nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+ *  The origin of this software must not be misrepresented; you must not claim that you wrote the original software. If you use this software in a product, an acknowledgment is required by displaying the trademark/log as per the details provided here: [https://www.qualcomm.com/documents/dirbs-logo-and-brand-guidelines]
+ *  Altered source versions must be plainly marked as such, and must not be misrepresented as being the original software.
+ *  This notice may not be removed or altered from any source distribution.
+ * NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE GRANTED BY THIS LICENSE. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+"Home" = "Trang Chủ";
+"Instructions" = "Hướng dẫn";
+"The IMEI (International Mobile Equipment Identity) is a globally unique number to identify any SIM based mobile device. You can view the mobile phone's IMEI by pressing *#06# on dialpad of the device. If the device has two simcards, you will see two 14-16 digit codes. Enter the 14-16 digit IMEI number in the box and click on the check  box to view its detail." = "IMEI (International Mobile Equipment Identity) là một số duy nhất trên toàn cầu để xác định bất kỳ thiết bị dựa trên SIM. Bạn có thể xem IMEI của thiết bị bằng cách bấm * # 06 # trên bàn phím số của điện thoại. Nếu thiết bị của bạn có một điều khoản cho hai simcard, bạn sẽ thấy hai mã gồm 15 chữ số. Nhập số IMEI 14-16 của bạn vào hộp và nhấp vào kiểm tra để xem chi tiết của nó.";
+"TYPE IMEI" = "NHẬP IMEI";
+"SCAN IMEI" = "QUÉT IMEI";
+"CHECK" = "KIỂM TRA";
+"Please enter 14-16 digit IMEI" = "Vui lòng nhập IMEI 14 chữ số 16";
+"IMEI must only contain numbers" = "IMEI chỉ được chứa số";
+"Allow Access" = "Cho phép truy cập";
+"Please Allow Camera  Access for Scanning Barcode Of IMEI" = "Vui lòng cho phép truy cập máy ảnh để quét mã vạch IMEI";
+"Enter Imei e.g. 123456789012345" = "Nhập IMEI, ví dụ: 123456789012345";
+"Please place the barcode inside the box." = "Vui lòng đặt mã vạch bên trong hộp.";
+"Ok" = "ĐỒNG Ý";
+"CANCEL" = "HỦY BỎ";
+"Verify Input" = "Xác minh đầu vào";
+"Please verify IMEI number you entered.Press OK to continue or CANCAL to re-enter"= "Vui lòng xác minh số IMEI bạn đã nhập. Nhấn OK để tiếp tục hoặc CANCEL để nhập lại";
+"Verify Scan" = "Xác minh quét";
+"Please verify IMEI number from scan and  press OK to continue" = "Vui lòng xác minh số IMEI từ quá trình quét và nhấn OK để tiếp tục";
+"Scan Result" = "Kết quả quét";
+"REPORT MOBILE PHONE" = "BÁO CÁO ĐIỆN THOẠI DI ĐỘNG";
+"Mobiel Phone Brand" = "Thương hiệu điện thoại Mobiel";
+"Model Name" =  "Tên người mẫu";
+"Store Name" = "Tên cửa hàng";
+"Address" = "Địa chỉ nhà";
+"Description" = "Sự miêu tả";
+"Device Image" = "Hình ảnh thiết bị";
+"SUBMIT" = "Gửi đi";
+"SELECT IMAGES" = "CHỌN HÌNH ẢNH";
+"can't be empty!" = "không thể để trống!";
+"Allow DCP to access the Photos" = "Cho phép DCP truy cập Ảnh";
+"Allow" = "Cho phép";
+"Deny" =  "Từ chối";
+"Enter the valid brand name of the device" = "Nhập tên thương hiệu hợp lệ của thiết bị";
+"Enter the valid store name of the device" = "Nhập tên cửa hàng hợp lệ của thiết bị";
+"Enter the valid model name of the device" = "Nhập tên kiểu máy hợp lệ của thiết bị";
+"Enter the valid address where the device is located." =" Nhập địa chỉ hợp lệ nơi đặt thiết bị.";
+"Add description for your device" = "Thêm mô tả cho thiết bị của bạn";
+"Upload valid images of the device" = "Tải lên hình ảnh hợp lệ của thiết bị";
+"History" = "Lịch sử";
+"Logout" = "Đăng xuất";
+"Are you sure you want to logout?" = "Bạn có chắc chắn muốn đăng xuất?";
+"YES" = "ĐỒNG";
+"NO" = "KHÔNG";
+"feedBack" = "Phản hồi";
+"SUBMIT FEEDBACK" = "ĐĂNG KÝ PHẢN HỒI";
+"Send Feedback" = "Gửi thông tin phản hồi";
+"Enter your feedback here." = "Nhập phản hồi của bạn ở đây.";
+"Does the record field match with the device?" = "Trường ghi có khớp với thiết bị không?";
+"NO,REPORT" = "KHÔNG CÓ BÁO CÁO";
+"Device ID" = "ID thiết bị";
+"Manufacturer" = "Nhà chế tạo";
+"Equipment Type" = "Loại thiết bị";
+"Brand Name" = "Tên thương hiệu";
+"Model Name" = "Tên người mẫu";
+"Marketing Name" = "Tên tiếp thị";
+"Internal Model Name" = "Tên mẫu nội bộ";
+"TAC Approved Date" = "Ngày phê duyệt TAC";
+"Device Certify Body" = "Thiết bị xác nhận thân máy";
+"Radio Interface" = "Giao diện vô tuyến";
+"Operating System" = "Hệ điều hành";
+"SIM Support" = "Hỗ trợ SIM";
+"NFC Support" = "Hỗ trợ NFC";
+"Bluetooth Support" = "Hỗ trợ Bluetooth";
+"WLAN Support" = "Hỗ trợ mạng WLAN";
+"LPWAN" = "LPWAN";
+"Succesful" = "Thành công";
+"Does status Updated successsfuly" = "Trạng thái được cập nhật thành công";
+"No Internet!" = "Không có mạng!";
+"No Internet Connection! Plese enable wifi or mobile data and try again." = "Không có kết nối Internet! Plese cho phép wifi hoặc dữ liệu di động và thử lại.";
+"YES, ENABLE IT!" = "CÓ, CÓ THỂ NÓ!";
+"Sorry, somthing went wrong. Try again a little later." = "Xin lỗi, có lỗi xảy ra. Hãy thử lại một chút sau.";
+"Oops..." = "Úi…";
+"Device Characterisation Platform" = "Nền tảng đặc tính thiết bị";
+"Email" = "E-mail";
+"Password" =  "Mật khẩu";
+"FORGOT PASSWORD?" = "QUÊN MẬT KHẨU?";
+"LOGIN" = "ĐĂNG NHẬP";
+"Must be at least minmimim 6 character" = "Phải có ít nhất 6 ký tự";
+"Invalid email!" = "Email không hợp lệ!";
+"Reset Password" = "Đặt lại mật khẩu";
+"Please enter your email address to reset your Password"   = "Vui lòng nhập địa chỉ email của bạn để đặt lại mật khẩu của bạn";
+"These credentials do not match our records" = "Những thông tin này không khớp với hồ sơ của chúng tôi";
+"DONE" = "Làm xong";
+"Authenticating" = "Chứng thực";
+"  not found in database. This device may be a counterfeit or illegal. Please report this device through DCP!.To fill the form press Report Mobile Phone" = "not found in database. This device may be a counterfeit or illegal. Please report this device through DCP!    To fill the form press Report Mobile Phone";
+"Session Expired!" = "Phiên hết hạn!";
+"Your session has expired.Please login again to continue using DCP." = "Phiên của bạn đã hết hạn. Vui lòng đăng nhập lại để tiếp tục sử dụng DCP.";
+"Submitting FeedBack" = "Gửi phản hồi";
+"Feedback sent" = "Phản hồi đã gửi.";
+"Verifiying" =  "Đang xác minh";
+"A reset email has been sent! Please check your email" = "Một email đặt lại đã được gửi! Vui lòng kiểm tra email của bạn";
+"Checking" = "kiểm tra";
+"Updating Device Status" = "Đang cập nhật trạng thái thiết bị";
+"Reported" = "Báo cáo";
+"Adding Device Information..." = "Thêm thông tin thiết bị ...";
+"Search IMEI" =  "Tìm kiếm IMEI";
+"Search" =  "Tìm kiếm";
+"No record found!" = "Không có dữ liệu được tìm thấy!";
+"Imei not Found" = "không tìm thấy IMEI!";
+"Report Mobile Phone" = "Báo cáo điện thoại di động";
+"Allow DCP to access the camera" = "Cho phép DCP truy cập máy ảnh";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
