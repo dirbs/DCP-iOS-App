@@ -1,3 +1,6 @@
+![Image of DIRBS Logo](https://avatars0.githubusercontent.com/u/42587891?s=100&v=4)
+
+
 # DCP-iOS-App
 ## License
 Copyright (c) 2019 Qualcomm Technologies, Inc.
@@ -57,5 +60,4 @@ DCP app utilizes some open source libraries to meet its functional requirements.
 -	Image picker for selecting or taking images.
 
 ### File Structure
-In DCP source code files are structured in a way that files related to a screen are placed in a folder having sub folders for scenes, view, presenter and worker calls.                         
-
+In DCP source code files are structured in a way that files related to a screen are placed in a folder having sub folders for scenes, view, presenter and worker calls.
